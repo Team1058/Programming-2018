@@ -26,35 +26,24 @@ public class ControllerInput {
     private BezierCurve yCurve = new BezierCurve(zero,yP1,yP2,one);
 
     private ControllerInput() {
-        this.driver = new LogitechF310Gamepad(0);
-        this.operator = new LogitechF310Gamepad(1);
+        driver = new LogitechF310Gamepad(0);
+        operator = new LogitechF310Gamepad(1);
     }
     /*
      * ADD CONTROLS HERE
      */
     public double getDriverLeftX(){
-        return this.driver.getLeftX();
+        return driver.getLeftX();
     }
     public double getDriverLeftY(){
-        return this.driver.getLeftY();
+        return driver.getLeftY();
     }
     public double getDriverRightX(){
-        return this.driver.getRightX();
+        return driver.getRightX();
     }
     public double getDriverRightY(){
-        return this.driver.getRightY();
+        return driver.getRightY();
     }
 
-    public double getMappedDriverLeftX(){
-        return xCurve.getY(this.driver.getLeftX());
-    }
-    public double getMappedDriverLeftY(){
-        return yCurve.getY(this.driver.getLeftY());
-    }
-    public double getMappedDriverRightX(){
-        return xCurve.getY(this.driver.getRightX());
-    }
-    public double getMappedDriverRightY(){
-        return yCurve.getY(this.driver.getRightY());
-    }
+    public boolean getDriveMode(){return driver.getAButton();}
 }
