@@ -12,9 +12,9 @@ public class TeleopControl {
     private ArrayList<TeleopComponent> components;
 
     private TeleopControl() {
-        this.components = new ArrayList<>();
-
-        //this.compnents.add(TeleopSubsystem.getInstance());
+        components = new ArrayList<>();
+        components.add(TeleopDrive.getInstance());
+        //compnents.add(TeleopSubsystem.getInstance());
     }
     public void runCycle(){
         for (TeleopComponent t: this.components

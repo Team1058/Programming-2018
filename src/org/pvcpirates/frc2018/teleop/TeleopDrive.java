@@ -1,8 +1,8 @@
 package org.pvcpirates.frc2018.teleop;
 
-import org.pvcpirates.frc2018.Robot;
 import org.pvcpirates.frc2018.io.ControllerInput;
 import org.pvcpirates.frc2018.io.RobotOutput;
+import org.pvcpirates.frc2018.io.SensorInput;
 import org.pvcpirates.frc2018.util.GamepadHelper;
 import org.pvcpirates.frc2018.util.PIDF;
 import org.pvcpirates.frc2018.util.RobotConstants;
@@ -11,6 +11,7 @@ public class TeleopDrive implements TeleopComponent{
     private static TeleopDrive ourInstance = new TeleopDrive();
 
     private RobotOutput robotOutput;
+    private SensorInput sensorInput;
     private ControllerInput controllerInput;
     private DriveMode driveMode = DriveMode.VELOCITY;
     private GamepadHelper gamepadHelper = new GamepadHelper();
@@ -23,6 +24,7 @@ public class TeleopDrive implements TeleopComponent{
 
     private TeleopDrive() {
         robotOutput = RobotOutput.getInstance();
+        sensorInput = SensorInput.getInstance();
         controllerInput = ControllerInput.getInstance();
         leftPIDF = new PIDF(RobotConstants.DRIVE_P,RobotConstants.DRIVE_I,RobotConstants.DRIVE_D,RobotConstants.DRIVE_F,0);
         rightPIDF = new PIDF(RobotConstants.DRIVE_P,RobotConstants.DRIVE_I,RobotConstants.DRIVE_D,RobotConstants.DRIVE_F,0);
@@ -36,11 +38,13 @@ public class TeleopDrive implements TeleopComponent{
     public void calculate(){
         double x = gamepadHelper.applyDeadBand(controllerInput.getDriverRightX(),0.15);
         double y = gamepadHelper.applyDeadBand(controllerInput.getDriverLeftY(),0.15);
+        double left = y+x;
+        double right = y-x;
         toggleDriveMode();
         if(driveMode == DriveMode.VELOCITY){
-            velocityDrive(x,y);
+            velocityDrive(left,right);
         }else{
-            directDrive(x,y);
+            directDrive(left,right);
         }
     }
 
@@ -59,23 +63,26 @@ public class TeleopDrive implements TeleopComponent{
         }
     }
 
-    private void velocityDrive(double x, double y){
+    private void velocityDrive(double left, double right){
         double velLeft;
         double velRight;
-        double leftOut = 0;
-        double rightOut = 0;
+        double leftOut;
+        double rightOut;
 
-        velLeft = (y * RobotConstants.DRIVE_MAX_FORWARD_VEL) + (x * RobotConstants.DRIVE_MAX_TURN_VEL);
-        velRight = (y * RobotConstants.DRIVE_MAX_FORWARD_VEL) - (x * RobotConstants.DRIVE_MAX_TURN_VEL);
+        velLeft = RobotConstants.DRIVE_MAX_FORWARD_VEL * left;
+        velRight = RobotConstants.DRIVE_MAX_FORWARD_VEL * right;
         leftPIDF.setValue(velLeft);
         rightPIDF.setValue(velRight);
 
-        //robotOutput.setDrive(leftPIDF.calculate());
+        leftOut = leftPIDF.calculate(velLeft-sensorInput.getLeftDriveVelocity());
+        rightOut = rightPIDF.calculate(velRight-sensorInput.getRightDriveVelocity());
+
+        robotOutput.setDrive(leftOut,rightOut);
 
     }
 
-    private void directDrive(double x, double y){
-        robotOutput.setDrive(y+x,y-x);
+    private void directDrive(double left, double right){
+        robotOutput.setDrive(left,right);
     }
 
 }
