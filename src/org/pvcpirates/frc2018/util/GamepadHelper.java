@@ -3,7 +3,7 @@ package org.pvcpirates.frc2018.util;
 public class GamepadHelper {
 
     public double applyDeadBand(double initial, double deadBand){
-        if(initial < deadBand){
+        if(Math.abs(initial) < Math.abs(deadBand)){
             return 0;
         }else{
             return initial;
