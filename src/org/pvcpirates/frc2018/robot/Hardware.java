@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import org.pvcpirates.frc2018.RobotMap;
-import org.pvcpirates.frc2018.util.RobotConstants;
 
 public class Hardware {
 
