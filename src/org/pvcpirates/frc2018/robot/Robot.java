@@ -1,10 +1,12 @@
 package org.pvcpirates.frc2018.robot;
 
+import org.pvcpirates.frc2018.robot.controllers.Drivetrain;
 import org.pvcpirates.frc2018.state.State;
 
 public class Robot {
     //TODO: switchState()
     public final Hardware hardware = Hardware.getInstance();
+    public final Drivetrain drivetrain = new Drivetrain();
     public State state;
 
     private static Robot ourInstance = new Robot();
@@ -13,5 +15,9 @@ public class Robot {
     }
 
     private Robot() {
+    }
+
+    public void setState(State state) {
+        this.state = state;
     }
 }

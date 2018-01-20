@@ -19,9 +19,9 @@ public class Hardware {
     //replace channels with enums
     public final Ultrasonic ultrasonic = new Ultrasonic(0,1);
 
-    public AHRS navx =  new AHRS(SPI.Port.kMXP);
+    //public AHRS navx =  new AHRS(SPI.Port.kMXP);
     public Encoder leftEncoder = new Encoder(RobotMap.SensorIDs.LEFT_DRIVE_ENCODER_PORTS[0], RobotMap.SensorIDs.LEFT_DRIVE_ENCODER_PORTS[1],false,Encoder.EncodingType.k4X);;
-    public Encoder rightEncoder= new Encoder(RobotConstants.RIGHT_DRIVE_ENCODER_PORTS[0],RobotConstants.RIGHT_DRIVE_ENCODER_PORTS[1],false,Encoder.EncodingType.k4X);;
+    public Encoder rightEncoder= new Encoder(RobotMap.SensorIDs.RIGHT_DRIVE_ENCODER_PORTS[0],RobotMap.SensorIDs.RIGHT_DRIVE_ENCODER_PORTS[1],false,Encoder.EncodingType.k4X);;
 
     private static Hardware ourInstance = new Hardware();
 

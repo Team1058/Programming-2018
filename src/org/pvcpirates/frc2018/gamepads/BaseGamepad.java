@@ -5,21 +5,28 @@ import edu.wpi.first.wpilibj.Joystick;
 import java.util.Vector;
 
 public abstract class BaseGamepad extends Joystick{
+    //Seperate file?
     public static enum ButtonTypes{
         BUTTON,DPAD,TRIGGER
     }
-    public class Button{
-        int buttonNum;
+    //Move to seperate file?
+    public static class Button{
+        GamepadEnum buttonEnum;
         ButtonTypes buttonType;
+
+        public Button(GamepadEnum buttonEnum, ButtonTypes buttonType) {
+            this.buttonEnum = buttonEnum;
+            this.buttonType = buttonType;
+        }
     }
-    public Vector<ButtonListener> buttonListeners;
+    public Vector<ButtonAction> buttonActions;
 
     public BaseGamepad(int port) {
         super(port);
-        this.buttonListeners = new Vector<>();
+        this.buttonActions = new Vector<>();
     }
 
-    public static abstract class ButtonListener{
+    public static abstract class ButtonAction {
         public Button button = null;
         public abstract Button setButton();
         public abstract void execute();
@@ -27,24 +34,26 @@ public abstract class BaseGamepad extends Joystick{
         public void check(BaseGamepad gamepad){
             if (button == null)
                 button = setButton();
-            else if (gamepad.getButton(button))
+            else if (gamepad.getPressable(button))
                 execute();
         }
     }
-    public void addListener(ButtonListener buttonListener){
-        buttonListeners.add(buttonListener);
+
+    public void addListener(ButtonAction buttonAction){
+        buttonActions.add(buttonAction);
     }
-    public boolean getButton(Button button){
+
+    public boolean getPressable(Button button){
         switch (button.buttonType){
-            case BUTTON:return getBooper(button.buttonNum);
-            case DPAD:return getDpad(button.buttonNum);
-            case TRIGGER:return getTrigger(button.buttonNum);
-            default:return  getBooper(button.buttonNum);
+            case BUTTON:return getButton(button.buttonEnum);
+            case DPAD:return getDpad(button.buttonEnum);
+            case TRIGGER:return getTrigger(button.buttonEnum);
+            default:return  getButton(button.buttonEnum);
         }
     }
-    public abstract boolean getBooper(int buttonNum);
-    public abstract double getAxis(int axisNum);
-    public abstract boolean getTrigger(int TriggerNum);
-    public abstract boolean getDpad(int dPadNum);
+    public abstract boolean getButton(GamepadEnum buttonEnum);
+    public abstract double getAxis(GamepadEnum axisEnum);
+    public abstract boolean getTrigger(GamepadEnum triggerEnum);
+    public abstract boolean getDpad(GamepadEnum dPadEnum);
 
 }
