@@ -8,11 +8,11 @@ import org.pvcpirates.frc2018.RobotMap;
 
 public class Drivetrain extends BaseController {
 
-    Hardware hardware = Robot.getInstance().hardware;
+    private Hardware hardware = Robot.getInstance().hardware;
     public Drivetrain() {
 
-       hardware.LD2.follow(hardware.LD1);
-       hardware.RD2.follow(hardware.RD1);
+       hardware.leftDrive2.follow(hardware.leftDrive1);
+       hardware.rightDrive2.follow(hardware.rightDrive1);
        //TODO: Extract navx and encoders
         //hardware.navx.reset();
 
@@ -22,13 +22,26 @@ public class Drivetrain extends BaseController {
 
     public void stopAll(){
         //shut everything off
-        hardware.LD1.set(ControlMode.PercentOutput,0);
-        hardware.LD1.set(ControlMode.PercentOutput,0);
+        hardware.leftDrive1.set(ControlMode.PercentOutput,0);
+        hardware.leftDrive1.set(ControlMode.PercentOutput,0);
     }
 
     public void setDrive(double left, double right){
-        hardware.LD1.set(ControlMode.PercentOutput,left);
-        hardware.RD1.set(ControlMode.PercentOutput,-right);
+        hardware.leftDrive1.set(ControlMode.PercentOutput,left);
+        hardware.rightDrive1.set(ControlMode.PercentOutput,-right);
+    }
+    public void setPIDF(double p,double i, double d, double f){
+        //Why ctre whyyyyyy
+        hardware.leftDrive1.config_kP(0,p,RobotMap.Constants.DRIVEBASE_TIMEOUT);
+        hardware.leftDrive1.config_kI(0,i,RobotMap.Constants.DRIVEBASE_TIMEOUT);
+        hardware.leftDrive1.config_kD(0,d,RobotMap.Constants.DRIVEBASE_TIMEOUT);
+        hardware.leftDrive1.config_kF(0,f,RobotMap.Constants.DRIVEBASE_TIMEOUT);
+
+        hardware.rightDrive1.config_kP(0,p,RobotMap.Constants.DRIVEBASE_TIMEOUT);
+        hardware.rightDrive1.config_kI(0,i,RobotMap.Constants.DRIVEBASE_TIMEOUT);
+        hardware.rightDrive1.config_kD(0,d,RobotMap.Constants.DRIVEBASE_TIMEOUT);
+        hardware.rightDrive1.config_kF(0,f,RobotMap.Constants.DRIVEBASE_TIMEOUT);
+
     }
     /*
     TODO:Move to encoder subsystem

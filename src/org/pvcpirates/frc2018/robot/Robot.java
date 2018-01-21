@@ -4,7 +4,7 @@ import org.pvcpirates.frc2018.robot.controllers.Drivetrain;
 import org.pvcpirates.frc2018.state.State;
 
 public class Robot {
-    //TODO: switchState()
+
     public final Hardware hardware = Hardware.getInstance();
     public final Drivetrain drivetrain = new Drivetrain();
     public State state;

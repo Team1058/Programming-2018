@@ -9,8 +9,8 @@ import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.robot.controllers.Drivetrain;
 
 public class TeleopState extends State{
-    Gamepad gamepad = new Gamepad(0);
-    Gamepad gamepad2 = new Gamepad(1);
+    private Gamepad gamepad = new Gamepad(0);
+    private Gamepad gamepad2 = new Gamepad(1);
     @Override
     public void init() {
         CommandFactory commandFactory = new CommandFactory();
@@ -22,7 +22,7 @@ public class TeleopState extends State{
 
             @Override
             public void execute() {
-                commandFactory.generate(Robot.getInstance().drivetrain,5);
+                commandFactory.generate(Robot.getInstance().drivetrain,5).cycle.exec();
             }
         });
     }
