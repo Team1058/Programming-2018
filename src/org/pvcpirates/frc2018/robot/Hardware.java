@@ -17,16 +17,19 @@ public class Hardware {
     public final TalonSRX rightDrive2 = new TalonSRX(RobotMap.CANTalonIds.RIGHT_DRIVE_2);
 
     //replace channels with enums
-    public final Ultrasonic ultrasonic = new Ultrasonic(0,1);
+    //public final Ultrasonic ultrasonic = new Ultrasonic(0,1);
 
     //public AHRS navx =  new AHRS(SPI.Port.kMXP);
     public Encoder leftEncoder = new Encoder(RobotMap.SensorIDs.LEFT_DRIVE_ENCODER_PORTS[0], RobotMap.SensorIDs.LEFT_DRIVE_ENCODER_PORTS[1],false,Encoder.EncodingType.k4X);
     public Encoder rightEncoder= new Encoder(RobotMap.SensorIDs.RIGHT_DRIVE_ENCODER_PORTS[0],RobotMap.SensorIDs.RIGHT_DRIVE_ENCODER_PORTS[1],false,Encoder.EncodingType.k4X);
 
-    private static Hardware ourInstance = new Hardware();
+    private static Hardware ourInstance;
 
 
     public static Hardware getInstance() {
+    	if(ourInstance == null){
+    		ourInstance = new Hardware();
+    	}
         return ourInstance;
     }
 

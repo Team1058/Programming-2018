@@ -8,7 +8,7 @@ import org.pvcpirates.frc2018.RobotMap;
 
 public class Drivetrain extends BaseController {
 
-    private Hardware hardware = Robot.getInstance().hardware;
+    private Hardware hardware = Hardware.getInstance();
     public Drivetrain() {
 
        hardware.leftDrive2.follow(hardware.leftDrive1);

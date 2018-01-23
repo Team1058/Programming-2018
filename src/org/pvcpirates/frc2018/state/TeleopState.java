@@ -37,7 +37,7 @@ public class TeleopState extends State{
             //TODO fix having to pass in gamepad instance
             buttonAction.check(gamepad2);
         }
-        Robot.getInstance().drivetrain.setDrive(gamepad.getAxis(GamepadEnum.LEFT_STICK_X),gamepad.getAxis(GamepadEnum.RIGHT_STICK_X));
+        Robot.getInstance().drivetrain.setDrive(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y),gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y));
     }
 
     @Override

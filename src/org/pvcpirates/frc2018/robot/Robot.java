@@ -9,9 +9,12 @@ public class Robot {
     public final Drivetrain drivetrain = new Drivetrain();
     public State state;
 
-    private static Robot ourInstance = new Robot();
+    private static Robot ourInstance;
     public static Robot getInstance() {
-        return ourInstance;
+    	if(ourInstance == null){
+    		ourInstance = new Robot();
+    	}
+    	return ourInstance;
     }
 
     private Robot() {

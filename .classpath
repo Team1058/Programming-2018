@@ -12,5 +12,7 @@
 			<attribute name="javadoc_location" value="file:/C:/Users/austi/wpilib/user/java/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="var" path="wpilib" sourcepath="wpilib.sources"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/CTRE_Phoenix.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

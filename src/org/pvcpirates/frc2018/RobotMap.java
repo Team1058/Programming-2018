@@ -9,8 +9,8 @@ public class RobotMap {
     }
     
     public static final class SensorIDs{
-        public static final int[] LEFT_DRIVE_ENCODER_PORTS = {0,0};
-        public static final int[] RIGHT_DRIVE_ENCODER_PORTS = {0,0};
+        public static final int[] LEFT_DRIVE_ENCODER_PORTS = {0,1};
+        public static final int[] RIGHT_DRIVE_ENCODER_PORTS = {2,3};
 
     }
     
