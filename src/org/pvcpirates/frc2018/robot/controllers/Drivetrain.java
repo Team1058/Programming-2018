@@ -1,6 +1,8 @@
 package org.pvcpirates.frc2018.robot.controllers;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+
 //import com.kauailabs.navx.frc.AHRS;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
@@ -13,11 +15,13 @@ public class Drivetrain extends BaseController {
 
        hardware.leftDrive2.follow(hardware.leftDrive1);
        hardware.rightDrive2.follow(hardware.rightDrive1);
+       hardware.leftDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.DRIVEBASE_TIMEOUT);
+       hardware.leftDrive2.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.DRIVEBASE_TIMEOUT);
        //TODO: Extract navx and encoders
         //hardware.navx.reset();
 
-        hardware.leftEncoder.setDistancePerPulse(RobotMap.Constants.DRIVE_DISTANCE_PER_TICK);
-        hardware.rightEncoder.setDistancePerPulse(RobotMap.Constants.DRIVE_DISTANCE_PER_TICK);
+        //hardware.leftEncoder.setDistancePerPulse(RobotMap.Constants.DRIVE_DISTANCE_PER_TICK);
+        //hardware.rightEncoder.setDistancePerPulse(RobotMap.Constants.DRIVE_DISTANCE_PER_TICK);
     }
 
     public void stopAll(){
