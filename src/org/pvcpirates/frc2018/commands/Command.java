@@ -13,6 +13,5 @@ public class Command {
     }
     public interface Cycle {
         void exec();
-
     }
 }
