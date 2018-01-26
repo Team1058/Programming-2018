@@ -13,6 +13,6 @@ public class AutoCommandFactory {
             //return whatever also ik you dont need it for drivebase
 
         }
-        return new AutoCommand(true,()->{});
+        return  null; //new AutoCommand(true,()->{});
     }
 }

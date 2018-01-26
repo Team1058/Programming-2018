@@ -1,6 +1,5 @@
 package org.pvcpirates.frc2018.gamepads;
 
-import org.pvcpirates.frc2018.commands.SampleCommand;
 import org.pvcpirates.frc2018.gamepads.Button.ButtonAction;
 
 public class OperatorGamepad extends BaseGamepad {
@@ -11,18 +10,9 @@ public class OperatorGamepad extends BaseGamepad {
 		//mapControlsToCommands();
 	}
 	
-	void mapControlsToCommands() {
-        addListener(new ButtonAction() {
-        		SampleAutoCommand sampCommand = new SampleAutoCommand();
-            @Override
-            public Button setButton() {
-                return new Button(GamepadEnum.A_BUTTON, Button.ButtonTypes.BUTTON);
-            }
-
-            @Override
-            public void execute() {
-            		sampCommand.executeCommand();
-            }
-        });
+	@Override
+	void mapCommandsToController() {
+        
 	}
+
 }

@@ -1,6 +1,5 @@
 package org.pvcpirates.frc2018.gamepads;
 
-import org.pvcpirates.frc2018.commands.SampleCommand;
 import org.pvcpirates.frc2018.gamepads.Button.ButtonAction;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.teleop.DriveCommand;

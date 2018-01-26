@@ -1,8 +1,9 @@
 package org.pvcpirates.frc2018.state;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import org.pvcpirates.frc2018.commands.Command;
-import org.pvcpirates.frc2018.commands.CommandFactory;
+
+import org.pvcpirates.frc2018.autonomous.AutoCommand;
+import org.pvcpirates.frc2018.autonomous.AutoCommandFactory;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.robot.controllers.Drivetrain;
 
@@ -21,7 +22,7 @@ public class AutoState extends State{
     //TODO:Parallel/Sequential stuff
     @Override
     public void exec() {
-        chooser.getSelected().cycle.exec();
+        chooser.getSelected().executeCommand();
     }
 
     @Override

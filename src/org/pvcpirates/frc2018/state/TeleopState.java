@@ -1,9 +1,7 @@
 package org.pvcpirates.frc2018.state;
 
-import org.pvcpirates.frc2018.commands.CommandFactory;
 import org.pvcpirates.frc2018.gamepads.BaseGamepad;
 import org.pvcpirates.frc2018.gamepads.DriverGamepad;
-import org.pvcpirates.frc2018.gamepads.Gamepad;
 import org.pvcpirates.frc2018.gamepads.GamepadEnum;
 import org.pvcpirates.frc2018.gamepads.OperatorGamepad;
 import org.pvcpirates.frc2018.robot.Hardware;
