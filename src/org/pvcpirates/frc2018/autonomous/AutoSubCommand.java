@@ -1,12 +1,13 @@
-package org.pvcpirates.frc2018.commands;
+package org.pvcpirates.frc2018.autonomous;
 
 import org.pvcpirates.frc2018.*;
+import org.pvcpirates.frc2018.gamepads.BaseGamepad;
 
-public class SubCommand{
-	Command parentCommand;
+public class AutoSubCommand{
+	AutoCommand parentCommand;
 	Status status;
 	
-	public SubCommand(Command parent) {
+	public AutoSubCommand(AutoCommand parent) {
 		parentCommand = parent;		
 	}
 	

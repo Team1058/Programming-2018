@@ -11,17 +11,18 @@ import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.robot.controllers.Drivetrain;
 
 public class TeleopState extends State{
-    private DriverGamepad driverGamepad = new DriverGamepad(0);
-    private OperatorGamepad operatorGamepad = new OperatorGamepad(1);
+    private DriverGamepad driverGamepad;
+    private OperatorGamepad operatorGamepad;
     @Override
     public void init() {
-        CommandFactory commandFactory = new CommandFactory();
+    		driverGamepad = new DriverGamepad(0);
+    		operatorGamepad = new OperatorGamepad(1);
     }
 
     @Override
     public void exec() {
-    		driverGamepad.executeActions();
-    		operatorGamepad.executeActions();
+    		driverGamepad.executeCommands();
+    		operatorGamepad.executeCommands();
     }
 
     @Override

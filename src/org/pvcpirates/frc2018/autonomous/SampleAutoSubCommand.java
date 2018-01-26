@@ -1,10 +1,10 @@
-package org.pvcpirates.frc2018.commands;
+package org.pvcpirates.frc2018.autonomous;
 
 import org.pvcpirates.frc2018.Status;
 
-public class SampleSubCommand extends SubCommand {
+public class SampleAutoSubCommand extends AutoSubCommand {
 	
-	public SampleSubCommand(Command parent) {
+	public SampleAutoSubCommand(AutoCommand parent) {
 		super(parent);
 	}
 	

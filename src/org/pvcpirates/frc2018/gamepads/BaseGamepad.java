@@ -5,31 +5,25 @@ import edu.wpi.first.wpilibj.Joystick;
 import java.util.Vector;
 
 import org.pvcpirates.frc2018.gamepads.Button.ButtonAction;
+import org.pvcpirates.frc2018.teleop.TeleopCommand;
 
 public abstract class BaseGamepad extends Joystick{
 
-    public Vector<ButtonAction> buttonActions;
+    public Vector<TeleopCommand> teleopCommands;
 
     public BaseGamepad(int port) {
         super(port);
-        this.buttonActions = new Vector<>();
-        mapControlsToCommands();
+        this.teleopCommands = new Vector<TeleopCommand>();
+        mapCommandsToController();
     }
     
-    abstract void mapControlsToCommands();
+    abstract void mapCommandsToController();
 
-    public void addListener(ButtonAction buttonAction){
-        buttonActions.add(buttonAction);
-    }
     
-    public void executeActions() {
-    		executeButtonActions();
-    }
-    
-    private void executeButtonActions() {
-        for(ButtonAction buttonAction: buttonActions){
-            buttonAction.check();
-        }
+    public void executeCommands() {
+    	  for(TeleopCommand command : teleopCommands) {
+    		  command.executeCommand();
+    	  }
     }
 
     public boolean getPressable(Button button){

@@ -1,4 +1,4 @@
-package org.pvcpirates.frc2018.commands;
+package org.pvcpirates.frc2018.autonomous;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,15 +7,15 @@ import java.util.PriorityQueue;
 
 import org.pvcpirates.frc2018.Status;
 
-public class Command {
+public class AutoCommand {
 
-	PriorityQueue<SubCommand> subCommands;
+	PriorityQueue<AutoSubCommand> subCommands;
 
-	public Command() {
-		subCommands = new PriorityQueue<SubCommand>();
+	public AutoCommand() {
+		subCommands = new PriorityQueue<AutoSubCommand>();
 	}
 	
-	public void addSubCommand(SubCommand toAdd) {
+	public void addSubCommand(AutoSubCommand toAdd) {
 		subCommands.add(toAdd);
 	}
 	
@@ -26,7 +26,7 @@ public class Command {
 	private void runNextSubCommand() {
 		// Exec next command in stack
 		if(!subCommands.isEmpty()) {
-		  SubCommand nextCommand = subCommands.remove();
+		  AutoSubCommand nextCommand = subCommands.remove();
 		  nextCommand.exec();
 		}else {
 			//All subcommands done.

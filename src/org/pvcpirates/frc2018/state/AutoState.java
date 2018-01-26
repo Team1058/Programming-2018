@@ -9,12 +9,12 @@ import org.pvcpirates.frc2018.robot.controllers.Drivetrain;
 import java.util.List;
 
 public class AutoState extends State{
-    private List<Command> commands;
-    private SendableChooser <Command> chooser = new SendableChooser<>();
+    private List<AutoCommand> commands;
+    private SendableChooser <AutoCommand> chooser = new SendableChooser<>();
     //TODO commandGroup
     @Override
     public void init() {
-        CommandFactory commandFactory = new CommandFactory();
+        AutoCommandFactory commandFactory = new AutoCommandFactory();
         commands.add(commandFactory.generate(Robot.getInstance().drivetrain,0));
         chooser.addObject("",commands.get(commands.size()-1));
     }

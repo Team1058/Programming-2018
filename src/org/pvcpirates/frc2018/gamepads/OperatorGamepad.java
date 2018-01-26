@@ -13,7 +13,7 @@ public class OperatorGamepad extends BaseGamepad {
 	
 	void mapControlsToCommands() {
         addListener(new ButtonAction() {
-        		SampleCommand sampCommand = new SampleCommand();
+        		SampleAutoCommand sampCommand = new SampleAutoCommand();
             @Override
             public Button setButton() {
                 return new Button(GamepadEnum.A_BUTTON, Button.ButtonTypes.BUTTON);
