@@ -46,6 +46,7 @@ public class Drivetrain extends BaseController {
         hardware.rightDrive1.config_kD(0,d,RobotMap.Constants.DRIVEBASE_TIMEOUT);
         hardware.rightDrive1.config_kF(0,f,RobotMap.Constants.DRIVEBASE_TIMEOUT);
     }
+    
     /*
     TODO:Move to encoder subsystem
     public double getLeftVelocity(){
