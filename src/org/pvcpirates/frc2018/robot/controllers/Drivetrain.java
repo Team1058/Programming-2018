@@ -18,10 +18,10 @@ public class Drivetrain extends BaseController {
        hardware.leftDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.DRIVEBASE_TIMEOUT);
        hardware.leftDrive2.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.DRIVEBASE_TIMEOUT);
        //TODO: Extract navx and encoders
-        //hardware.navx.reset();
+       //hardware.navx.reset();
 
-        //hardware.leftEncoder.setDistancePerPulse(RobotMap.Constants.DRIVE_DISTANCE_PER_TICK);
-        //hardware.rightEncoder.setDistancePerPulse(RobotMap.Constants.DRIVE_DISTANCE_PER_TICK);
+       //hardware.leftEncoder.setDistancePerPulse(RobotMap.Constants.DRIVE_DISTANCE_PER_TICK);
+       //hardware.rightEncoder.setDistancePerPulse(RobotMap.Constants.DRIVE_DISTANCE_PER_TICK);
     }
 
     public void stopAll(){
@@ -45,8 +45,8 @@ public class Drivetrain extends BaseController {
         hardware.rightDrive1.config_kI(0,i,RobotMap.Constants.DRIVEBASE_TIMEOUT);
         hardware.rightDrive1.config_kD(0,d,RobotMap.Constants.DRIVEBASE_TIMEOUT);
         hardware.rightDrive1.config_kF(0,f,RobotMap.Constants.DRIVEBASE_TIMEOUT);
-
     }
+    
     /*
     TODO:Move to encoder subsystem
     public double getLeftVelocity(){

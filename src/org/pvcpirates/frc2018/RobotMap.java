@@ -21,6 +21,9 @@ public class RobotMap {
         public static final double DRIVEBASE_kD = 0;
         public static final double DRIVEBASE_kF = 0;
         public static final double DRIVE_DISTANCE_PER_TICK = 0; //Feet
+        public static final double ARM_MASS = 0;
+        public static final double ARM_OFFSET_DEGREES = 0;
+        public static final double ARM_DISTANCE = 0;
     }
 
     public static final class GamepadPorts {

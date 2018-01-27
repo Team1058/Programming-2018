@@ -1,11 +1,14 @@
 package org.pvcpirates.frc2018.util;
 
+import org.pvcpirates.frc2018.RobotMap;
+
 public class PIDF {
 
     private double p;
     private double i;
     private double d;
     private double f;
+    private double gravityCompensation;
     private double value;
     private double range;
 
@@ -16,7 +19,6 @@ public class PIDF {
     private double minOutput;
 
     private boolean firstCycle;
-
 
     public PIDF(double p, double i, double d, double f, double value, double range) {
         this.p = p;
@@ -34,6 +36,18 @@ public class PIDF {
         this.i = i;
         this.d = d;
         this.f = f;
+        this.range = range;
+        firstCycle = false;
+        maxOutput = 1;
+        minOutput = -1;
+    }
+    public PIDF(double p, double i, double d, double f, double gravityCompensation, double value,  double range) {
+        this.p = p;
+        this.i = i;
+        this.d = d;
+        this.f = f;
+        this.gravityCompensation = gravityCompensation;
+        this.value = value;
         this.range = range;
         firstCycle = false;
         maxOutput = 1;
@@ -68,7 +82,8 @@ public class PIDF {
 
         //F
         fVal = f * value;
-
+      
+        
         this.previousError = error;
 
         result = pVal + iVal + dVal + fVal;
@@ -81,6 +96,13 @@ public class PIDF {
         return result;
     }
 
+    public double calculate(double error, double angle){
+    	double mass = RobotMap.Constants.ARM_MASS;
+    	double angleOffset = Math.toRadians(RobotMap.Constants.ARM_OFFSET_DEGREES);
+    	double distance = RobotMap.Constants.ARM_DISTANCE;
+    	return calculate(error) + gravityCompensation * (mass*distance*Math.cos(angle-angleOffset));
+    }
+    
     public void setValue(double value){
         this.value = value;
     }

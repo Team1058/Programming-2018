@@ -4,43 +4,26 @@ import edu.wpi.first.wpilibj.Joystick;
 
 import java.util.Vector;
 
-public abstract class BaseGamepad extends Joystick{
-    //Seperate file?
-    public static enum ButtonTypes{
-        BUTTON,DPAD,TRIGGER
-    }
-    //Move to seperate file?
-    public static class Button{
-        GamepadEnum buttonEnum;
-        ButtonTypes buttonType;
+import org.pvcpirates.frc2018.gamepads.Button.ButtonAction;
+import org.pvcpirates.frc2018.teleop.TeleopCommand;
 
-        public Button(GamepadEnum buttonEnum, ButtonTypes buttonType) {
-            this.buttonEnum = buttonEnum;
-            this.buttonType = buttonType;
-        }
-    }
-    public Vector<ButtonAction> buttonActions;
+public abstract class BaseGamepad extends Joystick{
+
+    public Vector<TeleopCommand> teleopCommands;
 
     public BaseGamepad(int port) {
         super(port);
-        this.buttonActions = new Vector<>();
+        this.teleopCommands = new Vector<TeleopCommand>();
+        mapCommandsToController();
     }
+    
+    abstract void mapCommandsToController();
 
-    public static abstract class ButtonAction {
-        public Button button = null;
-        public abstract Button setButton();
-        public abstract void execute();
-
-        public void check(BaseGamepad gamepad){
-            if (button == null)
-                button = setButton();
-            else if (gamepad.getPressable(button))
-                execute();
-        }
-    }
-
-    public void addListener(ButtonAction buttonAction){
-        buttonActions.add(buttonAction);
+    
+    public void executeCommands() {
+    	  for(TeleopCommand command : teleopCommands) {
+    		  command.executeCommand();
+    	  }
     }
 
     public boolean getPressable(Button button){
@@ -51,9 +34,25 @@ public abstract class BaseGamepad extends Joystick{
             default:return  getButton(button.buttonEnum);
         }
     }
-    public abstract boolean getButton(GamepadEnum buttonEnum);
-    public abstract double getAxis(GamepadEnum axisEnum);
-    public abstract boolean getTrigger(GamepadEnum triggerEnum);
-    public abstract boolean getDpad(GamepadEnum dPadEnum);
+    public boolean getButton(GamepadEnum buttonEnum) {
+        return getRawButton(buttonEnum.val);
+    }
+    public double getAxis(GamepadEnum axisEnum) {
+        return getRawAxis(axisEnum.val);
+    }
+    
+    public boolean getTrigger(GamepadEnum triggerEnum) {
+        return (getRawAxis(triggerEnum.val) > .8);
+    }
+    
+    public boolean getDpad(GamepadEnum dPadEnum) {
+        switch (dPadEnum){
+	        case DPAD_DOWN:return (getPOV(0) == 180);
+	        case DPAD_UP:return (getPOV(0) == 0);
+	        case DPAD_LEFT:return (getPOV(0) <= 315) || (getPOV(0) >= 225);
+	        case DPAD_RIGHT:return (getPOV(0) <= 135) || (getPOV(0) >= 45);
+        }
+        return false;
+    }
 
 }
