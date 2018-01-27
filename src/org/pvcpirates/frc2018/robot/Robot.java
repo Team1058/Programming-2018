@@ -5,19 +5,19 @@ import org.pvcpirates.frc2018.state.State;
 
 public class Robot {
 
+    private static Robot ourInstance;
     public final Hardware hardware = Hardware.getInstance();
     public final Drivetrain drivetrain = new Drivetrain();
     public State state;
 
-    private static Robot ourInstance;
-    public static Robot getInstance() {
-    	if(ourInstance == null){
-    		ourInstance = new Robot();
-    	}
-    	return ourInstance;
+    private Robot() {
     }
 
-    private Robot() {
+    public static Robot getInstance() {
+        if (ourInstance == null) {
+            ourInstance = new Robot();
+        }
+        return ourInstance;
     }
 
     public void setState(State state) {

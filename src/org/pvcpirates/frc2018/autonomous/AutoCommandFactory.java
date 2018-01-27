@@ -13,6 +13,7 @@ public class AutoCommandFactory {
     public AutoCommandFactory() {
         //Config?
     }
+<<<<<<< HEAD
     public <T> AutoCommand generate(StartingLocation location, AutoCommand command, AutoType type){
     	gameData = DriverStation.getInstance().getGameSpecificMessage();
     	
@@ -68,6 +69,15 @@ public class AutoCommandFactory {
     		}
     	}
     	return command;
+=======
+
+    public <T> AutoCommand generate(BaseController controller, T t) {
+        if (controller instanceof Drivetrain) {
+            //return whatever also ik you dont need it for drivebase
+
+        }
+        return null; //new AutoCommand(true,()->{});
+>>>>>>> 7db7131138724ea89896ca315052e335daa7067c
     }
     
     
