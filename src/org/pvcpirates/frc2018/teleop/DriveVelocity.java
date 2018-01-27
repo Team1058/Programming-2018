@@ -20,8 +20,8 @@ public class DriveVelocity extends TeleopCommand {
         Robot.getInstance().drivetrain.setPIDF(kP, kI, kD, kF);
         //ticks per 100 milliseconds
         double vel = 9.2 * 512 * 10;
-        double fb = Math.abs(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y));
-        double lr = Math.abs(gamepad.getAxis(GamepadEnum.RIGHT_STICK_X));
+        double fb = gamepad.getAxis(GamepadEnum.LEFT_STICK_Y);
+        double lr = gamepad.getAxis(GamepadEnum.RIGHT_STICK_X);
         double lspd = fb - lr;
         double rspd = fb + lr;
 
