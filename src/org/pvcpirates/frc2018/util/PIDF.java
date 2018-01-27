@@ -1,11 +1,14 @@
 package org.pvcpirates.frc2018.util;
 
+import org.pvcpirates.frc2018.RobotMap;
+
 public class PIDF {
 
     private double p;
     private double i;
     private double d;
     private double f;
+    private double gravityCompensation;
     private double value;
     private double range;
 
@@ -16,7 +19,6 @@ public class PIDF {
     private double minOutput;
 
     private boolean firstCycle;
-
 
     public PIDF(double p, double i, double d, double f, double value, double range) {
         this.p = p;
@@ -29,6 +31,7 @@ public class PIDF {
         maxOutput = 1;
         minOutput = -1;
     }
+
     public PIDF(double p, double i, double d, double f, double range) {
         this.p = p;
         this.i = i;
@@ -40,14 +43,27 @@ public class PIDF {
         minOutput = -1;
     }
 
-    public double calculate(double error){
+    public PIDF(double p, double i, double d, double f, double gravityCompensation, double value, double range) {
+        this.p = p;
+        this.i = i;
+        this.d = d;
+        this.f = f;
+        this.gravityCompensation = gravityCompensation;
+        this.value = value;
+        this.range = range;
+        firstCycle = false;
+        maxOutput = 1;
+        minOutput = -1;
+    }
+
+    public double calculate(double error) {
         double pVal;
         double iVal;
         double dVal;
         double fVal;
         double result;
 
-        if(firstCycle){
+        if (firstCycle) {
             previousError = error;
             firstCycle = false;
         }
@@ -56,9 +72,9 @@ public class PIDF {
         pVal = p * error;
 
         //I
-        if(Math.abs(pVal) < 1){
+        if (Math.abs(pVal) < 1) {
             totalError += error;
-        }else{
+        } else {
             totalError = 0;
         }
         iVal = i * totalError;
@@ -69,19 +85,27 @@ public class PIDF {
         //F
         fVal = f * value;
 
+
         this.previousError = error;
 
         result = pVal + iVal + dVal + fVal;
-        if(result > 1){
+        if (result > 1) {
             result = 1;
-        }else if (result < -1){
+        } else if (result < -1) {
             result = -1;
         }
 
         return result;
     }
 
-    public void setValue(double value){
+    public double calculate(double error, double angle) {
+        double mass = RobotMap.Constants.ARM_MASS;
+        double angleOffset = Math.toRadians(RobotMap.Constants.ARM_OFFSET_DEGREES);
+        double distance = RobotMap.Constants.ARM_DISTANCE;
+        return calculate(error) + gravityCompensation * (mass * distance * Math.cos(angle - angleOffset));
+    }
+
+    public void setValue(double value) {
         this.value = value;
     }
 
