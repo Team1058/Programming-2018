@@ -1,12 +1,8 @@
 package org.pvcpirates.frc2018.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-<<<<<<< HEAD
-
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.SPI;
-=======
->>>>>>> 7db7131138724ea89896ca315052e335daa7067c
 import edu.wpi.first.wpilibj.Ultrasonic;
 import org.pvcpirates.frc2018.RobotMap;
 
@@ -23,17 +19,9 @@ public class Hardware {
     //public AHRS navx =  new AHRS(SPI.Port.kMXP);
     //replace channels with enums
     public final Ultrasonic ultrasonic = new Ultrasonic(0, 1);
-
-
-<<<<<<< HEAD
     public final Compressor compressor = new Compressor(0);
     
-    private static Hardware ourInstance;
-=======
-    private Hardware() {
->>>>>>> 7db7131138724ea89896ca315052e335daa7067c
-
-    }
+    
 
     public static Hardware getInstance() {
         if (ourInstance == null) {
@@ -42,17 +30,12 @@ public class Hardware {
         return ourInstance;
     }
 
-<<<<<<< HEAD
     private Hardware() {
     	compressor.setClosedLoopControl(true);
     }
     
     private double getUltraDistance(){
     	return ultrasonic.getRangeInches();
-=======
-    private double getUltraDistance() {
-        return ultrasonic.getRangeInches();
->>>>>>> 7db7131138724ea89896ca315052e335daa7067c
     }
 
 }

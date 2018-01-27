@@ -5,8 +5,7 @@ import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.robot.controllers.Drivetrain;
 
 public class DriveUntil extends AutoSubCommand {
-
-<<<<<<< HEAD
+	
 	private double currentPos;
 	private Drivetrain drivetrain = Robot.getInstance().drivetrain;
 	private Hardware hardware = Hardware.getInstance();
@@ -21,26 +20,7 @@ public class DriveUntil extends AutoSubCommand {
 	
 	@Override
 	public void init(){
-		//currentPos = 
 	}
-=======
-    private double currentPos;
-    private Drivetrain drivetrain = Robot.getInstance().drivetrain;
-    private Hardware hardware = Hardware.getInstance();
-
-    public DriveUntil(AutoCommand parent) {
-        super(parent);
-        // TODO Auto-generated constructor stub
-    }
-
-    public DriveUntil(AutoCommand parent, double inches) {
-        super(parent);
-    }
-
-    @Override
-    public void init() {
-        currentPos = 0;
-    }
->>>>>>> 7db7131138724ea89896ca315052e335daa7067c
+    
 
 }
