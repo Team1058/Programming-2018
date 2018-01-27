@@ -4,6 +4,7 @@ import org.pvcpirates.frc2018.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Ultrasonic;
 
@@ -22,6 +23,8 @@ public class Hardware {
 
     //public AHRS navx =  new AHRS(SPI.Port.kMXP);
 
+    public final Compressor compressor = new Compressor(0);
+    
     private static Hardware ourInstance;
 
 
@@ -33,7 +36,7 @@ public class Hardware {
     }
 
     private Hardware() {
-
+    	compressor.setClosedLoopControl(true);
     }
     
     private double getUltraDistance(){

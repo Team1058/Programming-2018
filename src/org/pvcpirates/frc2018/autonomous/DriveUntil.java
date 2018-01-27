@@ -20,7 +20,7 @@ public class DriveUntil extends AutoSubCommand{
 	
 	@Override
 	public void init(){
-		currentPos = 
+		//currentPos = 
 	}
 
 }

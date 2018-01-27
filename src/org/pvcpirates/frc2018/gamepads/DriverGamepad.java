@@ -2,6 +2,7 @@ package org.pvcpirates.frc2018.gamepads;
 
 import org.pvcpirates.frc2018.gamepads.Button.ButtonAction;
 import org.pvcpirates.frc2018.robot.Robot;
+import org.pvcpirates.frc2018.teleop.CubeGrabber;
 import org.pvcpirates.frc2018.teleop.DriveCommand;
 
 public class DriverGamepad extends BaseGamepad {
@@ -13,7 +14,8 @@ public class DriverGamepad extends BaseGamepad {
 	}
 	
 	void mapCommandsToController() {
-		teleopCommands.add(new DriveCommand(this));
+		//teleopCommands.add(new DriveCommand(this));
+		teleopCommands.add(new CubeGrabber(this));
 	}
 
 }

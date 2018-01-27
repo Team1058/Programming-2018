@@ -8,6 +8,8 @@ import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.robot.controllers.Drivetrain;
 
+import edu.wpi.first.wpilibj.Compressor;
+
 public class TeleopState extends State{
     private DriverGamepad driverGamepad;
     private OperatorGamepad operatorGamepad;

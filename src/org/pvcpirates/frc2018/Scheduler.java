@@ -1,6 +1,7 @@
 
 package org.pvcpirates.frc2018;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.state.AutoState;
@@ -12,7 +13,6 @@ public class Scheduler extends IterativeRobot{
 
     @Override
     public void robotInit() {
-
     }
     @Override
     public void autonomousInit() {
