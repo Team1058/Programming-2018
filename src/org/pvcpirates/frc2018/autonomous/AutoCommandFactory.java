@@ -8,11 +8,12 @@ public class AutoCommandFactory {
     public AutoCommandFactory() {
         //Config?
     }
-    public <T> AutoCommand generate(BaseController controller,T t){
-        if (controller instanceof Drivetrain){
+
+    public <T> AutoCommand generate(BaseController controller, T t) {
+        if (controller instanceof Drivetrain) {
             //return whatever also ik you dont need it for drivebase
 
         }
-        return  null; //new AutoCommand(true,()->{});
+        return null; //new AutoCommand(true,()->{});
     }
 }

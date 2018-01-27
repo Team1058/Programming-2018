@@ -31,6 +31,7 @@ public class PIDF {
         maxOutput = 1;
         minOutput = -1;
     }
+
     public PIDF(double p, double i, double d, double f, double range) {
         this.p = p;
         this.i = i;
@@ -41,7 +42,8 @@ public class PIDF {
         maxOutput = 1;
         minOutput = -1;
     }
-    public PIDF(double p, double i, double d, double f, double gravityCompensation, double value,  double range) {
+
+    public PIDF(double p, double i, double d, double f, double gravityCompensation, double value, double range) {
         this.p = p;
         this.i = i;
         this.d = d;
@@ -54,14 +56,14 @@ public class PIDF {
         minOutput = -1;
     }
 
-    public double calculate(double error){
+    public double calculate(double error) {
         double pVal;
         double iVal;
         double dVal;
         double fVal;
         double result;
 
-        if(firstCycle){
+        if (firstCycle) {
             previousError = error;
             firstCycle = false;
         }
@@ -70,9 +72,9 @@ public class PIDF {
         pVal = p * error;
 
         //I
-        if(Math.abs(pVal) < 1){
+        if (Math.abs(pVal) < 1) {
             totalError += error;
-        }else{
+        } else {
             totalError = 0;
         }
         iVal = i * totalError;
@@ -82,28 +84,28 @@ public class PIDF {
 
         //F
         fVal = f * value;
-      
-        
+
+
         this.previousError = error;
 
         result = pVal + iVal + dVal + fVal;
-        if(result > 1){
+        if (result > 1) {
             result = 1;
-        }else if (result < -1){
+        } else if (result < -1) {
             result = -1;
         }
 
         return result;
     }
 
-    public double calculate(double error, double angle){
-    	double mass = RobotMap.Constants.ARM_MASS;
-    	double angleOffset = Math.toRadians(RobotMap.Constants.ARM_OFFSET_DEGREES);
-    	double distance = RobotMap.Constants.ARM_DISTANCE;
-    	return calculate(error) + gravityCompensation * (mass*distance*Math.cos(angle-angleOffset));
+    public double calculate(double error, double angle) {
+        double mass = RobotMap.Constants.ARM_MASS;
+        double angleOffset = Math.toRadians(RobotMap.Constants.ARM_OFFSET_DEGREES);
+        double distance = RobotMap.Constants.ARM_DISTANCE;
+        return calculate(error) + gravityCompensation * (mass * distance * Math.cos(angle - angleOffset));
     }
-    
-    public void setValue(double value){
+
+    public void setValue(double value) {
         this.value = value;
     }
 
