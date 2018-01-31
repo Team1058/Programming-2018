@@ -6,12 +6,19 @@ public class RobotMap {
         public static final int RIGHT_DRIVE_1 = 3;
         public static final int LEFT_DRIVE_2 = 8;
         public static final int RIGHT_DRIVE_2 = 2;
+        public static final int RIGHT_CUBE_GRABBER = 1;
+        public static final int LEFT_CUBE_GRABBER = 2;
     }
 
     public static final class SensorIDs {
         public static final int[] LEFT_DRIVE_ENCODER_PORTS = {0, 1};
         public static final int[] RIGHT_DRIVE_ENCODER_PORTS = {2, 3};
 
+    }
+    
+    public static final class PneumaticIds {
+    		public static final int GRABBER_1 = 1;
+    		public static final int GRABBER_2 = 2;
     }
 
     public static final class Constants {
