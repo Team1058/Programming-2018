@@ -1,10 +1,12 @@
 package org.pvcpirates.frc2018.state;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import org.pvcpirates.frc2018.AutoType;
-import org.pvcpirates.frc2018.StartingLocation;
-import org.pvcpirates.frc2018.autonomous.AutoCommand;
+
 import org.pvcpirates.frc2018.autonomous.AutoCommandFactory;
+import org.pvcpirates.frc2018.autonomous.AutoType;
+import org.pvcpirates.frc2018.autonomous.StartingLocation;
+import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
+import org.pvcpirates.frc2018.autonomous.command.SwitchAuto;
 import org.pvcpirates.frc2018.robot.Robot;
 
 import java.util.List;

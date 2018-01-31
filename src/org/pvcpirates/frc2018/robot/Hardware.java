@@ -1,6 +1,8 @@
 package org.pvcpirates.frc2018.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -16,7 +18,7 @@ public class Hardware {
     public final TalonSRX leftDrive2 = new TalonSRX(RobotMap.CANTalonIds.LEFT_DRIVE_2);
     public final TalonSRX rightDrive2 = new TalonSRX(RobotMap.CANTalonIds.RIGHT_DRIVE_2);
 
-    //public AHRS navx =  new AHRS(SPI.Port.kMXP);
+    public AHRS navx =  new AHRS(SPI.Port.kMXP);
     //replace channels with enums
     public final Ultrasonic ultrasonic = new Ultrasonic(0, 1);
     public final Compressor compressor = new Compressor(0);
