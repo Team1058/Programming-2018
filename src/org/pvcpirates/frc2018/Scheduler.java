@@ -1,6 +1,7 @@
 package org.pvcpirates.frc2018;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+<<<<<<< HEAD
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -10,8 +11,12 @@ import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
 import org.pvcpirates.frc2018.autonomous.command.DriveAuto;
 import org.pvcpirates.frc2018.autonomous.command.SwitchAuto;
 import org.pvcpirates.frc2018.robot.Hardware;
+=======
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+>>>>>>> Auto stuf
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.state.AutoState;
+import org.pvcpirates.frc2018.state.State;
 import org.pvcpirates.frc2018.state.TeleopState;
 
 public class Scheduler extends IterativeRobot {
@@ -40,9 +45,6 @@ public class Scheduler extends IterativeRobot {
 
     @Override
     public void teleopInit() {
-    	Hardware.getInstance().ultrasonic.setAutomaticMode(true);
-    	Hardware.getInstance().ultrasonic2.setAutomaticMode(true);
-
         robot.setState(new TeleopState());
         robot.state.init();
     }
@@ -50,9 +52,6 @@ public class Scheduler extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         robot.state.exec();
-        System.out.println("ULTRA1: "+ Hardware.getInstance().ultrasonic.getRangeInches());
-        System.out.println("ULTRA2: "+ Hardware.getInstance().ultrasonic2.getRangeInches());
-
     }
 
     @Override

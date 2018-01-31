@@ -4,7 +4,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import org.pvcpirates.frc2018.RobotMap;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -28,8 +27,8 @@ public class Hardware {
 
     public AHRS navx =  new AHRS(SPI.Port.kMXP);
     //replace channels with enums
-    public final Ultrasonic ultrasonic = new Ultrasonic(0, 1);
-    public final Ultrasonic ultrasonic2 = new Ultrasonic(2, 3);
+    public final Ultrasonic leftUltrasonic = new Ultrasonic(0, 1);
+    public final Ultrasonic rightUltrasonic = new Ultrasonic(2, 3);
 
     public final Compressor compressor = new Compressor(0);
     
@@ -44,10 +43,12 @@ public class Hardware {
 
     private Hardware() {
     	compressor.setClosedLoopControl(true);
+    	leftUltrasonic.setAutomaticMode(true);
+    	rightUltrasonic.setAutomaticMode(true);
     }
     
     private double getUltraDistance(){
-    	return ultrasonic.getRangeInches();
+    	return leftUltrasonic.getRangeInches();
     }
 
 }
