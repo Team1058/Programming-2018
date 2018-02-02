@@ -1,6 +1,5 @@
 package org.pvcpirates.frc2018;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.pvcpirates.frc2018.robot.Robot;

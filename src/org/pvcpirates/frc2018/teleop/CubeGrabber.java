@@ -2,6 +2,8 @@ package org.pvcpirates.frc2018.teleop;
 
 import org.pvcpirates.frc2018.gamepads.BaseGamepad;
 import org.pvcpirates.frc2018.gamepads.GamepadEnum;
+import org.pvcpirates.frc2018.robot.Hardware;
+import org.pvcpirates.frc2018.robot.Robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -10,10 +12,11 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class CubeGrabber extends TeleopCommand{
 
-    public final TalonSRX rightMotor = new TalonSRX(1);
-    public final TalonSRX leftMotor = new TalonSRX(2);
-    
-    public final DoubleSolenoid solenoid = new DoubleSolenoid(1,2);
+	private Hardware hardware = Hardware.getInstance();
+	
+    private final TalonSRX rightMotor = hardware.rightCubeGrabMotor;
+    private final TalonSRX leftMotor  = hardware.leftCubeGrabMotor;
+    private final DoubleSolenoid solenoid = hardware.cubeGrabberSolenoid;
 
 	public CubeGrabber(BaseGamepad gp) {
 		super(gp);
