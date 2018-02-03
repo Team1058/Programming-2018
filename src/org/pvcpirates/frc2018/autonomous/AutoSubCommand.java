@@ -5,7 +5,7 @@ import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
 
 public class AutoSubCommand {
     AutoCommand parentCommand;
-    Status status;
+    public Status status;
 
     public AutoSubCommand(AutoCommand parent) {
         parentCommand = parent;

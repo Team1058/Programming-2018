@@ -9,45 +9,31 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import org.pvcpirates.frc2018.robot.controllers.GrabberController;
 
 public class CubeGrabber extends TeleopCommand{
 
-	private Hardware hardware = Hardware.getInstance();
-	
-    private final TalonSRX rightMotor = hardware.rightCubeGrabMotor;
-    private final TalonSRX leftMotor  = hardware.leftCubeGrabMotor;
-    private final DoubleSolenoid solenoid = hardware.cubeGrabberSolenoid;
 
+
+    GrabberController grabberController = new GrabberController();
 	public CubeGrabber(BaseGamepad gp) {
 		super(gp);
-	}
-	
-	private void openGrabber(){
-	    solenoid.set(DoubleSolenoid.Value.kForward);
-	}
-	
-	private void closeGrabber(){
-	    solenoid.set(DoubleSolenoid.Value.kReverse);
 	}
 	
 
 	@Override
 	public void executeCommand() {
 		if(gamepad.getButton(GamepadEnum.A_BUTTON)){
-			rightMotor.set(ControlMode.PercentOutput,-1);
-			leftMotor.set(ControlMode.PercentOutput, .75);
-			openGrabber();
+			grabberController.intakeRollers();
+			grabberController.openGrabber();
 		}else if(gamepad.getButton(GamepadEnum.X_BUTTON)){
-			rightMotor.set(ControlMode.PercentOutput,1);
-			leftMotor.set(ControlMode.PercentOutput, -1);
+			grabberController.outtakeRollers();
 			//openGrabber();
 		}else if(gamepad.getButton(GamepadEnum.B_BUTTON)){
-			rightMotor.set(ControlMode.PercentOutput,-.1);
-			leftMotor.set(ControlMode.PercentOutput, .1);
+			grabberController.holdRollers();
 		}else{
-			rightMotor.set(ControlMode.PercentOutput,0);
-			leftMotor.set(ControlMode.PercentOutput,0);	
-			closeGrabber();
+			grabberController.stopRollers();
+			grabberController.closeGrabber();
 		}
 	}
 }

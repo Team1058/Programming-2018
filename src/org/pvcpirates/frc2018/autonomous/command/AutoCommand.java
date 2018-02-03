@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
 public class AutoCommand {
 
     PriorityQueue<AutoSubCommand> subCommands;
-
+    private AutoSubCommand currentSubCommand = null;
     public AutoCommand() {
         subCommands = new PriorityQueue<AutoSubCommand>();
     }
@@ -18,16 +18,19 @@ public class AutoCommand {
     }
 
     public void executeCommand() {
-        runNextSubCommand();
+        while (!subCommands.isEmpty()){
+            runNextSubCommand();
+        }
     }
 
     private void runNextSubCommand() {
         // Exec next command in stack
-        if (!subCommands.isEmpty()) {
-            AutoSubCommand nextCommand = subCommands.remove();
-            nextCommand.exec();
+        if (!subCommands.isEmpty() && (currentSubCommand.status == Status.STOP || currentSubCommand == null)) {
+            currentSubCommand = subCommands.remove();
+            currentSubCommand.init();
         } else {
             //All subcommands done.
+            currentSubCommand.exec();
         }
     }
 

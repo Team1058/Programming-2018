@@ -1,6 +1,7 @@
 package org.pvcpirates.frc2018.gamepads;
 
 import org.pvcpirates.frc2018.teleop.CubeGrabber;
+import org.pvcpirates.frc2018.teleop.DriveVelocity;
 
 public class DriverGamepad extends BaseGamepad {
 
