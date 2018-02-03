@@ -29,6 +29,8 @@ public class Hardware {
     public AHRS navx =  new AHRS(SPI.Port.kMXP);
     //replace channels with enums
     public final Ultrasonic ultrasonic = new Ultrasonic(0, 1);
+    public final Ultrasonic ultrasonic2 = new Ultrasonic(2, 3);
+
     public final Compressor compressor = new Compressor(0);
     
     

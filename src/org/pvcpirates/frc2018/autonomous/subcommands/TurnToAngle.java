@@ -1,6 +1,5 @@
 package org.pvcpirates.frc2018.autonomous.subcommands;
 
-import org.pvcpirates.frc2018.autonomous.AutoSubCommand;
 import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
@@ -27,7 +26,7 @@ public class TurnToAngle extends AutoSubCommand {
 	
 	@Override
     public void init() {
-        super.init();
+		super.init();
         current = Hardware.getInstance().navx.getYaw();
         pidf = new PIDF(p,i,d,0,0);
     }

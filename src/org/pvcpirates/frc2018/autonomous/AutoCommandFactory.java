@@ -19,13 +19,21 @@ public class AutoCommandFactory {
     	gameData = DriverStation.getInstance().getGameSpecificMessage();
     	
     	if(type == AutoType.SWITCH){
-    		command = configureSwitch(location, command);
+    		
+    	}
+    	switch(type){
+    	case SWITCH: command = configureSwitch(location, command);
+    	case DRIVE: command = configureDrive(command);
     	}
     	
     	return command;
     }
     
-    public AutoCommand configureSwitch(StartingLocation location, AutoCommand command){
+    private AutoCommand configureDrive(AutoCommand command) {
+		command.addSubCommand(new DriveFor(command,10));
+		return command;
+	}
+	public AutoCommand configureSwitch(StartingLocation location, AutoCommand command){
     	if(location == StartingLocation.LEFT){
     		//Go to left side
     		if(gameData.charAt(0) == 'L'){
