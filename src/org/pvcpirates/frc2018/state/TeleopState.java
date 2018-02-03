@@ -1,8 +1,10 @@
 package org.pvcpirates.frc2018.state;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.pvcpirates.frc2018.gamepads.DriverGamepad;
 import org.pvcpirates.frc2018.gamepads.OperatorGamepad;
 import edu.wpi.first.wpilibj.Compressor;
+import org.pvcpirates.frc2018.robot.Robot;
 
 public class TeleopState extends State {
     private DriverGamepad driverGamepad;
@@ -16,6 +18,7 @@ public class TeleopState extends State {
 
     @Override
     public void exec() {
+        SmartDashboard.putNumber("Ultra",Robot.getInstance().hardware.leftUltrasonic.getRangeInches());
         driverGamepad.executeCommands();
         operatorGamepad.executeCommands();
     }
