@@ -1,7 +1,6 @@
 package org.pvcpirates.frc2018.autonomous;
 
 import org.pvcpirates.frc2018.autonomous.command.Command;
-import org.pvcpirates.frc2018.autonomous.command.Command;
 import org.pvcpirates.frc2018.autonomous.subcommands.DriveFor;
 import org.pvcpirates.frc2018.autonomous.subcommands.DriveUltra;
 import org.pvcpirates.frc2018.autonomous.subcommands.TurnToAngle;
