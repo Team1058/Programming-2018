@@ -5,6 +5,7 @@ import org.pvcpirates.frc2018.Scheduler;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
+<<<<<<< HEAD
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.pvcpirates.frc2018.autonomous.AutoCommandFactory;
 import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
@@ -19,7 +20,7 @@ import org.pvcpirates.frc2018.autonomous.command.SwitchAuto;
 import org.pvcpirates.frc2018.autonomous.subcommands.DriveFor;
 import org.pvcpirates.frc2018.autonomous.subcommands.DriveUltra;
 import org.pvcpirates.frc2018.robot.Robot;
-
+import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
 import java.util.List;
 
 public class AutoState extends State {

@@ -39,6 +39,7 @@ public class Scheduler extends IterativeRobot {
     SendableChooser<AutoCommand> chooser = new SendableChooser<>();
     @Override
     public void robotInit() {
+    	
     	AutoCommandFactory commandFactory = new AutoCommandFactory();
 
         AutoCommand ultraAutoCommand = new AutoCommand();

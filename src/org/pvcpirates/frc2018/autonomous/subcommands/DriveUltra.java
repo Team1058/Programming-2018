@@ -35,7 +35,7 @@ public class DriveUltra extends AutoSubCommand {
         double ultrasonicInchesR = Robot.getInstance().hardware.leftUltrasonic.getRangeInches();
         double ultrasonicInchesL = Robot.getInstance().hardware.rightUltrasonic.getRangeInches();
 
-        Robot.getInstance().drivetrain.setDrive(ControlMode.PercentOutput,1*((ultrasonicInchesL-inches))/ultrasonicInchesL,1*((ultrasonicInchesR-inches))/ultrasonicInchesR);
+        Robot.getInstance().drivetrain.setDrive(ControlMode.PercentOutput,((ultrasonicInchesL-inches))/ultrasonicInchesL,((ultrasonicInchesR-inches))/ultrasonicInchesR);
         if (ultrasonicInchesL == inches && ultrasonicInchesR == inches)
             this.finished();
     }
