@@ -1,6 +1,5 @@
 package org.pvcpirates.frc2018.autonomous.subcommands;
 
-import org.pvcpirates.frc2018.autonomous.AutoSubCommand;
 import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.robot.controllers.GrabberController;

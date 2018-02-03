@@ -1,7 +1,6 @@
 package org.pvcpirates.frc2018.autonomous.subcommands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import org.pvcpirates.frc2018.autonomous.AutoSubCommand;
 import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
