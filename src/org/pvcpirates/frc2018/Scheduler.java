@@ -1,7 +1,7 @@
 package org.pvcpirates.frc2018;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-<<<<<<< HEAD
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -11,9 +11,7 @@ import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
 import org.pvcpirates.frc2018.autonomous.command.DriveAuto;
 import org.pvcpirates.frc2018.autonomous.command.SwitchAuto;
 import org.pvcpirates.frc2018.robot.Hardware;
-=======
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
->>>>>>> Auto stuf
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.state.AutoState;
 import org.pvcpirates.frc2018.state.State;
@@ -60,7 +58,7 @@ public class Scheduler extends IterativeRobot {
 
     @Override
     public void disabledPeriodic() {
-
+        SmartDashboard.putNumber("Ultra",robot.hardware.leftUltrasonic.getRangeInches());
     }
 
 }

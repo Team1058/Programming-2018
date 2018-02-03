@@ -8,11 +8,14 @@ public class RobotMap {
         public static final int RIGHT_DRIVE_2 = 2;
         public static final int RIGHT_CUBE_GRABBER = 1;
         public static final int LEFT_CUBE_GRABBER = 2;
+        public static final int ARM_PIVOT_TALON = -1;
+        public static final int ARM_EXTEND_TALON = -1;
     }
 
     public static final class SensorIDs {
         public static final int[] LEFT_DRIVE_ENCODER_PORTS = {0, 1};
         public static final int[] RIGHT_DRIVE_ENCODER_PORTS = {2, 3};
+        public static final int CUBE_LIMIT_SWITCH = 0;
 
     }
     
@@ -33,23 +36,5 @@ public class RobotMap {
         public static final double ARM_DISTANCE = 0;
     }
 
-    public static final class GamepadPorts {
-        public static final int xButton = 3;
-        public static final int aButton = 1;
-        public static final int bButton = 2;
-        public static final int yButton = 4;
-        public static final int leftBumper = 5;
-        public static final int rightBumper = 6;
-        public static final int backButton = 7;
-        public static final int startButton = 8;
-        public static final int leftStickPress = 9;
-        public static final int rightStickPress = 10;
 
-        public static final int leftStick_xAxis = 0;
-        public static final int leftStick_yAxis = 1;
-        public static final int leftTrigger_Axis = 2;
-        public static final int rightTrigger_Axis = 3;
-        public static final int rightStick_xAxis = 4;
-        public static final int rightStick_yAxis = 5;
-    }
 }
