@@ -29,7 +29,6 @@ public class AutoState extends State {
     
     @Override
     public void init() {
-
     }
 
     //TODO:Parallel/Sequential stuff
