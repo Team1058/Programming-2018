@@ -1,4 +1,4 @@
-package org.pvcpirates.frc2018.robot.controllers;
+package org.pvcpirates.frc2018.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -12,16 +12,11 @@ public class Drivetrain extends BaseController {
     private Hardware hardware = Hardware.getInstance();
 
     public Drivetrain() {
-
+        //TODO? SHOULD THIS BE IN HARDWARE INIT
         hardware.leftDrive2.follow(hardware.leftDrive1);
         hardware.rightDrive2.follow(hardware.rightDrive1);
         hardware.leftDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.DRIVEBASE_TIMEOUT);
-        hardware.leftDrive2.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.DRIVEBASE_TIMEOUT);
-        //TODO: Extract navx and encoders
-        //hardware.navx.reset();
-
-        //hardware.leftEncoder.setDistancePerPulse(RobotMap.Constants.DRIVE_DISTANCE_PER_TICK);
-        //hardware.rightEncoder.setDistancePerPulse(RobotMap.Constants.DRIVE_DISTANCE_PER_TICK);
+        hardware.rightDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.DRIVEBASE_TIMEOUT);
     }
 
     public void stopAll() {

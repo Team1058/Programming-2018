@@ -2,20 +2,14 @@ package org.pvcpirates.frc2018.teleop;
 
 import org.pvcpirates.frc2018.gamepads.BaseGamepad;
 import org.pvcpirates.frc2018.gamepads.GamepadEnum;
-import org.pvcpirates.frc2018.robot.Hardware;
-import org.pvcpirates.frc2018.robot.Robot;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import org.pvcpirates.frc2018.robot.controllers.GrabberController;
+import org.pvcpirates.frc2018.robot.subsystems.Grabber;
 
 public class CubeGrabber extends TeleopCommand{
 
 
 
-    GrabberController grabberController = new GrabberController();
+    Grabber grabberController = new Grabber();
 	public CubeGrabber(BaseGamepad gp) {
 		super(gp);
 	}

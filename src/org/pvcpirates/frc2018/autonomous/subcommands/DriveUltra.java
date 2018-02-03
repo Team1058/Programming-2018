@@ -5,7 +5,7 @@ import org.pvcpirates.frc2018.autonomous.AutoSubCommand;
 import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
-import org.pvcpirates.frc2018.robot.controllers.Drivetrain;
+import org.pvcpirates.frc2018.robot.subsystems.Drivetrain;
 
 public class DriveUltra extends AutoSubCommand {
 	

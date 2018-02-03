@@ -19,7 +19,8 @@ public class Scheduler extends IterativeRobot {
     public void robotInit() {
         auto.init();
         teleOp.init();
-
+        robot.hardware.leftUltrasonic.setAutomaticMode(true);
+        robot.hardware.rightUltrasonic.setAutomaticMode(true);
     }
 
     @Override

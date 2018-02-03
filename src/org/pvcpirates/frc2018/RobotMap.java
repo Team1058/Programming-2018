@@ -17,6 +17,8 @@ public class RobotMap {
         public static final int[] RIGHT_DRIVE_ENCODER_PORTS = {2, 3};
         public static final int CUBE_LIMIT_SWITCH = 0;
 
+        public static final int PIVOT_POT = 0;
+        public static final int WRIST_POT = 0;
     }
     
     public static final class PneumaticIds {

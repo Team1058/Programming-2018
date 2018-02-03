@@ -1,11 +1,11 @@
-package org.pvcpirates.frc2018.robot.controllers;
+package org.pvcpirates.frc2018.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import org.pvcpirates.frc2018.robot.Hardware;
 
-public class GrabberController extends BaseController {
+public class Grabber extends BaseController {
 
     private Hardware hardware = Hardware.getInstance();
     private final DoubleSolenoid solenoid = hardware.cubeGrabberSolenoid;
