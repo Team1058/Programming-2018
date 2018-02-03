@@ -3,8 +3,9 @@ package org.pvcpirates.frc2018.autonomous.command;
 import java.util.LinkedList;
 
 import org.pvcpirates.frc2018.Status;
+import org.pvcpirates.frc2018.robot.Hardware;
 
-public class Command {
+public abstract class Command {
 	
 	public LinkedList<Command> commands;
 	private Command current;
@@ -28,6 +29,9 @@ public class Command {
 					allDone = false;
 					cmd.exec();
 				}
+				if(cmd.getStatus() == Status.STOP){
+					cmd.finished();
+				}
 			}
 			if(allDone){
 				this.finished();
@@ -35,6 +39,7 @@ public class Command {
 		}else{
 			while(!commands.isEmpty()){
 				if(current.getStatus() == Status.STOP){
+					current.finished();
 					commands.removeFirst();
 					if(commands.isEmpty()){
 						this.finished();
@@ -53,10 +58,10 @@ public class Command {
 	}
 	
 	public void finished(){
-		this.setStatus(Status.STOP);
+		
 	}
 	
-	private void setStatus(Status status){
+	protected void setStatus(Status status){
 		this.status = status;
 	}
 	

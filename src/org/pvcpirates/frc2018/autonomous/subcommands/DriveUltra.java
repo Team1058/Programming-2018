@@ -1,31 +1,26 @@
 package org.pvcpirates.frc2018.autonomous.subcommands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
-import org.pvcpirates.frc2018.robot.Hardware;
-import org.pvcpirates.frc2018.robot.Robot;
-import org.pvcpirates.frc2018.robot.controllers.Drivetrain;
 
-public class DriveUltra extends AutoSubCommand {
+import org.pvcpirates.frc2018.Status;
+import org.pvcpirates.frc2018.autonomous.command.Command;
+import org.pvcpirates.frc2018.robot.Robot;
+
+public class DriveUltra extends Command {
 	
-	private double currentPos;
-	private Drivetrain drivetrain = Robot.getInstance().drivetrain;
-	private Hardware hardware = Hardware.getInstance();
 	private double inches = 0;
 	
-	public DriveUltra(AutoCommand parent) {
-		super(parent);
-		// TODO Auto-generated constructor stub
+	public DriveUltra() {
+		
 	}
-	public DriveUltra(AutoCommand parent, double inches){
-		super(parent);
+	public DriveUltra(double inches){
 		this.inches = inches;
 	}
 
 	@Override
 	public void init() {
-		super.init();
 		Robot.getInstance().drivetrain.setPIDF(.15,0,0,0);
+		this.setStatus(Status.EXEC);
 	}
 
 	@Override
@@ -36,7 +31,7 @@ public class DriveUltra extends AutoSubCommand {
 
         Robot.getInstance().drivetrain.setDrive(ControlMode.PercentOutput,((ultrasonicInchesL-inches))/ultrasonicInchesL,((ultrasonicInchesR-inches))/ultrasonicInchesR);
         if (ultrasonicInchesL == inches && ultrasonicInchesR == inches)
-            this.finished();
+            this.setStatus(Status.STOP);
     }
 
     @Override
