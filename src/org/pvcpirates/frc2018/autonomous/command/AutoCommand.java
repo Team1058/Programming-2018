@@ -19,7 +19,7 @@ public class AutoCommand {
     }
 
     public void executeCommand() {
-        while (!subCommands.isEmpty()){
+        if (!subCommands.isEmpty()){
             runNextSubCommand();
         }
     }
