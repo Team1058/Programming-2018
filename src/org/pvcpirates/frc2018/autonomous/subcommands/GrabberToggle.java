@@ -1,13 +1,12 @@
 package org.pvcpirates.frc2018.autonomous.subcommands;
 
-import org.pvcpirates.frc2018.autonomous.AutoSubCommand;
 import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
 import org.pvcpirates.frc2018.robot.Robot;
-import org.pvcpirates.frc2018.robot.subsystems.Grabber;
+import org.pvcpirates.frc2018.robot.controllers.GrabberController;
 
 public class GrabberToggle extends AutoSubCommand {
     private boolean grab;
-    private Grabber grabberController;
+    private GrabberController grabberController;
     public GrabberToggle(AutoCommand parent,boolean grab) {
         super(parent);
         this.grab = grab;
@@ -16,7 +15,7 @@ public class GrabberToggle extends AutoSubCommand {
     @Override
     public void init() {
         super.init();
-        grabberController = new Grabber();
+        grabberController = new GrabberController();
         if (grab)
             grabberController.intakeRollers();
         else

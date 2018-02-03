@@ -1,4 +1,4 @@
-package org.pvcpirates.frc2018.autonomous;
+package org.pvcpirates.frc2018.autonomous.subcommands;
 
 import org.pvcpirates.frc2018.Status;
 import org.pvcpirates.frc2018.autonomous.command.AutoCommand;

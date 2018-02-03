@@ -1,6 +1,5 @@
 package org.pvcpirates.frc2018.autonomous.subcommands;
 
-import org.pvcpirates.frc2018.autonomous.AutoSubCommand;
 import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
 
 public class SampleAutoSubCommand extends AutoSubCommand {

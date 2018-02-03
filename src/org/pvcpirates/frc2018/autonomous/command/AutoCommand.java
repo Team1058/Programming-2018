@@ -1,16 +1,17 @@
 package org.pvcpirates.frc2018.autonomous.command;
 
 import org.pvcpirates.frc2018.Status;
-import org.pvcpirates.frc2018.autonomous.AutoSubCommand;
+import org.pvcpirates.frc2018.autonomous.subcommands.AutoSubCommand;
 
-import java.util.PriorityQueue;
+import java.util.LinkedList;
 
 public class AutoCommand {
 
-    PriorityQueue<AutoSubCommand> subCommands;
+    LinkedList<AutoSubCommand> subCommands;
     private AutoSubCommand currentSubCommand = null;
+
     public AutoCommand() {
-        subCommands = new PriorityQueue<AutoSubCommand>();
+        subCommands = new LinkedList<AutoSubCommand>();
     }
 
     public void addSubCommand(AutoSubCommand toAdd) {

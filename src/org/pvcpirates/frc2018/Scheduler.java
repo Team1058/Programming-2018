@@ -1,31 +1,34 @@
 package org.pvcpirates.frc2018;
 
-import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.pvcpirates.frc2018.autonomous.AutoType;
+import org.pvcpirates.frc2018.autonomous.StartingLocation;
+import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
+import org.pvcpirates.frc2018.autonomous.command.DriveAuto;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.state.AutoState;
-import org.pvcpirates.frc2018.state.State;
 import org.pvcpirates.frc2018.state.TeleopState;
+
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Scheduler extends IterativeRobot {
 
     public static final Robot robot = Robot.getInstance();
-    public static final State auto = new AutoState();
-    public static final State teleOp = new TeleopState();
-    SendableChooser<Command> sendableChooser = new SendableChooser<>();
+	public static SendableChooser<AutoCommand> chooser = new SendableChooser<>();
+
+
     @Override
     public void robotInit() {
-        auto.init();
-        teleOp.init();
-        robot.hardware.leftUltrasonic.setAutomaticMode(true);
-        robot.hardware.rightUltrasonic.setAutomaticMode(true);
+    	chooser.addDefault("Drive Forward", AutoState.commandFactory.generate(StartingLocation.CENTER, new DriveAuto(), AutoType.DRIVE));
+        SmartDashboard.putData("Auto Chooser",chooser);
+
     }
 
     @Override
     public void autonomousInit() {
-        robot.setState(auto);
+        robot.setState(new AutoState());
+        robot.state.init();
     }
 
     @Override
@@ -35,7 +38,8 @@ public class Scheduler extends IterativeRobot {
 
     @Override
     public void teleopInit() {
-        robot.setState(teleOp);
+        robot.setState(new TeleopState());
+        robot.state.init();
     }
 
     @Override

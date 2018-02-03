@@ -13,8 +13,8 @@ public class DriverGamepad extends BaseGamepad {
 	
 	void mapCommandsToController() {
 		//teleopCommands.add(new DriveCommand(this));
-		//teleopCommands.add(new CubeGrabber(this));
 		teleopCommands.add(new DriveVelocity(this));
+		teleopCommands.add(new CubeGrabber(this));
 	}
     
 

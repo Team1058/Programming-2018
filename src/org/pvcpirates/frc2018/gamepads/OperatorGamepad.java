@@ -10,7 +10,6 @@ public class OperatorGamepad extends BaseGamepad {
 
     @Override
     void mapCommandsToController() {
-
+    	
     }
-
 }

@@ -19,21 +19,15 @@ public class Hardware {
     
     public final TalonSRX rightCubeGrabMotor = new TalonSRX(RobotMap.CANTalonIds.RIGHT_CUBE_GRABBER);
     public final TalonSRX leftCubeGrabMotor = new TalonSRX(RobotMap.CANTalonIds.LEFT_CUBE_GRABBER);
-
-    public final TalonSRX armPivotMotor = new TalonSRX(RobotMap.CANTalonIds.ARM_PIVOT_TALON);
-    public final TalonSRX armExtendMotor = new TalonSRX(RobotMap.CANTalonIds.ARM_EXTEND_TALON);
-
-    //public final AnalogPotentiometer pivotPot = new AnalogPotentiometer(RobotMap.SensorIDs.PIVOT_POT);
-    //public final AnalogPotentiometer wristPot = new AnalogPotentiometer(RobotMap.SensorIDs.WRIST_POT);
-
+    
     public final DoubleSolenoid cubeGrabberSolenoid = new DoubleSolenoid(RobotMap.PneumaticIds.GRABBER_1,
     																		RobotMap.PneumaticIds.GRABBER_2);
 
     public final DigitalInput cubeLimitSwitch = new DigitalInput(RobotMap.SensorIDs.CUBE_LIMIT_SWITCH);
     public AHRS navx =  new AHRS(SPI.Port.kMXP);
     //replace channels with enums
-    public final Ultrasonic leftUltrasonic = new Ultrasonic(2, 3);
-    public final Ultrasonic rightUltrasonic = new Ultrasonic(0, 1);
+    public final Ultrasonic leftUltrasonic = new Ultrasonic(0, 1);
+    public final Ultrasonic rightUltrasonic = new Ultrasonic(2, 3);
     public final Compressor compressor = new Compressor(0);
     
     
@@ -47,7 +41,8 @@ public class Hardware {
 
     private Hardware() {
     	compressor.setClosedLoopControl(true);
-
+    	leftUltrasonic.setAutomaticMode(true);
+    	//rightUltrasonic.setAutomaticMode(true);
     }
     
     private double getUltraDistance(){
