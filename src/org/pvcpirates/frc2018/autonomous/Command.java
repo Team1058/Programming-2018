@@ -9,7 +9,7 @@ public abstract class Command {
 	public LinkedList<Command> commands;
 	private Command current;
 	Status status = Status.INIT;
-	boolean parallel = false;
+	protected boolean parallel = false;
 	
 	public Command(){
 		commands = new LinkedList<Command>();
@@ -27,20 +27,22 @@ public abstract class Command {
 			for(Command cmd: commands){
 				if(cmd.getStatus() == Status.INIT){
 					cmd.init();
+					allDone = false;
 				}
-				if(cmd.getStatus() == Status.EXEC){
+				else if(cmd.getStatus() == Status.EXEC){
 					allDone = false;
 					cmd.exec();
 				}
-				if(cmd.getStatus() == Status.STOP){
+				else if(cmd.getStatus() == Status.STOP){
 					cmd.finished();
+					
 				}
 			}
 			if(allDone){
-				this.finished();
+				setStatus(Status.STOP);
 			}
 		}else{
-			while(!commands.isEmpty()){
+			if(!commands.isEmpty()){
 				if(current.getStatus() == Status.STOP){
 					current.finished();
 					commands.removeFirst();
