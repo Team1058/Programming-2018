@@ -1,37 +1,37 @@
-package org.pvcpirates.frc2018.autonomous.subcommands;
+package org.pvcpirates.frc2018.autonomous.commands;
 
-import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
+import org.pvcpirates.frc2018.Status;
+import org.pvcpirates.frc2018.autonomous.Command;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.robot.controllers.GrabberController;
 
-public class GrabberToggle extends AutoSubCommand {
+public class GrabberToggle extends Command {
     private boolean grab;
     private GrabberController grabberController;
-    public GrabberToggle(AutoCommand parent,boolean grab) {
-        super(parent);
+    
+    public GrabberToggle(boolean grab) {
+        super();
         this.grab = grab;
     }
 
     @Override
     public void init() {
-        super.init();
         grabberController = new GrabberController();
         if (grab)
             grabberController.intakeRollers();
         else
             grabberController.outtakeRollers();
+        setStatus(Status.EXEC);
     }
 
     @Override
     public void exec() {
-        super.exec();
         if (Robot.getInstance().hardware.cubeLimitSwitch.get() == grab)
-            this.finished();
+            setStatus(Status.STOP);
     }
 
     @Override
     public void finished() {
-        super.finished();
         grabberController.closeGrabber();
         if (grab)
             grabberController.holdRollers();

@@ -1,9 +1,8 @@
 package org.pvcpirates.frc2018.autonomous;
 
-import org.pvcpirates.frc2018.autonomous.command.Command;
-import org.pvcpirates.frc2018.autonomous.subcommands.DriveFor;
-import org.pvcpirates.frc2018.autonomous.subcommands.DriveUltra;
-import org.pvcpirates.frc2018.autonomous.subcommands.TurnToAngle;
+import org.pvcpirates.frc2018.autonomous.commands.DriveFor;
+import org.pvcpirates.frc2018.autonomous.commands.DriveUltra;
+import org.pvcpirates.frc2018.autonomous.commands.TurnToAngle;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
@@ -24,6 +23,7 @@ public class CommandFactory {
     	switch(type){
     	case SWITCH: command = configureSwitch(location, command);
     	case DRIVE: command = configureDrive(command);
+		default: command = configureDrive(command);
     	}
     	
     	return command;

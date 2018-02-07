@@ -1,9 +1,8 @@
-package org.pvcpirates.frc2018.autonomous.command;
+package org.pvcpirates.frc2018.autonomous;
 
 import java.util.LinkedList;
 
 import org.pvcpirates.frc2018.Status;
-import org.pvcpirates.frc2018.robot.Hardware;
 
 public abstract class Command {
 	
@@ -12,9 +11,13 @@ public abstract class Command {
 	Status status = Status.INIT;
 	boolean parallel = false;
 	
+	public Command(){
+		commands = new LinkedList<Command>();
+	}
+	
 	public void init(){
 		current = commands.getFirst();
-		this.setStatus(Status.EXEC);
+		setStatus(Status.EXEC);
 	}
 	
 	public void exec(){

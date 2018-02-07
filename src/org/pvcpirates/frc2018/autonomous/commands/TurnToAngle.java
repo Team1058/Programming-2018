@@ -1,8 +1,7 @@
-package org.pvcpirates.frc2018.autonomous.subcommands;
+package org.pvcpirates.frc2018.autonomous.commands;
 
 import org.pvcpirates.frc2018.Status;
-import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
-import org.pvcpirates.frc2018.autonomous.command.Command;
+import org.pvcpirates.frc2018.autonomous.Command;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.util.PIDF;
@@ -20,6 +19,7 @@ public class TurnToAngle extends Command {
 	PIDF pidf;
 	
 	public TurnToAngle(double goal) {
+		super();
 		this.goal = goal;
 		
 	}

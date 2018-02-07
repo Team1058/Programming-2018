@@ -1,10 +1,9 @@
 package org.pvcpirates.frc2018;
 
 import org.pvcpirates.frc2018.autonomous.AutoType;
+import org.pvcpirates.frc2018.autonomous.Command;
 import org.pvcpirates.frc2018.autonomous.StartingLocation;
-import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
-import org.pvcpirates.frc2018.autonomous.command.Command;
-import org.pvcpirates.frc2018.autonomous.subcommands.DriveFor;
+import org.pvcpirates.frc2018.autonomous.commands.DriveFor;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.state.AutoState;
 import org.pvcpirates.frc2018.state.TeleopState;
