@@ -21,24 +21,21 @@ public abstract class Command {
 	}
 	
 	public void exec(){
-		boolean allDone = true;
 		//LONG COMMANDS WILL NOT WORK WITH PARALLEL
 		if(parallel){
 			for(Command cmd: commands){
 				if(cmd.getStatus() == Status.INIT){
 					cmd.init();
-					allDone = false;
 				}
 				else if(cmd.getStatus() == Status.EXEC){
-					allDone = false;
 					cmd.exec();
 				}
-				else if(cmd.getStatus() == Status.STOP){
+				if(cmd.getStatus() == Status.STOP){
 					cmd.finished();
-					
+					commands.remove(cmd);
 				}
 			}
-			if(allDone){
+			if(commands.isEmpty()){
 				setStatus(Status.STOP);
 			}
 		}else{
