@@ -55,12 +55,13 @@ public abstract class Command {
 				if(current.getStatus() == Status.EXEC){
 					current.exec();
 				}
+			}else{
+				setStatus(Status.STOP);
 			}
 		}
 	}
 	
-	public void finished(){
-		
+	public void finished(){		
 	}
 	
 	protected void setStatus(Status status){

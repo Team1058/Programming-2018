@@ -3,6 +3,7 @@ package test;
 import static org.junit.Assert.assertEquals;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 
 import org.junit.After;
@@ -33,39 +34,39 @@ public class CommandTest {
 		System.setOut(old);
 	}
 	
-//	@Test
-//	public void testSequential() { 
-//		String expected = ""
-//				+ "foo Initialized\n"
-//				+ "foo\n"
-//				+ "foo\n"
-//				+ "foo Finished\n"
-//				+ "bar Initialized\n"
-//				+ "bar\n"
-//				+ "bar\n"
-//				+ "bar\n"
-//				+ "bar Finished";
-//		TestDaddyCommand seqCommand = new TestDaddyCommand(false);
-//		seqCommand.init();
-//		autoPeriodic(seqCommand);
-//		seqCommand.finished();
-//		//see if byte array is equal to expected value;
-//		assertEquals(expected, baos.toString());
-//	}
-//	
+	@Test
+	public void testSequential() { 
+		String expected = ""
+				+ "foo Initialized\r\n"
+				+ "foo\r\n"
+				+ "foo\r\n"
+				+ "foo Finished\r\n"
+				+ "bar Initialized\r\n"
+				+ "bar\r\n"
+				+ "bar\r\n"
+				+ "bar\r\n"
+				+ "bar Finished\r\n";
+		TestDaddyCommand seqCommand = new TestDaddyCommand(false);
+		seqCommand.init();
+		autoPeriodic(seqCommand);
+		seqCommand.finished();
+		//see if byte array is equal to expected value;
+		assertEquals(expected, baos.toString());
+	}
+	
 	
 	@Test
 	public void testParallel() {
 		String expected = ""
-				+"foo Initialized\n"
-				+"bar Initialized\n"
-				+"foo\n"
-				+"bar\n"
-				+"foo\n"
-				+"bar\n"
-				+"foo Finished\n"
-				+"bar\n"
-				+"bar Finished";
+				+"foo Initialized\r\n"
+				+"bar Initialized\r\n"
+				+"foo\r\n"
+				+"bar\r\n"
+				+"foo\r\n"
+				+"bar\r\n"
+				+"foo Finished\r\n"
+				+"bar\r\n"
+				+"bar Finished\r\n";
 		TestDaddyCommand parCommand = new TestDaddyCommand(true);
 		parCommand.init();
 		autoPeriodic(parCommand);
