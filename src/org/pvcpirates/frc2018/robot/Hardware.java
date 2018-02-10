@@ -42,7 +42,9 @@ public class Hardware {
     private Hardware() {
     	compressor.setClosedLoopControl(true);
     	leftUltrasonic.setAutomaticMode(true);
-    	//rightUltrasonic.setAutomaticMode(true);
+    	leftDrive1.setInverted(true);
+    	leftDrive2.setInverted(true);
+    	
     }
     
     private double getUltraDistance(){

@@ -2,9 +2,15 @@ package org.pvcpirates.frc2018.state;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.pvcpirates.frc2018.gamepads.DriverGamepad;
+import org.pvcpirates.frc2018.gamepads.GamepadEnum;
 import org.pvcpirates.frc2018.gamepads.OperatorGamepad;
 import edu.wpi.first.wpilibj.Compressor;
+
+import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
+import org.pvcpirates.frc2018.util.GamepadHelper;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class TeleopState extends State {
     private DriverGamepad driverGamepad;
@@ -21,6 +27,9 @@ public class TeleopState extends State {
         SmartDashboard.putNumber("Ultra",Robot.getInstance().hardware.leftUltrasonic.getRangeInches());
         driverGamepad.executeCommands();
         operatorGamepad.executeCommands();
+        Hardware.getInstance().leftCubeGrabMotor.set(ControlMode.PercentOutput, GamepadHelper.applyDeadBand(driverGamepad.getAxis(GamepadEnum.LEFT_STICK_Y),.1));
+        Hardware.getInstance().rightCubeGrabMotor.set(ControlMode.PercentOutput, GamepadHelper.applyDeadBand(-driverGamepad.getAxis(GamepadEnum.LEFT_STICK_Y),.1));
+        System.out.println("Current: "+ Hardware.getInstance().leftCubeGrabMotor.getOutputCurrent());
     }
 
     @Override
