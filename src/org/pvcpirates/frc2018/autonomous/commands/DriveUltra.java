@@ -1,9 +1,9 @@
-package org.pvcpirates.frc2018.autonomous.subcommands;
+package org.pvcpirates.frc2018.autonomous.commands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import org.pvcpirates.frc2018.Status;
-import org.pvcpirates.frc2018.autonomous.command.Command;
+import org.pvcpirates.frc2018.autonomous.Command;
 import org.pvcpirates.frc2018.robot.Robot;
 
 public class DriveUltra extends Command {
@@ -11,7 +11,7 @@ public class DriveUltra extends Command {
 	private double inches = 0;
 	
 	public DriveUltra() {
-		
+		super();
 	}
 	public DriveUltra(double inches){
 		this.inches = inches;

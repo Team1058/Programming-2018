@@ -1,8 +1,7 @@
-package org.pvcpirates.frc2018.autonomous.subcommands;
+package org.pvcpirates.frc2018.autonomous.commands;
 
 import org.pvcpirates.frc2018.Status;
-import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
-import org.pvcpirates.frc2018.autonomous.command.Command;
+import org.pvcpirates.frc2018.autonomous.Command;
 import org.pvcpirates.frc2018.robot.Robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -12,6 +11,7 @@ public class DriveFor extends Command {
 
 
     public DriveFor(double inches) {
+    	super();
         this.inches = inches;
 	}
 	
@@ -19,6 +19,7 @@ public class DriveFor extends Command {
     public void init() {
         Robot.getInstance().drivetrain.setPIDF(.15,0,0,0);
         encTicks = (inches/(6 * Math.PI)) * 256;
+        //Manually change instead of super.init() b/c there is no command list
         setStatus(Status.EXEC);
     }
 
