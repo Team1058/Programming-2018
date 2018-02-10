@@ -1,7 +1,6 @@
 package org.pvcpirates.frc2018.gamepads;
 
-import org.pvcpirates.frc2018.teleop.CubeGrabber;
-import org.pvcpirates.frc2018.teleop.DriveVelocity;
+import org.pvcpirates.frc2018.teleop.DriveOpenLoop;
 
 public class DriverGamepad extends BaseGamepad {
 
@@ -13,8 +12,7 @@ public class DriverGamepad extends BaseGamepad {
 	
 	void mapCommandsToController() {
 		//teleopCommands.add(new DriveCommand(this));
-		teleopCommands.add(new DriveVelocity(this));
-		teleopCommands.add(new CubeGrabber(this));
+		teleopCommands.add(new DriveOpenLoop(this));
 	}
     
 

@@ -6,9 +6,9 @@ import org.pvcpirates.frc2018.gamepads.GamepadEnum;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.util.GamepadHelper;
 
-public class DriveCommand extends TeleopCommand {
+public class DriveOpenLoop extends TeleopCommand {
 
-    public DriveCommand(BaseGamepad gp) {
+    public DriveOpenLoop(BaseGamepad gp) {
         super(gp);
     }
 

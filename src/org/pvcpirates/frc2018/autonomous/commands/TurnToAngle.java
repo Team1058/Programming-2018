@@ -26,19 +26,17 @@ public class TurnToAngle extends Command {
 	
 	@Override
     public void init() {
-        current = Hardware.getInstance().navx.getYaw();
-        pidf = new PIDF(p,i,d,0,0);
         setStatus(Status.EXEC);
     }
 
     @Override
     public void exec() {
         double output = 0;
-        current = Hardware.getInstance().navx.getYaw();
+        current = Hardware.getInstance().navx.getPitch();
         if(Math.abs(goal-current) < 1) {
         	this.setStatus(Status.STOP);
         }
-        output = pidf.calculate(goal-current);
+        output = (goal-current) / goal;
         Robot.getInstance().drivetrain.setDrive(ControlMode.PercentOutput, output, -output);
     }
 
