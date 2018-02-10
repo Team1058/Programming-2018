@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import org.pvcpirates.frc2018.robot.Hardware;
+import org.pvcpirates.frc2018.robot.subsystems.BaseController;
 
 public class GrabberController extends BaseController {
 

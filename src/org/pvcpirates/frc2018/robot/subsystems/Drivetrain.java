@@ -13,10 +13,6 @@ public class Drivetrain extends BaseController {
 
     public Drivetrain() {
         //TODO? SHOULD THIS BE IN HARDWARE INIT
-        hardware.leftDrive2.follow(hardware.leftDrive1);
-        hardware.rightDrive2.follow(hardware.rightDrive1);
-        hardware.leftDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.DRIVEBASE_TIMEOUT);
-        hardware.rightDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.DRIVEBASE_TIMEOUT);
     }
 
     public void stopAll() {

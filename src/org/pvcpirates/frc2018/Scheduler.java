@@ -54,6 +54,7 @@ public class Scheduler extends IterativeRobot {
     @Override
     public void disabledPeriodic() {
         SmartDashboard.putNumber("Ultra",robot.hardware.leftUltrasonic.getRangeInches());
+
     }
 
 }
