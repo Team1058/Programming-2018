@@ -7,7 +7,7 @@ import org.pvcpirates.frc2018.robot.Robot;
 
 import static org.pvcpirates.frc2018.RobotMap.Ranges.THE_MIDDLE;
 
-public class Arm extends  BaseController {
+public class Arm extends BaseSubsystem {
     Hardware hardware = Robot.getInstance().hardware;
     double currArmAngle;
     double currExt;
@@ -38,22 +38,28 @@ public class Arm extends  BaseController {
     }
 
     public void extendArm(double distance){
-        //TODO gear ratios
-        if (distance < RobotMap.Constants.ARM_DISTANCE && distance >=0)
-            hardware.armExtendMotor.set(ControlMode.Position,distance);
+        if (distance < RobotMap.Constants.ARM_DISTANCE && distance >=0) {
+            distance = (distance /(1.751*Math.PI)) * 256;
+            hardware.armExtendMotor.set(ControlMode.Position, distance);
+        }
     }
 
     public void pivotArm(double angleSetpoint){
-        //RATIOS
-        if (angleSetpoint <RobotMap.Ranges.POTENTIOMETER_MAX && angleSetpoint < RobotMap.Ranges.POTENTIOMETER_MIN)
-            hardware.armPivotMotor.set(ControlMode.Position,angleSetpoint);
+        if (angleSetpoint <RobotMap.Ranges.POTENTIOMETER_MAX && angleSetpoint < RobotMap.Ranges.POTENTIOMETER_MIN) {
+            angleSetpoint = (1019*(angleSetpoint/270)+5);
+            hardware.armPivotMotor.set(ControlMode.Position, angleSetpoint);
+        }
     }
 
-    public void move(double x, double y){
+    public void moveXY(double x, double y){
+        double angle = Math.atan2(y,x);
+        double hyp = y/Math.sin(angle);
+        pivotArm(angle);
+        extendArm(hyp);
+    }
+
+    public void moveCurve(){
 
     }
 
-    public void setPIDF(double p, double i, double d, double f) {
-
-    }
 }
