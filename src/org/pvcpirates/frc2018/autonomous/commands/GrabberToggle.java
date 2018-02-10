@@ -3,11 +3,11 @@ package org.pvcpirates.frc2018.autonomous.commands;
 import org.pvcpirates.frc2018.Status;
 import org.pvcpirates.frc2018.autonomous.Command;
 import org.pvcpirates.frc2018.robot.Robot;
-import org.pvcpirates.frc2018.robot.controllers.GrabberController;
+import org.pvcpirates.frc2018.robot.subsystems.Grabber;
 
 public class GrabberToggle extends Command {
     private boolean grab;
-    private GrabberController grabberController;
+    private Grabber grabber;
     
     public GrabberToggle(boolean grab) {
         super();
@@ -16,11 +16,11 @@ public class GrabberToggle extends Command {
 
     @Override
     public void init() {
-        grabberController = new GrabberController();
+        grabber = new Grabber();
         if (grab)
-            grabberController.intakeRollers();
+            grabber.intakeRollers();
         else
-            grabberController.outtakeRollers();
+            grabber.outtakeRollers();
         setStatus(Status.EXEC);
     }
 
@@ -32,10 +32,10 @@ public class GrabberToggle extends Command {
 
     @Override
     public void finished() {
-        grabberController.closeGrabber();
+        grabber.closeGrabber();
         if (grab)
-            grabberController.holdRollers();
+            grabber.holdRollers();
         else
-            grabberController.stopRollers();
+            grabber.stopRollers();
     }
 }

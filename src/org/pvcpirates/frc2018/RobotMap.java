@@ -30,7 +30,7 @@ public class RobotMap {
     }
 
     public static final class Constants {
-        public static final int DRIVEBASE_TIMEOUT = 0;
+        public static final int DRIVEBASE_TIMEOUT = 10;
         public static final double DRIVEBASE_kP = 0;
         public static final double DRIVEBASE_kI = 0;
         public static final double DRIVEBASE_kD = 0;

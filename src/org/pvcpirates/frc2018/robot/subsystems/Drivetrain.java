@@ -1,13 +1,12 @@
 package org.pvcpirates.frc2018.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import org.pvcpirates.frc2018.RobotMap;
 import org.pvcpirates.frc2018.robot.Hardware;
 
 //import com.kauailabs.navx.frc.AHRS;
 
-public class Drivetrain extends BaseController {
+public class Drivetrain extends BaseSubsystem {
 
     private Hardware hardware = Hardware.getInstance();
 
