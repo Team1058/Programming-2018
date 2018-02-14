@@ -11,7 +11,7 @@ public class RobotMap {
         //TODO: TALON IDSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
         public static final int ARM_PIVOT_TALON = -1;
         public static final int ARM_EXTEND_TALON = -1;
-        public static final int ARM_EXTEND_TALON_SLAVE = -1;
+        public static final int ARM_EXTEND_TALON_FOLLOWER = -1;
         public static final int WRIST_PIVOT_MOTOR = -1;
     }
 
