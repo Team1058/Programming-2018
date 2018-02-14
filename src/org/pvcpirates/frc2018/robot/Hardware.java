@@ -6,6 +6,8 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
+
 import org.pvcpirates.frc2018.RobotMap;
 
 import static org.pvcpirates.frc2018.RobotMap.Constants.*;
@@ -26,7 +28,7 @@ public class Hardware {
 
     public final TalonSRX armPivotMotor = new TalonSRX(RobotMap.CANTalonIds.ARM_PIVOT_TALON);
     public final TalonSRX armExtendMotor = new TalonSRX(RobotMap.CANTalonIds.ARM_EXTEND_TALON);
-    public final TalonSRX armExtendMotorSlave = new TalonSRX(RobotMap.CANTalonIds.ARM_EXTEND_TALON_SLAVE);
+    public final TalonSRX armExtendMotorFollower = new TalonSRX(RobotMap.CANTalonIds.ARM_EXTEND_TALON_SLAVE);
     public final TalonSRX wristPivotMotor = new TalonSRX(RobotMap.CANTalonIds.WRIST_PIVOT_MOTOR);
 
     //public final Accelerometer wristAccelerometer;
@@ -41,6 +43,8 @@ public class Hardware {
     public final Ultrasonic rightUltrasonic = new Ultrasonic(2, 3);
     public final Compressor compressor = new Compressor(0);
     
+    
+    public final ADXL345_I2C accel = new ADXL345_I2C(I2C.Port.kOnboard, Range.k4G);
     
 
     public static Hardware getInstance() {
@@ -71,7 +75,7 @@ public class Hardware {
         armPivotMotor.configReverseSoftLimitEnable(true,DRIVEBASE_TIMEOUT);
 
 
-        armExtendMotorSlave.follow(armExtendMotor);
+        armExtendMotorFollower.follow(armExtendMotor);
     }
     
     private double getUltraDistance(){
