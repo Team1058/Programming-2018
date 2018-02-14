@@ -16,6 +16,7 @@ public class Arm extends BaseSubsystem {
     
     public Arm() {
         zeroArm();
+        configurePID();
     }
 
     /*
@@ -24,7 +25,14 @@ public class Arm extends BaseSubsystem {
     rest encoders
      */
 
-    public void zeroArm(){
+    public void configurePID() {
+		Hardware.setPIDF(0, 0, 0, 0, hardware.armPivotMotor);
+		Hardware.setPIDF(0, 0, 0, 0, hardware.armExtendMotor);
+		Hardware.setPIDF(0, 0, 0, 0, hardware.wristPivotMotor);
+		
+	}
+
+	public void zeroArm(){
         hardware.armExtendMotor.set(ControlMode.Position,0);
         hardware.armPivotMotor.set(ControlMode.Position,0);
         hardware.wristPivotMotor.set(ControlMode.Position,THE_MIDDLE);
@@ -63,5 +71,6 @@ public class Arm extends BaseSubsystem {
     public void moveCurve(){
 
     }
+    
 
 }
