@@ -12,6 +12,8 @@ public class Arm extends BaseSubsystem {
     double currArmAngle;
     double currExt;
     double currWristAngle;
+    
+    
     public Arm() {
         zeroArm();
     }
@@ -29,7 +31,7 @@ public class Arm extends BaseSubsystem {
     }
 
     public void levelWrist(){
-
+    	hardware.wristPivotMotor.set(ControlMode.Position,THE_MIDDLE);
     }
 
     public void wristRotate(double angleSetpoint){
