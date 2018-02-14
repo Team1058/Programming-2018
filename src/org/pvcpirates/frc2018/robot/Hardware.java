@@ -78,10 +78,6 @@ public class Hardware {
         armExtendMotorFollower.follow(armExtendMotor);
     }
     
-    private double getUltraDistance(){
-    	return leftUltrasonic.getRangeInches();
-    }
-
     public static void setPIDF(double p, double i, double d, double f,TalonSRX talonSRX){
         talonSRX.config_kP(0,p,DRIVEBASE_TIMEOUT);
         talonSRX.config_kI(0,i,DRIVEBASE_TIMEOUT);
