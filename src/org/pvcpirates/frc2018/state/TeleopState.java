@@ -27,9 +27,6 @@ public class TeleopState extends State {
         SmartDashboard.putNumber("Ultra",Robot.getInstance().hardware.leftUltrasonic.getRangeInches());
         driverGamepad.executeCommands();
         operatorGamepad.executeCommands();
-        Hardware.getInstance().leftCubeGrabMotor.set(ControlMode.PercentOutput, GamepadHelper.applyDeadBand(driverGamepad.getAxis(GamepadEnum.LEFT_STICK_Y),.1));
-        Hardware.getInstance().rightCubeGrabMotor.set(ControlMode.PercentOutput, GamepadHelper.applyDeadBand(-driverGamepad.getAxis(GamepadEnum.LEFT_STICK_Y),.1));
-        System.out.println("Current: "+ Hardware.getInstance().leftCubeGrabMotor.getOutputCurrent());
     }
 
     @Override

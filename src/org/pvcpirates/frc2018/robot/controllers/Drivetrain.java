@@ -16,7 +16,7 @@ public class Drivetrain extends BaseController {
         hardware.leftDrive2.follow(hardware.leftDrive1);
         hardware.rightDrive2.follow(hardware.rightDrive1);
         hardware.leftDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.DRIVEBASE_TIMEOUT);
-        hardware.leftDrive2.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.DRIVEBASE_TIMEOUT);
+        hardware.rightDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.DRIVEBASE_TIMEOUT);
         //TODO: Extract navx and encoders
         //hardware.navx.reset();
 
@@ -27,7 +27,7 @@ public class Drivetrain extends BaseController {
     public void stopAll() {
         //shut everything off
         hardware.leftDrive1.set(ControlMode.PercentOutput, 0);
-        hardware.leftDrive1.set(ControlMode.PercentOutput, 0);
+        hardware.rightDrive1.set(ControlMode.PercentOutput, 0);
     }
 
     public void setDrive(ControlMode controlMode, double left, double right) {

@@ -42,6 +42,7 @@ public class Hardware {
     private Hardware() {
     	compressor.setClosedLoopControl(true);
     	leftUltrasonic.setAutomaticMode(true);
+    	leftDrive1.setSensorPhase(false);
     	leftDrive1.setInverted(true);
     	leftDrive2.setInverted(true);
     	
