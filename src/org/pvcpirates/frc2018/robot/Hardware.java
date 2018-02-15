@@ -18,6 +18,8 @@ public class Hardware {
     //possibly move instance creation to constructor??
 
     private static Hardware ourInstance;
+
+
     public final TalonSRX leftDrive1 = new TalonSRX(RobotMap.CANTalonIds.LEFT_DRIVE_1);
     public final TalonSRX rightDrive1 = new TalonSRX(RobotMap.CANTalonIds.RIGHT_DRIVE_1);
     public final TalonSRX leftDrive2 = new TalonSRX(RobotMap.CANTalonIds.LEFT_DRIVE_2);
@@ -28,15 +30,14 @@ public class Hardware {
 
     public final TalonSRX armPivotMotor = new TalonSRX(RobotMap.CANTalonIds.ARM_PIVOT_TALON);
     public final TalonSRX armExtendMotor = new TalonSRX(RobotMap.CANTalonIds.ARM_EXTEND_TALON);
-    public final TalonSRX armExtendMotorSlave = new TalonSRX(RobotMap.CANTalonIds.ARM_EXTEND_TALON_SLAVE);
+    public final TalonSRX armExtendMotorFollower = new TalonSRX(RobotMap.CANTalonIds.ARM_EXTEND_TALON_FOLLOWER);
     public final TalonSRX wristPivotMotor = new TalonSRX(RobotMap.CANTalonIds.WRIST_PIVOT_MOTOR);
-
-    //public final Accelerometer wristAccelerometer;
+    public final ADXL345_I2C wristAccel = new ADXL345_I2C(I2C.Port.kOnboard, Range.k4G);
 
     public final DoubleSolenoid cubeGrabberSolenoid = new DoubleSolenoid(RobotMap.PneumaticIds.GRABBER_1,
     																		RobotMap.PneumaticIds.GRABBER_2);
-
     public final DigitalInput cubeLimitSwitch = new DigitalInput(RobotMap.SensorIDs.CUBE_LIMIT_SWITCH);
+
     public AHRS navx =  new AHRS(SPI.Port.kMXP);
     //replace channels with enums
     public final Ultrasonic leftUltrasonic = new Ultrasonic(0, 1);
@@ -79,11 +80,8 @@ public class Hardware {
         armPivotMotor.configReverseSoftLimitEnable(true, ROBOT_TIMEOUT);
 
 
-        //armExtendMotorSlave.follow(armExtendMotor);
-    }
-    
-    private double getUltraDistance(){
-    	return leftUltrasonic.getRangeInches();
+
+        armExtendMotorFollower.follow(armExtendMotor);
     }
 
     public static void setPIDF(double p, double i, double d, double f,TalonSRX talonSRX){

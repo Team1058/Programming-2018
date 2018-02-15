@@ -10,21 +10,23 @@ import org.pvcpirates.frc2018.autonomous.AutoCommandFactory;
 public class AutoState extends State {
     private List<Command> commands;
     public static AutoCommandFactory autoCommandFactory = new AutoCommandFactory();
+    private Command command;
     //TODO commandGroup
     
     @Override
     public void init() {
-    	Scheduler.chooser.getSelected().init();
+    	Scheduler.autoChooser.getSelected().init();
+
     }
 
     //TODO:Parallel/Sequential stuff
     @Override
     public void exec() {
-		Scheduler.chooser.getSelected().exec();
+		Scheduler.autoChooser.getSelected().exec();
     }
 
     @Override
     public void stop() {
-    	Scheduler.chooser.getSelected().finished();
+    	Scheduler.autoChooser.getSelected().finished();
     }
 }

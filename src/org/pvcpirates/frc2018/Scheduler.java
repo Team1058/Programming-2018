@@ -15,11 +15,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Scheduler extends IterativeRobot {
 
     public static final Robot robot = Robot.getInstance();
-	public static SendableChooser<Command> chooser = new SendableChooser<>();
+	public static SendableChooser<Command> autoChooser = new SendableChooser<>();
 
     @Override
     public void robotInit() {
-    	chooser.addDefault("Drive Forward", AutoState.autoCommandFactory.generate(StartingLocation.CENTER, new DriveFor(60), AutoType.DRIVE));
+    	autoChooser.addDefault("Drive Forward", AutoState.autoCommandFactory.generate(StartingLocation.CENTER, new DriveFor(60), AutoType.DRIVE));
         SmartDashboard.putData("Auto Chooser",chooser);
 
     }
@@ -39,14 +39,11 @@ public class Scheduler extends IterativeRobot {
     public void teleopInit() {
         robot.setState(new TeleopState());
         robot.state.init();
-
     }
 
     @Override
     public void teleopPeriodic() {
         robot.state.exec();
-
-
     }
 
     @Override

@@ -9,10 +9,10 @@ public class RobotMap {
         public static final int RIGHT_CUBE_GRABBER = 8;
         public static final int LEFT_CUBE_GRABBER = 9;
         //TODO: TALON IDSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
-        public static final int ARM_PIVOT_TALON = 7;
-        public static final int ARM_EXTEND_TALON = 5;
-        public static final int ARM_EXTEND_TALON_SLAVE =4;
-        public static final int WRIST_PIVOT_MOTOR = 6;
+        public static final int ARM_PIVOT_TALON = -1;
+        public static final int ARM_EXTEND_TALON = -1;
+        public static final int ARM_EXTEND_TALON_FOLLOWER = -1;
+        public static final int WRIST_PIVOT_MOTOR = -1;
     }
 
     public static final class SensorIDs {
@@ -30,7 +30,7 @@ public class RobotMap {
     }
 
     public static final class Constants {
-        public static final int ROBOT_TIMEOUT = 10;
+        public static final int DRIVEBASE_TIMEOUT = 10;
         public static final double DRIVEBASE_kP = 0;
         public static final double DRIVEBASE_kI = 0;
         public static final double DRIVEBASE_kD = 0;
@@ -46,18 +46,12 @@ public class RobotMap {
     }
 
     public static final class Ranges{
-
         public static final int POTENTIOMETER_MAX = -1;
         public static final int POTENTIOMETER_MIN = 1000000;
         //TODO GET THESE VALUES
         public static final int WRIST_MAX = -1;
         public static final int WRIST_MIN = 1000000000;
         public static final int THE_MIDDLE= -1;
-
-        public static final int ARM_EXTEND_MAX = 10;
-        public static final int ARM_EXTEND_MIN =1;
-
-
     }
 
 }

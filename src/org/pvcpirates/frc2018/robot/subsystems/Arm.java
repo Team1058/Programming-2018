@@ -12,6 +12,20 @@ import static org.pvcpirates.frc2018.RobotMap.Ranges.THE_MIDDLE;
 public class Arm extends BaseSubsystem {
     private static Hardware hardware = Robot.getInstance().hardware;
 
+
+    /*
+    Encoder/pot stuff
+    pivot - pot
+    rest encoders
+     */
+
+    public void configurePID() {
+		Hardware.setPIDF(0, 0, 0, 0, hardware.armPivotMotor);
+		Hardware.setPIDF(0, 0, 0, 0, hardware.armExtendMotor);
+		Hardware.setPIDF(0, 0, 0, 0, hardware.wristPivotMotor);
+
+	}
+
     public static void resetArm(){
         hardware.armExtendMotor.set(ControlMode.Position,0);
         hardware.armPivotMotor.set(ControlMode.Position,0);
@@ -19,7 +33,7 @@ public class Arm extends BaseSubsystem {
     }
 
     public static void levelWrist(){
-
+    	hardware.wristPivotMotor.set(ControlMode.Position,THE_MIDDLE);
     }
 
     public static void wristRotate(double angleSetpoint){
