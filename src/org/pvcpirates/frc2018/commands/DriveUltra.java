@@ -1,9 +1,8 @@
-package org.pvcpirates.frc2018.autonomous.commands;
+package org.pvcpirates.frc2018.commands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import org.pvcpirates.frc2018.Status;
-import org.pvcpirates.frc2018.autonomous.Command;
 import org.pvcpirates.frc2018.robot.Robot;
 
 public class DriveUltra extends Command {

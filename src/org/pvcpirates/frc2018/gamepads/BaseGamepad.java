@@ -20,7 +20,7 @@ public abstract class BaseGamepad extends Joystick {
 
     public void executeCommands() {
         for (TeleopCommand command : teleopCommands) {
-            command.executeCommand();
+            command.exec();
         }
     }
 
