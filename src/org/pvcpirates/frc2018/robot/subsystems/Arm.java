@@ -69,6 +69,7 @@ public class Arm extends BaseSubsystem {
     }
 
     public void moveCurve(){
+    	
 
     }
     
