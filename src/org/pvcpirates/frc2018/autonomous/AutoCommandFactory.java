@@ -1,17 +1,18 @@
 package org.pvcpirates.frc2018.autonomous;
 
-import org.pvcpirates.frc2018.autonomous.commands.DriveFor;
-import org.pvcpirates.frc2018.autonomous.commands.DriveUltra;
-import org.pvcpirates.frc2018.autonomous.commands.TurnToAngle;
+import org.pvcpirates.frc2018.commands.Command;
+import org.pvcpirates.frc2018.commands.DriveFor;
+import org.pvcpirates.frc2018.commands.DriveUltra;
+import org.pvcpirates.frc2018.commands.TurnToAngle;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
 
-public class CommandFactory {
+public class AutoCommandFactory {
 
 	private String gameData;
 	
-    public CommandFactory() {
+    public AutoCommandFactory() {
         //Config?
     }
     public Command generate(StartingLocation location, Command command, AutoType type){

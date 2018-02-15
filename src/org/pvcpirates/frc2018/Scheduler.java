@@ -1,9 +1,9 @@
 package org.pvcpirates.frc2018;
 
 import org.pvcpirates.frc2018.autonomous.AutoType;
-import org.pvcpirates.frc2018.autonomous.Command;
+import org.pvcpirates.frc2018.commands.Command;
 import org.pvcpirates.frc2018.autonomous.StartingLocation;
-import org.pvcpirates.frc2018.autonomous.commands.DriveFor;
+import org.pvcpirates.frc2018.commands.DriveFor;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.state.AutoState;
 import org.pvcpirates.frc2018.state.TeleopState;
@@ -17,10 +17,9 @@ public class Scheduler extends IterativeRobot {
     public static final Robot robot = Robot.getInstance();
 	public static SendableChooser<Command> chooser = new SendableChooser<>();
 
-
     @Override
     public void robotInit() {
-    	chooser.addDefault("Drive Forward", AutoState.commandFactory.generate(StartingLocation.CENTER, new DriveFor(60), AutoType.DRIVE));
+    	chooser.addDefault("Drive Forward", AutoState.autoCommandFactory.generate(StartingLocation.CENTER, new DriveFor(60), AutoType.DRIVE));
         SmartDashboard.putData("Auto Chooser",chooser);
 
     }
@@ -40,11 +39,14 @@ public class Scheduler extends IterativeRobot {
     public void teleopInit() {
         robot.setState(new TeleopState());
         robot.state.init();
+
     }
 
     @Override
     public void teleopPeriodic() {
         robot.state.exec();
+
+
     }
 
     @Override

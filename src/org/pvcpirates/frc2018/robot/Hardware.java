@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.*;
 import org.pvcpirates.frc2018.RobotMap;
 
 import static org.pvcpirates.frc2018.RobotMap.Constants.*;
+import static org.pvcpirates.frc2018.RobotMap.Ranges.ARM_EXTEND_MAX;
+import static org.pvcpirates.frc2018.RobotMap.Ranges.ARM_EXTEND_MIN;
 
 
 public class Hardware {
@@ -54,24 +56,30 @@ public class Hardware {
     	compressor.setClosedLoopControl(true);
     	leftUltrasonic.setAutomaticMode(true);
     	//rightUltrasonic.setAutomaticMode(true);
-        leftDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.DRIVEBASE_TIMEOUT);
-        rightDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.DRIVEBASE_TIMEOUT);
+        leftDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
+        rightDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
         leftDrive2.follow(leftDrive1);
         rightDrive2.follow(rightDrive1);
 
-        armExtendMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0, RobotMap.Constants.DRIVEBASE_TIMEOUT);
+        //ALWAYS USE PROTECTION
+        armExtendMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder,0, RobotMap.Constants.ROBOT_TIMEOUT);
+        armExtendMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector,LimitSwitchNormal.NormallyOpen, ROBOT_TIMEOUT);
+        armExtendMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector,LimitSwitchNormal.NormallyOpen, ROBOT_TIMEOUT);
+        armExtendMotor.configForwardSoftLimitThreshold(ARM_EXTEND_MAX,ROBOT_TIMEOUT);
+        armExtendMotor.configReverseSoftLimitThreshold(ARM_EXTEND_MIN,ROBOT_TIMEOUT);
+        armExtendMotor.configForwardSoftLimitEnable(true,ROBOT_TIMEOUT);
+        armExtendMotor.configReverseSoftLimitEnable(true,ROBOT_TIMEOUT);
 
-        armPivotMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog,0, RobotMap.Constants.DRIVEBASE_TIMEOUT);
-        armPivotMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen,DRIVEBASE_TIMEOUT);
-        armPivotMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen,DRIVEBASE_TIMEOUT);
-        armPivotMotor.configForwardSoftLimitThreshold(RobotMap.Ranges.POTENTIOMETER_MAX,DRIVEBASE_TIMEOUT);
-        armPivotMotor.configReverseSoftLimitThreshold(RobotMap.Ranges.POTENTIOMETER_MIN,DRIVEBASE_TIMEOUT);
+        armPivotMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog,0, RobotMap.Constants.ROBOT_TIMEOUT);
+        armPivotMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, ROBOT_TIMEOUT);
+        armPivotMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, ROBOT_TIMEOUT);
+        armPivotMotor.configForwardSoftLimitThreshold(RobotMap.Ranges.POTENTIOMETER_MAX, ROBOT_TIMEOUT);
+        armPivotMotor.configReverseSoftLimitThreshold(RobotMap.Ranges.POTENTIOMETER_MIN, ROBOT_TIMEOUT);
+        armPivotMotor.configForwardSoftLimitEnable(true, ROBOT_TIMEOUT);
+        armPivotMotor.configReverseSoftLimitEnable(true, ROBOT_TIMEOUT);
 
-        armPivotMotor.configForwardSoftLimitEnable(true,DRIVEBASE_TIMEOUT);
-        armPivotMotor.configReverseSoftLimitEnable(true,DRIVEBASE_TIMEOUT);
 
-
-        armExtendMotorSlave.follow(armExtendMotor);
+        //armExtendMotorSlave.follow(armExtendMotor);
     }
     
     private double getUltraDistance(){
@@ -79,9 +87,9 @@ public class Hardware {
     }
 
     public static void setPIDF(double p, double i, double d, double f,TalonSRX talonSRX){
-        talonSRX.config_kP(0,p,DRIVEBASE_TIMEOUT);
-        talonSRX.config_kI(0,i,DRIVEBASE_TIMEOUT);
-        talonSRX.config_kD(0,d,DRIVEBASE_TIMEOUT);
-        talonSRX.config_kD(0,f,DRIVEBASE_TIMEOUT);
+        talonSRX.config_kP(0,p, ROBOT_TIMEOUT);
+        talonSRX.config_kI(0,i, ROBOT_TIMEOUT);
+        talonSRX.config_kD(0,d, ROBOT_TIMEOUT);
+        talonSRX.config_kD(0,f, ROBOT_TIMEOUT);
     }
 }

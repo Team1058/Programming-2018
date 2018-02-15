@@ -8,7 +8,7 @@ import java.io.PrintStream;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.pvcpirates.frc2018.autonomous.Command;
+import org.pvcpirates.frc2018.commands.Command;
 
 public class CommandTest {
 	
