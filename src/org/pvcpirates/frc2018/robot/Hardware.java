@@ -11,8 +11,7 @@ import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
 import org.pvcpirates.frc2018.RobotMap;
 
 import static org.pvcpirates.frc2018.RobotMap.Constants.*;
-import static org.pvcpirates.frc2018.RobotMap.Ranges.ARM_EXTEND_MAX;
-import static org.pvcpirates.frc2018.RobotMap.Ranges.ARM_EXTEND_MIN;
+import static org.pvcpirates.frc2018.RobotMap.Ranges.*;
 
 
 public class Hardware {
