@@ -40,7 +40,7 @@ public class AutoCommandFactory {
     		if(gameData.charAt(0) == 'L'){
     			command.commands.add(new DriveFor(0));
     			command.commands.add(new TurnToAngle(180));
-    			command.commands.add(new DriveUltra(0));
+    			command.commands.add(new DriveFor(0));
     		}
     		//Drive behind the switch on right side
     		if(gameData.charAt(0) == 'R'){
@@ -48,14 +48,14 @@ public class AutoCommandFactory {
     			command.commands.add(new TurnToAngle(180));
     			command.commands.add(new DriveFor(0));
     			command.commands.add(new TurnToAngle(180));
-    			command.commands.add(new DriveUltra(0));
+    			command.commands.add(new DriveFor(0));
     		}
     	}else if(location == StartingLocation.RIGHT){
     		//Go to right side
     		if(gameData.charAt(0) == 'R'){
     			command.commands.add(new DriveFor(0));
     			command.commands.add(new TurnToAngle(-180));
-    			command.commands.add(new DriveUltra(0));
+    			command.commands.add(new DriveFor(0));
     		}
     		//Drive behind the switch to left side
     		if(gameData.charAt(0) == 'L'){
@@ -63,19 +63,19 @@ public class AutoCommandFactory {
     			command.commands.add(new TurnToAngle(-180));
     			command.commands.add(new DriveFor(0));
     			command.commands.add(new TurnToAngle(-180));
-    			command.commands.add(new DriveUltra(0));
+    			command.commands.add(new DriveFor(0));
     		}
     	}else if(location == StartingLocation.CENTER){
     		if(gameData.charAt(0) == 'L'){
     			command.commands.add(new TurnToAngle(-45));
     			command.commands.add(new DriveFor(0));
     			command.commands.add(new TurnToAngle(45));
-    			command.commands.add(new DriveUltra(0));
+    			command.commands.add(new DriveFor(0));
     		}else if(gameData.charAt(0) == 'R'){
     			command.commands.add(new TurnToAngle(45));
     			command.commands.add(new DriveFor(0));
     			command.commands.add(new TurnToAngle(-45));
-    			command.commands.add(new DriveUltra(0));
+    			command.commands.add(new DriveFor(0));
     		}
     	}
     	return command;
