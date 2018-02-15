@@ -3,17 +3,17 @@ package org.pvcpirates.frc2018.state;
 
 import org.pvcpirates.frc2018.Scheduler;
 import org.pvcpirates.frc2018.autonomous.CommandFactory;
-
+import org.pvcpirates.frc2018.commands.Command;
 
 public class AutoState extends State {
-    public static CommandFactory commandFactory = new CommandFactory();
+    public static AutoCommandFactory autoCommandFactory = new AutoCommandFactory();
     private Command command;
     //TODO commandGroup
     
     @Override
     public void init() {
     	Scheduler.autoChooser.getSelected().init();
-    	
+
     }
 
     //TODO:Parallel/Sequential stuff

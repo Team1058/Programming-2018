@@ -6,6 +6,7 @@ import org.pvcpirates.frc2018.gamepads.BaseGamepad;
 import org.pvcpirates.frc2018.gamepads.GamepadEnum;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
+import org.pvcpirates.frc2018.robot.subsystems.Drivetrain;
 import org.pvcpirates.frc2018.util.GamepadHelper;
 
 public class DriveVelocity extends TeleopCommand {
@@ -20,15 +21,15 @@ public class DriveVelocity extends TeleopCommand {
     }
 
     @Override
-    public void executeCommand() {
-        Robot.getInstance().drivetrain.setPIDF(kP, kI, kD, kF);
+    public void exec() {
+        Drivetrain.setPIDF(kP, kI, kD, kF);
         //ticks per 100 milliseconds
         double vel = 9.2 * 512 * 10;
         double fb = GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y),.1);
         double lr = GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_X),.1);
         double lspd = fb - lr;
         double rspd = fb + lr;
-        Robot.getInstance().drivetrain.setDrive(ControlMode.Velocity, vel * lspd, vel * rspd);
+        Drivetrain.setDrive(ControlMode.Velocity, vel * lspd, vel * rspd);
         SmartDashboard.putNumber("rspd",vel*rspd);
         SmartDashboard.putNumber("lspd",vel*lspd);
     }

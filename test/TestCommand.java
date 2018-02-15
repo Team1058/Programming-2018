@@ -1,7 +1,7 @@
 package test;
 
 import org.pvcpirates.frc2018.Status;
-import org.pvcpirates.frc2018.autonomous.Command;
+import org.pvcpirates.frc2018.commands.Command;
 
 public class TestCommand extends Command{
 	

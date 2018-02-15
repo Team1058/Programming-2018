@@ -1,4 +1,4 @@
-package org.pvcpirates.frc2018.autonomous.commands;
+package org.pvcpirates.frc2018.commands;
 
 import org.pvcpirates.frc2018.Status;
 import org.pvcpirates.frc2018.autonomous.Command;
@@ -38,5 +38,5 @@ public class DriveFor extends Command {
         Robot.getInstance().drivetrain.stopAll();
     }
 
-    
+
 }

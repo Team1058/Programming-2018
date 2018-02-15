@@ -7,31 +7,31 @@ import org.pvcpirates.frc2018.robot.Hardware;
 
 public class Grabber extends BaseSubsystem {
 
-    private Hardware hardware = Hardware.getInstance();
-    private final DoubleSolenoid solenoid = hardware.cubeGrabberSolenoid;
-    private final TalonSRX rightMotor = hardware.rightCubeGrabMotor;
-    private final TalonSRX leftMotor  = hardware.leftCubeGrabMotor;
+    private static Hardware hardware = Hardware.getInstance();
+    private static final DoubleSolenoid solenoid = hardware.cubeGrabberSolenoid;
+    private static final TalonSRX rightMotor = hardware.rightCubeGrabMotor;
+    private static final TalonSRX leftMotor  = hardware.leftCubeGrabMotor;
 
-    public void openGrabber(){
+    public static void openGrabber(){
         solenoid.set(DoubleSolenoid.Value.kForward);
     }
 
-    public void closeGrabber(){
+    public static void closeGrabber(){
         solenoid.set(DoubleSolenoid.Value.kReverse);
     }
-    public void intakeRollers(){
+    public static void intakeRollers(){
         rightMotor.set(ControlMode.PercentOutput,-1);
         leftMotor.set(ControlMode.PercentOutput, .75);
     }
-    public void holdRollers(){
+    public static void holdRollers(){
         rightMotor.set(ControlMode.PercentOutput,-.1);
         leftMotor.set(ControlMode.PercentOutput, .1);
     }
-    public void outtakeRollers(){
+    public static void outtakeRollers(){
         rightMotor.set(ControlMode.PercentOutput,1);
         leftMotor.set(ControlMode.PercentOutput,-1);
     }
-    public void stopRollers(){
+    public static void stopRollers(){
         rightMotor.set(ControlMode.PercentOutput,0);
         leftMotor.set(ControlMode.PercentOutput,0);
     }

@@ -9,25 +9,25 @@ public class CubeGrabber extends TeleopCommand{
 
 
 
-    Grabber grabber = new Grabber();
+
 	public CubeGrabber(BaseGamepad gp) {
 		super(gp);
 	}
 	
 
 	@Override
-	public void executeCommand() {
+	public void exec() {
 		if(gamepad.getButton(GamepadEnum.A_BUTTON)){
-			grabber.intakeRollers();
-			grabber.openGrabber();
+			Grabber.intakeRollers();
+			Grabber.openGrabber();
 		}else if(gamepad.getButton(GamepadEnum.X_BUTTON)){
-			grabber.outtakeRollers();
+			Grabber.outtakeRollers();
 			//openGrabber();
 		}else if(gamepad.getButton(GamepadEnum.B_BUTTON)){
-			grabber.holdRollers();
+			Grabber.holdRollers();
 		}else{
-			grabber.stopRollers();
-			grabber.closeGrabber();
+			Grabber.stopRollers();
+			Grabber.closeGrabber();
 		}
 	}
 }
