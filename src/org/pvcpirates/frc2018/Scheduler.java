@@ -4,9 +4,12 @@ import org.pvcpirates.frc2018.autonomous.AutoType;
 import org.pvcpirates.frc2018.autonomous.Command;
 import org.pvcpirates.frc2018.autonomous.StartingLocation;
 import org.pvcpirates.frc2018.autonomous.commands.DriveFor;
+import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.state.AutoState;
 import org.pvcpirates.frc2018.state.TeleopState;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -21,6 +24,7 @@ public class Scheduler extends IterativeRobot {
     @Override
     public void robotInit() {
     	chooser.addDefault("Drive Forward", AutoState.commandFactory.generate(StartingLocation.CENTER, new DriveFor(60), AutoType.DRIVE));
+    	chooser.addObject("Drive Test", new DriveFor(10));
         SmartDashboard.putData("Auto Chooser",chooser);
 
     }
@@ -53,7 +57,6 @@ public class Scheduler extends IterativeRobot {
 
     @Override
     public void disabledPeriodic() {
-        SmartDashboard.putNumber("Ultra",robot.hardware.leftUltrasonic.getRangeInches());
     }
 
 }

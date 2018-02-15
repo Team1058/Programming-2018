@@ -4,14 +4,16 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.pvcpirates.frc2018.gamepads.BaseGamepad;
 import org.pvcpirates.frc2018.gamepads.GamepadEnum;
+import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.util.GamepadHelper;
 
 public class DriveVelocity extends TeleopCommand {
-    public static final double kP = .15;
+    public static final double kP = 0;
     public static final double kI = 0;
     public static final double kD = 0;
-    public static final double kF = 0;
+    // (100% * 1023) / vel
+    public static final double kF = .021717901;
 
     public DriveVelocity(BaseGamepad gp) {
         super(gp);

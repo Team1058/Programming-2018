@@ -1,4 +1,4 @@
-package org.pvcpirates.frc2018.robot.subsystems;
+package org.pvcpirates.frc2018.robot.controllers;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -22,7 +22,7 @@ public class Drivetrain extends BaseController {
     public void stopAll() {
         //shut everything off
         hardware.leftDrive1.set(ControlMode.PercentOutput, 0);
-        hardware.leftDrive1.set(ControlMode.PercentOutput, 0);
+        hardware.rightDrive1.set(ControlMode.PercentOutput, 0);
     }
 
     public void setDrive(ControlMode controlMode, double left, double right) {

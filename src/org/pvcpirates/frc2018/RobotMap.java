@@ -2,12 +2,12 @@ package org.pvcpirates.frc2018;
 
 public class RobotMap {
     public static final class CANTalonIds {
-        public static final int LEFT_DRIVE_1 = 7;
-        public static final int RIGHT_DRIVE_1 = 3;
-        public static final int LEFT_DRIVE_2 = 8;
-        public static final int RIGHT_DRIVE_2 = 2;
-        public static final int RIGHT_CUBE_GRABBER = 1;
-        public static final int LEFT_CUBE_GRABBER = 2;
+        public static final int LEFT_DRIVE_1 = 2;
+        public static final int RIGHT_DRIVE_1 = 0;
+        public static final int LEFT_DRIVE_2 = 3;
+        public static final int RIGHT_DRIVE_2 = 1;
+        public static final int RIGHT_CUBE_GRABBER = 4;
+        public static final int LEFT_CUBE_GRABBER = 5;
         public static final int ARM_PIVOT_TALON = -1;
         public static final int ARM_EXTEND_TALON = -1;
     }
@@ -27,7 +27,7 @@ public class RobotMap {
     }
 
     public static final class Constants {
-        public static final int DRIVEBASE_TIMEOUT = 0;
+        public static final int DRIVEBASE_TIMEOUT = 10;
         public static final double DRIVEBASE_kP = 0;
         public static final double DRIVEBASE_kI = 0;
         public static final double DRIVEBASE_kD = 0;
