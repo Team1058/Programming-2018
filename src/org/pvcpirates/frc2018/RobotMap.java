@@ -42,6 +42,7 @@ public class RobotMap {
         public static final double MAX_ARM_HEIGHT =71;
         public static final double PIVOT_HEIGHT = 38;
         public static final double PIVOT_TO_MAX_PERIM = 32.5;
+        public static final int ROBOT_TIMEOUT = 10;
 
     }
 
@@ -52,6 +53,8 @@ public class RobotMap {
         public static final int WRIST_MAX = -1;
         public static final int WRIST_MIN = 1000000000;
         public static final int THE_MIDDLE= -1;
+        public static final int ARM_EXTEND_MAX = -1;
+        public static final int ARM_EXTEND_MIN = -1;
     }
 
 }
