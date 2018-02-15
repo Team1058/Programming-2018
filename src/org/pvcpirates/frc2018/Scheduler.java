@@ -20,6 +20,7 @@ public class Scheduler extends IterativeRobot {
     @Override
     public void robotInit() {
     	autoChooser.addDefault("Drive Forward Center", AutoState.commandFactory.generate(StartingLocation.CENTER, new DriveFor(60), AutoType.DRIVE));
+    	autoChooser.addObject("Drive Test", new DriveFor(10));
     }
 
     @Override
