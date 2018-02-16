@@ -20,12 +20,13 @@ public class MoveArmPerimeter extends Command {
             change = 80;
         else {
             change = Arm.getArmY() - lastHeight;
-            lastHeight = Arm.getArmY();
         }
 
         Arm.moveCurveMax(Arm.getArmY()+(sign*change));
-        if (Arm.getArmY() == height)
+        lastHeight = Arm.getArmY();
+        if (Arm.getArmY() == height) {
             this.setStatus(Status.STOP);
+        }
     }
 
     @Override
