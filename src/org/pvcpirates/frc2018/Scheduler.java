@@ -1,28 +1,23 @@
 package org.pvcpirates.frc2018;
 
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import org.pvcpirates.frc2018.autonomous.AutoType;
 import org.pvcpirates.frc2018.autonomous.StartingLocation;
-import org.pvcpirates.frc2018.autonomous.command.AutoCommand;
-import org.pvcpirates.frc2018.autonomous.command.Command;
-import org.pvcpirates.frc2018.autonomous.subcommands.DriveFor;
+import org.pvcpirates.frc2018.commands.Command;
+import org.pvcpirates.frc2018.commands.DriveFor;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.state.AutoState;
 import org.pvcpirates.frc2018.state.TeleopState;
 
-import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 public class Scheduler extends IterativeRobot {
 
     public static final Robot robot = Robot.getInstance();
-	public static SendableChooser<Command> chooser = new SendableChooser<>();
-
+    public static SendableChooser<Command> autoChooser = new SendableChooser<>();
 
     @Override
     public void robotInit() {
-    	chooser.addDefault("Drive Forward", AutoState.commandFactory.generate(StartingLocation.CENTER, new DriveFor(60), AutoType.DRIVE));
-        SmartDashboard.putData("Auto Chooser",chooser);
+        autoChooser.addDefault("Drive ForwardCenter", AutoState.autoCommandFactory.generate(StartingLocation.CENTER, new DriveFor(60), AutoType.DRIVE));
 
     }
 
@@ -54,7 +49,6 @@ public class Scheduler extends IterativeRobot {
 
     @Override
     public void disabledPeriodic() {
-        SmartDashboard.putNumber("Ultra",robot.hardware.leftUltrasonic.getRangeInches());
     }
 
 }

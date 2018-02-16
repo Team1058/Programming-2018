@@ -1,5 +1,7 @@
 package org.pvcpirates.frc2018.gamepads;
 
+import org.pvcpirates.frc2018.teleop.CubeGrabber;
+
 public class OperatorGamepad extends BaseGamepad {
 
     public OperatorGamepad(int port) {
@@ -10,6 +12,6 @@ public class OperatorGamepad extends BaseGamepad {
 
     @Override
     void mapCommandsToController() {
-    	
+        teleopCommands.add(new CubeGrabber(this));
     }
 }
