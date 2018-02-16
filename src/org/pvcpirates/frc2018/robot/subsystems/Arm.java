@@ -33,7 +33,10 @@ public class Arm extends BaseSubsystem {
     }
 
     public static void levelWrist(){
-    	hardware.wristPivotMotor.set(ControlMode.Position,THE_MIDDLE);
+    	double pivotAngle = getPivotAngle();
+    	double suppliment = 180-pivotAngle;
+    	hardware.wristPivotMotor.set(ControlMode.Position, (suppliment/360)*1024);
+    	
     }
 
     public static void wristRotate(double angleSetpoint){
@@ -43,7 +46,7 @@ public class Arm extends BaseSubsystem {
 
     public static void extendArm(double distance){
         if (distance < RobotMap.Constants.ARM_DISTANCE && distance >=0) {
-            distance = (distance /(1.751*Math.PI)) * 4096;
+            distance = (distance /(1.751*Math.PI)) * 1024;
             hardware.armExtendMotor.set(ControlMode.Position, distance);
         }
 

@@ -3,7 +3,6 @@ package org.pvcpirates.frc2018.teleop;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import org.pvcpirates.frc2018.gamepads.BaseGamepad;
 import org.pvcpirates.frc2018.gamepads.GamepadEnum;
-import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.robot.subsystems.Drivetrain;
 import org.pvcpirates.frc2018.util.GamepadHelper;
 
@@ -19,7 +18,7 @@ public class DriveCommand extends TeleopCommand {
          double lr = GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_X),.1);
          double lspd = fb - lr;
          double rspd = fb + lr;
-         Drivetrain.setDrive(ControlMode.PercentOutput,lspd ,-rspd);
+         Drivetrain.setDrive(ControlMode.PercentOutput,lspd ,rspd);
     }
 
 }
