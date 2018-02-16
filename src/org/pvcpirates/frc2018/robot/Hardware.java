@@ -36,27 +36,19 @@ public class Hardware {
     public final DoubleSolenoid cubeGrabberSolenoid = new DoubleSolenoid(RobotMap.PneumaticIds.GRABBER_1,
             RobotMap.PneumaticIds.GRABBER_2);
     public final DigitalInput cubeLimitSwitch = new DigitalInput(RobotMap.SensorIDs.CUBE_LIMIT_SWITCH);
-    public AHRS navx =  new AHRS(SPI.Port.kMXP);
     //replace channels with enums
     public final Ultrasonic leftUltrasonic = new Ultrasonic(0, 1);
     public final Ultrasonic rightUltrasonic = new Ultrasonic(2, 3);
     public final Compressor compressor = new Compressor(0);
-    
-    
+    public AHRS navx = new AHRS(SPI.Port.kMXP);
 
-    public static Hardware getInstance() {
-        if (ourInstance == null) {
-            ourInstance = new Hardware();
-        }
-        return ourInstance;
-    }
 
     private Hardware() {
-    	compressor.setClosedLoopControl(true);
-    	leftUltrasonic.setAutomaticMode(true);
-    	leftDrive1.setSensorPhase(false);
-    	leftDrive1.setInverted(true);
-    	leftDrive2.setInverted(true);//rightUltrasonic.setAutomaticMode(true);
+        compressor.setClosedLoopControl(true);
+        leftUltrasonic.setAutomaticMode(true);
+        leftDrive1.setSensorPhase(false);
+        leftDrive1.setInverted(true);
+        leftDrive2.setInverted(true);//rightUltrasonic.setAutomaticMode(true);
         leftDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
         rightDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
         leftDrive2.follow(leftDrive1);
@@ -81,6 +73,13 @@ public class Hardware {
 
 
         armExtendMotorFollower.follow(armExtendMotor);
+    }
+
+    public static Hardware getInstance() {
+        if (ourInstance == null) {
+            ourInstance = new Hardware();
+        }
+        return ourInstance;
     }
 
     public static void setPIDF(double p, double i, double d, double f, TalonSRX talonSRX) {

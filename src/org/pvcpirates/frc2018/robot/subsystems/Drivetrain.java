@@ -3,7 +3,6 @@ package org.pvcpirates.frc2018.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import org.pvcpirates.frc2018.RobotMap;
 import org.pvcpirates.frc2018.robot.Hardware;
-import org.pvcpirates.frc2018.robot.subsystems.BaseController;
 
 //import com.kauailabs.navx.frc.AHRS;
 

@@ -11,7 +11,7 @@ public class RobotMap {
         //TODO: TALON IDSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
         public static final int ARM_PIVOT_TALON = 7;
         public static final int ARM_EXTEND_TALON = 5;
-        public static final int ARM_EXTEND_TALON_FOLLOWER =4;
+        public static final int ARM_EXTEND_TALON_FOLLOWER = 4;
         public static final int WRIST_PIVOT_MOTOR = 6;
     }
 
@@ -23,10 +23,10 @@ public class RobotMap {
         public static final int PIVOT_POT = 0;
 
     }
-    
+
     public static final class PneumaticIds {
-    		public static final int GRABBER_1 = 1;
-    		public static final int GRABBER_2 = 2;
+        public static final int GRABBER_1 = 1;
+        public static final int GRABBER_2 = 2;
     }
 
     public static final class Constants {
@@ -50,7 +50,7 @@ public class RobotMap {
         public static final int WRIST_MIN = 1000000000;
         public static final int THE_MIDDLE = -1;
         public static final int ARM_EXTEND_MAX = 10;
-        public static final int ARM_EXTEND_MIN =1;
+        public static final int ARM_EXTEND_MIN = 1;
 
     }
 

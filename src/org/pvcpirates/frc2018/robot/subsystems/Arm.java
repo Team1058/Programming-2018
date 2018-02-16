@@ -13,16 +13,16 @@ public class Arm extends BaseSubsystem {
 
 
     public static void configurePID() {
-		Hardware.setPIDF(0, 0, 0, 0, hardware.armPivotMotor);
-		Hardware.setPIDF(0, 0, 0, 0, hardware.armExtendMotor);
-		Hardware.setPIDF(0, 0, 0, 0, hardware.wristPivotMotor);
+        Hardware.setPIDF(0, 0, 0, 0, hardware.armPivotMotor);
+        Hardware.setPIDF(0, 0, 0, 0, hardware.armExtendMotor);
+        Hardware.setPIDF(0, 0, 0, 0, hardware.wristPivotMotor);
 
-	}
+    }
 
-	public static void zeroArm(){
-        hardware.armExtendMotor.set(ControlMode.Position,0);
-        hardware.armPivotMotor.set(ControlMode.Position,0);
-        hardware.wristPivotMotor.set(ControlMode.Position,THE_MIDDLE);
+    public static void zeroArm() {
+        hardware.armExtendMotor.set(ControlMode.Position, 0);
+        hardware.armPivotMotor.set(ControlMode.Position, 0);
+        hardware.wristPivotMotor.set(ControlMode.Position, THE_MIDDLE);
     }
 
     public static void levelWrist() {

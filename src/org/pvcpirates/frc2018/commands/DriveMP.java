@@ -12,33 +12,17 @@ import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
 
 public class DriveMP extends Command {
-    //change points
-    private enum MPState {
-        STOP, INIT, START, RUN;
-    }
-
+    private static final int MIN_POINTS = 15;
     public MotionProfileStatus status = new MotionProfileStatus();
     public MPState mpState = MPState.STOP;
+    Notifier notifer = new Notifier(new PeriodicRunnable());
     private Trajectory trajectoryL;
     private Trajectory trajectoryR;
-    
     private Hardware hardware = Robot.getInstance().hardware;
-    
-    private static final int MIN_POINTS = 15;
 
-    class PeriodicRunnable implements java.lang.Runnable {
-        public void run() {
-            hardware.leftDrive1.processMotionProfileBuffer();
-            hardware.leftDrive1.processMotionProfileBuffer();
-        }
-
-    }
-
-    Notifier notifer = new Notifier(new PeriodicRunnable());
-
-    DriveMP(Waypoint[] points,Trajectory.Config config,double wheelbaseWidth){
+    DriveMP(Waypoint[] points, Trajectory.Config config, double wheelbaseWidth) {
         double timeFrame = config.dt;
-        hardware.leftDrive1.changeMotionControlFramePeriod((int)timeFrame*1000);
+        hardware.leftDrive1.changeMotionControlFramePeriod((int) timeFrame * 1000);
         notifer.startPeriodic(timeFrame);
         //for tankdrive but other types can be implemented
         TankModifier tankModifier = new TankModifier(Pathfinder.generate(points, config));
@@ -47,7 +31,6 @@ public class DriveMP extends Command {
         trajectoryR = tankModifier.getRightTrajectory();
 
     }
-
 
     @Override
     public void exec() {
@@ -69,7 +52,8 @@ public class DriveMP extends Command {
                     mpState = mpState.STOP;
         }
     }
-    private void sendPoints(){
+
+    private void sendPoints() {
         hardware.leftDrive1.clearMotionProfileTrajectories();
         hardware.leftDrive1.clearMotionProfileTrajectories();
         TrajectoryPoint pointL = new TrajectoryPoint();
@@ -79,21 +63,35 @@ public class DriveMP extends Command {
             Trajectory.Segment segR = trajectoryR.get(i);
 
 
-            hardware.leftDrive1.pushMotionProfileTrajectory(genPoint(segR,i));
-            hardware.leftDrive1.pushMotionProfileTrajectory(genPoint(segL,i));
+            hardware.leftDrive1.pushMotionProfileTrajectory(genPoint(segR, i));
+            hardware.leftDrive1.pushMotionProfileTrajectory(genPoint(segL, i));
         }
     }
-    private TrajectoryPoint genPoint(Trajectory.Segment seg,int i){
+
+    private TrajectoryPoint genPoint(Trajectory.Segment seg, int i) {
         TrajectoryPoint point = new TrajectoryPoint();
 
         point.headingDeg = seg.heading;
         point.position = seg.position;
         point.profileSlotSelect0 = 0;
-        point.timeDur = TrajectoryPoint.TrajectoryDuration.valueOf(String.valueOf(Math.round(seg.dt*.1)*10));
+        point.timeDur = TrajectoryPoint.TrajectoryDuration.valueOf(String.valueOf(Math.round(seg.dt * .1) * 10));
         point.velocity = seg.velocity;
 
         point.zeroPos = i == 0;
-        point.isLastPoint = i == trajectoryR.length()-1;
+        point.isLastPoint = i == trajectoryR.length() - 1;
         return point;
+    }
+
+    //change points
+    private enum MPState {
+        STOP, INIT, START, RUN;
+    }
+
+    class PeriodicRunnable implements java.lang.Runnable {
+        public void run() {
+            hardware.leftDrive1.processMotionProfileBuffer();
+            hardware.leftDrive1.processMotionProfileBuffer();
+        }
+
     }
 }

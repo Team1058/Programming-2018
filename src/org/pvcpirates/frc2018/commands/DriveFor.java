@@ -2,7 +2,6 @@ package org.pvcpirates.frc2018.commands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import org.pvcpirates.frc2018.Status;
-import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.robot.subsystems.Drivetrain;
 
@@ -13,14 +12,14 @@ public class DriveFor extends Command {
 
 
     public DriveFor(double inches) {
-    	super();
+        super();
         this.inches = inches;
-	}
-	
-	@Override
+    }
+
+    @Override
     public void init() {
-    	Drivetrain.setPIDF(.15, 0.0, 0, 0);
-        encTicks = (inches/(6 * Math.PI)) * 1024 *(17.3);
+        Drivetrain.setPIDF(.15, 0.0, 0, 0);
+        encTicks = (inches / (6 * Math.PI)) * 1024 * (17.3);
         Robot.getInstance().hardware.leftDrive1.getSensorCollection().setQuadraturePosition(0, 10);
         Robot.getInstance().hardware.rightDrive1.getSensorCollection().setQuadraturePosition(0, 10);
         System.out.println("INIT");
