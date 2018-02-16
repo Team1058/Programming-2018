@@ -2,7 +2,7 @@ package org.pvcpirates.frc2018.state;
 
 
 import org.pvcpirates.frc2018.Scheduler;
-import org.pvcpirates.frc2018.autonomous.CommandFactory;
+import org.pvcpirates.frc2018.autonomous.AutoCommandFactory;
 import org.pvcpirates.frc2018.commands.Command;
 
 public class AutoState extends State {

@@ -1,4 +1,4 @@
-package org.pvcpirates.frc2018.autonomous.commands;
+package org.pvcpirates.frc2018.commands;
 
 import com.ctre.phoenix.motion.MotionProfileStatus;
 import com.ctre.phoenix.motion.TrajectoryPoint;
@@ -8,7 +8,6 @@ import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.Waypoint;
 import jaci.pathfinder.modifiers.TankModifier;
-import org.pvcpirates.frc2018.autonomous.Command;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
 

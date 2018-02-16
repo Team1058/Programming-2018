@@ -1,5 +1,6 @@
 package org.pvcpirates.frc2018.commands;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import org.pvcpirates.frc2018.Status;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
