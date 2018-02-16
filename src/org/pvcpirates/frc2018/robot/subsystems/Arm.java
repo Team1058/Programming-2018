@@ -25,53 +25,60 @@ public class Arm extends BaseSubsystem {
         hardware.wristPivotMotor.set(ControlMode.Position,THE_MIDDLE);
     }
 
-    public static void levelWrist(){
-    	hardware.wristPivotMotor.set(ControlMode.Position,THE_MIDDLE);
+    public static void levelWrist() {
+        double pivotAngle = getPivotAngle();
+        double suppliment = 180 - pivotAngle;
+        hardware.wristPivotMotor.set(ControlMode.Position, (suppliment / 360) * 1024);
+
     }
 
-    public static void wristRotate(double angleSetpoint){
+    public static void wristRotate(double angleSetpoint) {
         if (angleSetpoint < RobotMap.Ranges.WRIST_MAX && angleSetpoint < RobotMap.Ranges.WRIST_MIN)
-            hardware.wristPivotMotor.set(ControlMode.Position,angleSetpoint);
+            hardware.wristPivotMotor.set(ControlMode.Position, angleSetpoint);
     }
 
-    public static void extendArm(double distance){
-        if (distance < RobotMap.Constants.ARM_DISTANCE && distance >=0) {
-            distance = (distance /(1.751*Math.PI)) * 1025;
+    public static void extendArm(double distance) {
+        if (distance < RobotMap.Constants.ARM_DISTANCE && distance >= 0) {
+            //FIXME MAKE THIS A CONSTANT
+            distance = (distance / (1.751 * Math.PI)) * 1025;
             hardware.armExtendMotor.set(ControlMode.Position, distance);
         }
 
     }
 
-    public static double getArmExtension(){
-        return (hardware.armPivotMotor.getSensorCollection().getQuadraturePosition()/4096)/(1.751*Math.PI);
+    public static double getArmExtension() {
+        //FIXME THESE MAGIC NUMBERS
+        return (hardware.armPivotMotor.getSensorCollection().getQuadraturePosition() / 4096) / (1.751 * Math.PI);
     }
 
-    public static double getArmY(){
-        return Math.sin(getPivotAngle())* getArmExtension();
+    public static double getArmY() {
+        return Math.sin(getPivotAngle()) * getArmExtension();
     }
 
-    public static double getArmX(){
-        return Math.cos(getPivotAngle())*getArmExtension();
+    public static double getArmX() {
+        return Math.cos(getPivotAngle()) * getArmExtension();
     }
 
-    public static void pivotArm(double angleSetpoint){
-        angleSetpoint = (1019*(angleSetpoint/270)+5);
-        if (angleSetpoint <RobotMap.Ranges.POTENTIOMETER_MAX && angleSetpoint < RobotMap.Ranges.POTENTIOMETER_MIN)
+    public static void pivotArm(double angleSetpoint) {
+        //FIXME MAGIC NUMBERS REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        angleSetpoint = (1019 * (angleSetpoint / 270) + 5);
+        if (angleSetpoint < RobotMap.Ranges.POTENTIOMETER_MAX && angleSetpoint < RobotMap.Ranges.POTENTIOMETER_MIN)
             hardware.armPivotMotor.set(ControlMode.Position, angleSetpoint);
     }
 
-    public static double getPivotAngle(){
-        return ((hardware.armPivotMotor.getSelectedSensorPosition(0)-5)/1019)*270;
+    public static double getPivotAngle() {
+        return ((hardware.armPivotMotor.getSelectedSensorPosition(0) - 5) / 1019) * 270;
     }
 
-    public static void moveXY(double x, double y){
+    public static void moveXY(double x, double y) {
         double angle;
         double hyp;
         //DONT RUN THE ARM INTO THE GROUND
-        if (y <0)
+        if (y < 0)
             y = 25;
+        //FIXME ENUM
         //Distance from ground to pivot
-        y -=38;
+        y -= 38;
         angle = Math.atan2(y, x);
         hyp = y / Math.sin(angle);
         if (x > PIVOT_TO_MAX_PERIM) {
@@ -80,20 +87,21 @@ public class Arm extends BaseSubsystem {
         }
     }
 
-    public static void moveCurveMax(double y){
+    public static void moveCurveMax(double y) {
         // Distance between pivot point and maximum robot extension size
         double x = PIVOT_TO_MAX_PERIM;
         //if you need to start curving back throw out x since its gonna be less
 
         if (y > MAX_ARM_HEIGHT)
-            x = Math.sqrt(Math.pow(ARM_DISTANCE,2)-Math.pow(y-PIVOT_HEIGHT,2));
-        moveXY(x,y);
+            x = Math.sqrt(Math.pow(ARM_DISTANCE, 2) - Math.pow(y - PIVOT_HEIGHT, 2));
+        moveXY(x, y);
     }
 
-    public static void stopAll(){
-        hardware.armExtendMotor.set(ControlMode.PercentOutput,0);
-        hardware.armPivotMotor.set(ControlMode.PercentOutput,0);
+    public static void stopAll() {
+        hardware.armExtendMotor.set(ControlMode.PercentOutput, 0);
+        hardware.armPivotMotor.set(ControlMode.PercentOutput, 0);
     }
+
 
     //TODO SHOOT CUBE OVER ANOTHER CUBE ON THE SCALE
 }

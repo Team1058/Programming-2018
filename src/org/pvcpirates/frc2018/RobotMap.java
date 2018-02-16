@@ -30,32 +30,27 @@ public class RobotMap {
     }
 
     public static final class Constants {
-        public static final int ROBOT_TIMEOUT = 10;
-        public static final double DRIVEBASE_kP = 0;
-        public static final double DRIVEBASE_kI = 0;
-        public static final double DRIVEBASE_kD = 0;
-        public static final double DRIVEBASE_kF = 0;
+        //FIXME LITERALLY all this bs
         public static final double DRIVE_DISTANCE_PER_TICK = 0; //Feet
         public static final double ARM_MASS = 0;
         public static final double ARM_DISTANCE = 48;
-        public static final double PIVOT_POINT_HEIGHT=0;
-        public static final double MAX_ARM_HEIGHT =71;
+        public static final double PIVOT_POINT_HEIGHT = 0;
+        public static final double MAX_ARM_HEIGHT = 71;
         public static final double PIVOT_HEIGHT = 38;
         public static final double PIVOT_TO_MAX_PERIM = 32.5;
+        public static final int ROBOT_TIMEOUT = 10;
 
     }
 
-    public static final class Ranges{
+    public static final class Ranges {
         public static final int POTENTIOMETER_MAX = -1;
         public static final int POTENTIOMETER_MIN = 1000000;
-        //TODO GET THESE VALUES
+        //TODO GET THESE VALUES PLEAAAAAAAAAAAAAAAAAAAAAAAAAAAASE
         public static final int WRIST_MAX = -1;
         public static final int WRIST_MIN = 1000000000;
-        public static final int THE_MIDDLE= -1;
-
+        public static final int THE_MIDDLE = -1;
         public static final int ARM_EXTEND_MAX = 10;
         public static final int ARM_EXTEND_MIN =1;
-
 
     }
 
