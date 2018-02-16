@@ -16,14 +16,14 @@ public class MoveArmXYGamepad extends TeleopCommand {
 
     @Override
     public void exec() {
-        if (moveArmXY == null) {
-            moveArmXY = new MoveArmXY(Arm.getArmX()+gamepad.getAxis(GamepadEnum.LEFT_STICK_X) * INCREMENT, Arm.getArmY()+gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y) * INCREMENT);
-        } else if (moveArmXY.getStatus() == Status.STOP) {
+        double x = Arm.getArmX()+gamepad.getAxis(GamepadEnum.LEFT_STICK_X) * INCREMENT;
+        double y = Arm.getArmY()+gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y) * INCREMENT;
+        if (moveArmXY == null)
+            moveArmXY = new MoveArmXY(x, y);
+        else if (moveArmXY.getStatus() == Status.STOP)
             moveArmXY.finished();
-            moveArmXY = new MoveArmXY(Arm.getArmX()+gamepad.getAxis(GamepadEnum.LEFT_STICK_X) * INCREMENT, Arm.getArmY()+gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y) * INCREMENT);
-        } else {
-            if (moveArmXY.getStatus() == Status.EXEC)
-                moveArmXY.finished();
+        else {
+            moveArmXY.setXY(x, y);
             moveArmXY.exec();
         }
     }

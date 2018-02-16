@@ -35,8 +35,13 @@ public class MoveArmXY extends Command {
         lastY = Arm.getArmY();
     }
 
+    public void setXY(double x, double y){
+        this.x = x;
+        this.y = y;
+        this.setStatus(Status.EXEC);
+    }
     @Override
     public void finished() {
-        super.finished();
+        Arm.stopAll();
     }
 }
