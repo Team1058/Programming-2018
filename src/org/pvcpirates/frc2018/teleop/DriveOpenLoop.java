@@ -18,7 +18,7 @@ public class DriveOpenLoop extends TeleopCommand {
          double lr = GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_X),.1);
          double lspd = fb - lr;
          double rspd = fb + lr;
-         Drivetrain.setDrive(ControlMode.PercentOutput,lspd ,-rspd);
+         Drivetrain.setDrive(ControlMode.PercentOutput,lspd ,rspd);
     }
 
 }
