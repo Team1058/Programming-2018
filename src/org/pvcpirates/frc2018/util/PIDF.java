@@ -100,9 +100,10 @@ public class PIDF {
 
     public double calculate(double error, double angle) {
         double mass = RobotMap.Constants.ARM_MASS;
-        double angleOffset = Math.toRadians(RobotMap.Constants.ARM_OFFSET_DEGREES);
+        //double angleOffset = Math.toRadians(RobotMap.Constants.ARM_OFFSET_DEGREES);
         double distance = RobotMap.Constants.ARM_DISTANCE;
-        return calculate(error) + gravityCompensation * (mass * distance * Math.cos(angle - angleOffset));
+        //return calculate(error) + gravityCompensation * (mass * distance * Math.cos(angle - angleOffset));
+        return 0;
     }
 
     public void setValue(double value) {
