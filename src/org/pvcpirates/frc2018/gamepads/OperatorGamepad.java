@@ -12,6 +12,6 @@ public class OperatorGamepad extends BaseGamepad {
 
     @Override
     void mapCommandsToController() {
-    	teleopCommands.add(new CubeGrabber(this));
+        teleopCommands.add(new CubeGrabber(this));
     }
 }

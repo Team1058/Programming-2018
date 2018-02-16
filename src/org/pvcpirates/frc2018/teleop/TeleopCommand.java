@@ -9,6 +9,7 @@ public abstract class TeleopCommand extends Command {
 
     public BaseGamepad gamepad;
     public Hardware hardware = Robot.getInstance().hardware;
+
     public TeleopCommand(BaseGamepad gp) {
         gamepad = gp;
     }

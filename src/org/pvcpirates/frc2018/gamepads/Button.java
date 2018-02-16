@@ -4,6 +4,7 @@ public class Button {
 
     GamepadEnum buttonEnum;
     ButtonTypes buttonType;
+
     public Button(GamepadEnum buttonEnum, ButtonTypes buttonType) {
         this.buttonEnum = buttonEnum;
         this.buttonType = buttonType;

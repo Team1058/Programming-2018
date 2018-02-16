@@ -14,11 +14,11 @@ public class DriveCommand extends TeleopCommand {
 
     @Override
     public void exec() {
-    	 double fb = GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y),.1);
-         double lr = GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_X),.1);
-         double lspd = fb - lr;
-         double rspd = fb + lr;
-         Drivetrain.setDrive(ControlMode.PercentOutput,lspd ,rspd);
+        double fb = GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1);
+        double lr = GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_X), .1);
+        double lspd = fb - lr;
+        double rspd = fb + lr;
+        Drivetrain.setDrive(ControlMode.PercentOutput, lspd, rspd);
     }
 
 }

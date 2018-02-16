@@ -6,8 +6,7 @@ import org.pvcpirates.frc2018.robot.subsystems.Grabber;
 
 public class GrabberToggle extends Command {
     private boolean grab;
-    private Grabber grabber;
-    
+
     public GrabberToggle(boolean grab) {
         super();
         this.grab = grab;
@@ -15,11 +14,10 @@ public class GrabberToggle extends Command {
 
     @Override
     public void init() {
-        grabber = new Grabber();
         if (grab)
-            grabber.intakeRollers();
+            Grabber.intakeRollers();
         else
-            grabber.outtakeRollers();
+            Grabber.outtakeRollers();
         setStatus(Status.EXEC);
     }
 
@@ -31,10 +29,10 @@ public class GrabberToggle extends Command {
 
     @Override
     public void finished() {
-        grabber.closeGrabber();
+        Grabber.closeGrabber();
         if (grab)
-            grabber.holdRollers();
+            Grabber.holdRollers();
         else
-            grabber.stopRollers();
+            Grabber.stopRollers();
     }
 }
