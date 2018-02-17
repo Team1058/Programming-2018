@@ -37,7 +37,7 @@ public class DriveFor extends Command {
 
     @Override
     public void finished() {
-        Robot.getInstance().drivetrain.stopAll();
+        Drivetrain.stopAll();
     }
 
 }

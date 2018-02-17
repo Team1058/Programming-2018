@@ -33,22 +33,20 @@ public class Arm extends BaseSubsystem {
     }
 
     public static void wristRotate(double angleSetpoint) {
-        if (angleSetpoint < RobotMap.Ranges.WRIST_MAX && angleSetpoint < RobotMap.Ranges.WRIST_MIN)
+        if (angleSetpoint < RobotMap.Ranges.WRIST_ENCODER_MAX && angleSetpoint < RobotMap.Ranges.WRIST_ENCODER_MIN)
             hardware.wristPivotMotor.set(ControlMode.Position, angleSetpoint);
     }
 
     public static void extendArm(double distance) {
         if (distance < RobotMap.Constants.ARM_DISTANCE && distance >= 0) {
-            //FIXME MAKE THIS A CONSTANT
-            distance = (distance / (1.751 * Math.PI)) * 1025;
+            distance = (distance / (SPROCKET_DIAMETER * Math.PI)) * 1024;
             hardware.armExtendMotor.set(ControlMode.Position, distance);
         }
 
     }
 
     public static double getArmExtension() {
-        //FIXME THESE MAGIC NUMBERS
-        return (hardware.armPivotMotor.getSensorCollection().getQuadraturePosition() / 4096) / (1.751 * Math.PI);
+        return (hardware.armPivotMotor.getSensorCollection().getQuadraturePosition() / 1024) / (SPROCKET_DIAMETER * Math.PI);
     }
 
     public static double getArmY() {
@@ -60,9 +58,9 @@ public class Arm extends BaseSubsystem {
     }
 
     public static void pivotArm(double angleSetpoint) {
-        //FIXME MAGIC NUMBERS REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        //DEGREES WE CAN ROTATE
         angleSetpoint = (1019 * (angleSetpoint / 270) + 5);
-        if (angleSetpoint < RobotMap.Ranges.POTENTIOMETER_MAX && angleSetpoint < RobotMap.Ranges.POTENTIOMETER_MIN)
+        if (angleSetpoint < RobotMap.Ranges.PIVOT_ENCODER_MAX && angleSetpoint < RobotMap.Ranges.PIVOT_ENCODER_MIN)
             hardware.armPivotMotor.set(ControlMode.Position, angleSetpoint);
     }
 
@@ -76,9 +74,7 @@ public class Arm extends BaseSubsystem {
         //DONT RUN THE ARM INTO THE GROUND
         if (y < 0)
             y = 25;
-        //FIXME ENUM
-        //Distance from ground to pivot
-        y -= 38;
+        y -= GROUND_TO_PIVOT;
         angle = Math.atan2(y, x);
         hyp = y / Math.sin(angle);
         if (x > PIVOT_TO_MAX_PERIM) {

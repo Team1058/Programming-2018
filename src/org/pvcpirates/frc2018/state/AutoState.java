@@ -8,7 +8,6 @@ import org.pvcpirates.frc2018.commands.Command;
 public class AutoState extends State {
     public static AutoCommandFactory autoCommandFactory = new AutoCommandFactory();
     private Command command;
-    //TODO commandGroup
 
     @Override
     public void init() {
@@ -16,7 +15,6 @@ public class AutoState extends State {
 
     }
 
-    //TODO:Parallel/Sequential stuff
     @Override
     public void exec() {
         Scheduler.autoChooser.getSelected().exec();

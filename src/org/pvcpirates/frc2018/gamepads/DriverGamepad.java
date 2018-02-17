@@ -6,8 +6,6 @@ public class DriverGamepad extends BaseGamepad {
 
     public DriverGamepad(int port) {
         super(port);
-        // TODO: Do the concrete abstract methods get called by the super class constructor??
-        //mapControlsToCommands();
     }
 
     void mapCommandsToController() {

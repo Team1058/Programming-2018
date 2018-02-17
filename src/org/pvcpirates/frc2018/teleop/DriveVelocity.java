@@ -7,13 +7,15 @@ import org.pvcpirates.frc2018.gamepads.GamepadEnum;
 import org.pvcpirates.frc2018.robot.subsystems.Drivetrain;
 import org.pvcpirates.frc2018.util.GamepadHelper;
 
+import static org.pvcpirates.frc2018.RobotMap.Constants.MAX_VELOCITY;
+
 public class DriveVelocity extends TeleopCommand {
     //FIXME PID REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-    public static final double kP = 0;
-    public static final double kI = 0;
-    public static final double kD = 0;
+    private static final double kP = 0;
+    private static final double kI = 0;
+    private static final double kD = 0;
     // (100% * 1023) / vel
-    public static final double kF = .021717901;
+    private static final double kF = .021717901;
 
     public DriveVelocity(BaseGamepad gp) {
         super(gp);
@@ -23,8 +25,7 @@ public class DriveVelocity extends TeleopCommand {
     public void exec() {
         Drivetrain.setPIDF(kP, kI, kD, kF);
         //ticks per 100 milliseconds
-        //FIXME MAGIC NUMBERS
-        double vel = 9.2 * 512 * 10;
+        double vel = MAX_VELOCITY * 1024 * 6;
         double fb = GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1);
         double lr = GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_X), .1);
         double lspd = fb - lr;

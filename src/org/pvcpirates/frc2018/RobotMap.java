@@ -39,18 +39,20 @@ public class RobotMap {
         public static final double PIVOT_HEIGHT = 38;
         public static final double PIVOT_TO_MAX_PERIM = 32.5;
         public static final int ROBOT_TIMEOUT = 10;
-
+        public static final double SPROCKET_DIAMETER = 1.751;
+        public static final double GROUND_TO_PIVOT = 38;
+        public static final double MAX_VELOCITY = 9.2;
     }
 
     public static final class Ranges {
-        public static final int POTENTIOMETER_MAX = -1;
-        public static final int POTENTIOMETER_MIN = 1000000;
+        public static final int PIVOT_ENCODER_MAX = -1;
+        public static final int PIVOT_ENCODER_MIN = 1000000;
         //TODO GET THESE VALUES PLEAAAAAAAAAAAAAAAAAAAAAAAAAAAASE
-        public static final int WRIST_MAX = -1;
-        public static final int WRIST_MIN = 1000000000;
+        public static final int WRIST_ENCODER_MAX = -1;
+        public static final int WRIST_ENCODER_MIN = 1000000000;
         public static final int THE_MIDDLE = -1;
-        public static final int ARM_EXTEND_MAX = 10;
-        public static final int ARM_EXTEND_MIN = 1;
+        public static final int ARM_EXTEND_ENCODER_MAX = 10;
+        public static final int ARM_EXTEND_ENCODER_MIN = 1;
 
     }
 

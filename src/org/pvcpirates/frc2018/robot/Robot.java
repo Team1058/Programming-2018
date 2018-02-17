@@ -7,7 +7,6 @@ public class Robot {
 
     private static Robot ourInstance;
     public final Hardware hardware = Hardware.getInstance();
-    public final Drivetrain drivetrain = new Drivetrain();
     public State state;
 
     private Robot() {

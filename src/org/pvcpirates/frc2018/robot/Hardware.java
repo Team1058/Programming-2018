@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
 import org.pvcpirates.frc2018.RobotMap;
 
 import static org.pvcpirates.frc2018.RobotMap.Constants.ROBOT_TIMEOUT;
-import static org.pvcpirates.frc2018.RobotMap.Ranges.ARM_EXTEND_MAX;
-import static org.pvcpirates.frc2018.RobotMap.Ranges.ARM_EXTEND_MIN;
+import static org.pvcpirates.frc2018.RobotMap.Ranges.ARM_EXTEND_ENCODER_MAX;
+import static org.pvcpirates.frc2018.RobotMap.Ranges.ARM_EXTEND_ENCODER_MIN;
 
 
 public class Hardware {
@@ -58,16 +58,16 @@ public class Hardware {
         armExtendMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
         armExtendMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, ROBOT_TIMEOUT);
         armExtendMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, ROBOT_TIMEOUT);
-        armExtendMotor.configForwardSoftLimitThreshold(ARM_EXTEND_MAX, ROBOT_TIMEOUT);
-        armExtendMotor.configReverseSoftLimitThreshold(ARM_EXTEND_MIN, ROBOT_TIMEOUT);
+        armExtendMotor.configForwardSoftLimitThreshold(ARM_EXTEND_ENCODER_MAX, ROBOT_TIMEOUT);
+        armExtendMotor.configReverseSoftLimitThreshold(ARM_EXTEND_ENCODER_MIN, ROBOT_TIMEOUT);
         armExtendMotor.configForwardSoftLimitEnable(true, ROBOT_TIMEOUT);
         armExtendMotor.configReverseSoftLimitEnable(true, ROBOT_TIMEOUT);
 
         armPivotMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, RobotMap.Constants.ROBOT_TIMEOUT);
         armPivotMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, ROBOT_TIMEOUT);
         armPivotMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, ROBOT_TIMEOUT);
-        armPivotMotor.configForwardSoftLimitThreshold(RobotMap.Ranges.POTENTIOMETER_MAX, ROBOT_TIMEOUT);
-        armPivotMotor.configReverseSoftLimitThreshold(RobotMap.Ranges.POTENTIOMETER_MIN, ROBOT_TIMEOUT);
+        armPivotMotor.configForwardSoftLimitThreshold(RobotMap.Ranges.PIVOT_ENCODER_MAX, ROBOT_TIMEOUT);
+        armPivotMotor.configReverseSoftLimitThreshold(RobotMap.Ranges.PIVOT_ENCODER_MIN, ROBOT_TIMEOUT);
         armPivotMotor.configForwardSoftLimitEnable(true, ROBOT_TIMEOUT);
         armPivotMotor.configReverseSoftLimitEnable(true, ROBOT_TIMEOUT);
 
