@@ -5,6 +5,8 @@ import org.pvcpirates.frc2018.Status;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.robot.subsystems.Drivetrain;
 
+import static org.pvcpirates.frc2018.RobotMap.Constants.ROBOT_TIMEOUT;
+
 
 public class DriveFor extends Command {
     private double inches;
@@ -20,8 +22,8 @@ public class DriveFor extends Command {
     public void init() {
         Drivetrain.setPIDF(.15, 0.0, 0, 0);
         encTicks = (inches / (6 * Math.PI)) * 1024 * (17.3);
-        Robot.getInstance().hardware.leftDrive1.getSensorCollection().setQuadraturePosition(0, 10);
-        Robot.getInstance().hardware.rightDrive1.getSensorCollection().setQuadraturePosition(0, 10);
+        Robot.getInstance().hardware.leftDrive1.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);
+        Robot.getInstance().hardware.rightDrive1.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);
         System.out.println("INIT");
         //Manually change instead of super.init() b/c there is no command list
         setStatus(Status.EXEC);
