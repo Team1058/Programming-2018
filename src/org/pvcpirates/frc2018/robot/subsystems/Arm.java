@@ -13,6 +13,7 @@ public class Arm extends BaseSubsystem {
 
 
     public static void configurePID() {
+        //FIXME PID VALS
         Hardware.setPIDF(0, 0, 0, 0, hardware.armPivotMotor);
         Hardware.setPIDF(0, 0, 0, 0, hardware.armExtendMotor);
         Hardware.setPIDF(0, 0, 0, 0, hardware.wristPivotMotor);

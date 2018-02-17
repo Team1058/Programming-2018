@@ -22,7 +22,7 @@ public class MoveArmPerimeter extends Command {
         // When gp.something.......
         int sign = (int) (Arm.getArmY() - height) / (int) Math.abs(Arm.getArmY() - height);
         change = Arm.getArmY() - lastHeight;
-        
+
         Arm.moveCurveMax(Arm.getArmY() + (sign * change));
         lastHeight = Arm.getArmY();
         if (Arm.getArmY() == height) {
