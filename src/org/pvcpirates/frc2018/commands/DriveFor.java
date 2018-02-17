@@ -14,12 +14,12 @@ public class DriveFor extends Command {
 
 
     public DriveFor(double inches) {
-        super();
         this.inches = inches;
     }
 
     @Override
     public void init() {
+        //FIXME TUNE PID
         Drivetrain.setPIDF(.15, 0.0, 0, 0);
         encTicks = (inches / (6 * Math.PI)) * 1024 * (17.3);
         Robot.getInstance().hardware.leftDrive1.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);

@@ -10,22 +10,14 @@ public class TurnToAngle extends Command {
 
     double goal;
     double current;
-    double p;
-    double i;
-    double d;
-
-    PIDF pidf;
 
     public TurnToAngle(double goal) {
-        super();
         this.goal = goal;
-
     }
 
     @Override
     public void init() {
-        current = Hardware.getInstance().navx.getYaw();
-        pidf = new PIDF(p, i, d, 0, 0);
+        current = Hardware.getInstance().navx.getPitch();
         setStatus(Status.EXEC);
     }
 
@@ -35,9 +27,10 @@ public class TurnToAngle extends Command {
         current = Hardware.getInstance().navx.getPitch();
         if (Math.abs(goal - current) < 1) {
             this.setStatus(Status.STOP);
+        }else {
+            output = (goal - current) / goal;
+            Drivetrain.setDrive(ControlMode.PercentOutput, output, -output);
         }
-        output = (goal - current) / goal;
-        Drivetrain.setDrive(ControlMode.PercentOutput, output, -output);
     }
 
     @Override

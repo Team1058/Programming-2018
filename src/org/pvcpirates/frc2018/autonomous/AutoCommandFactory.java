@@ -16,10 +16,6 @@ public class AutoCommandFactory {
 
     public Command generate(StartingLocation location, Command command, AutoType type) {
         gameData = DriverStation.getInstance().getGameSpecificMessage();
-
-        if (type == AutoType.SWITCH) {
-
-        }
         switch (type) {
             case SWITCH:
                 command = configureSwitch(location, command);
@@ -33,6 +29,7 @@ public class AutoCommandFactory {
     }
 
     private Command configureDrive(Command command) {
+        //FIXME GET INCHES FROM SAM
         command.commands.add(new DriveFor(10));
         return command;
     }

@@ -35,7 +35,6 @@ public class Hardware {
 
     public final DoubleSolenoid cubeGrabberSolenoid = new DoubleSolenoid(RobotMap.PneumaticIds.GRABBER_1,
             RobotMap.PneumaticIds.GRABBER_2);
-    public final DigitalInput cubeLimitSwitch = new DigitalInput(RobotMap.SensorIDs.CUBE_LIMIT_SWITCH);
     //replace channels with enums
     public final Ultrasonic leftUltrasonic = new Ultrasonic(0, 1);
     public final Ultrasonic rightUltrasonic = new Ultrasonic(2, 3);

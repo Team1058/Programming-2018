@@ -71,16 +71,19 @@ public class Arm extends BaseSubsystem {
     public static void moveXY(double x, double y) {
         double angle;
         double hyp;
+        //Make sure where within the perimeter either side
+        if (Math.abs(x) > PIVOT_TO_MAX_PERIM) {
+            x = PIVOT_TO_MAX_PERIM*(Math.abs(x)/x);
+        }
         //DONT RUN THE ARM INTO THE GROUND
         if (y < 0)
             y = 25;
         y -= GROUND_TO_PIVOT;
         angle = Math.atan2(y, x);
         hyp = y / Math.sin(angle);
-        if (x > PIVOT_TO_MAX_PERIM) {
-            pivotArm(angle);
-            extendArm(hyp);
-        }
+
+        extendArm(hyp);
+        pivotArm(angle);
     }
 
     public static void moveCurveMax(double y) {

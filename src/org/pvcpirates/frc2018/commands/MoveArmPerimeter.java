@@ -13,15 +13,16 @@ public class MoveArmPerimeter extends Command {
     }
 
     @Override
+    public void init() {
+        change = 1;
+    }
+
+    @Override
     public void exec() {
         // When gp.something.......
         int sign = (int) (Arm.getArmY() - height) / (int) Math.abs(Arm.getArmY() - height);
-        if (change == 0)
-            change = 80;
-        else {
-            change = Arm.getArmY() - lastHeight;
-        }
-
+        change = Arm.getArmY() - lastHeight;
+        
         Arm.moveCurveMax(Arm.getArmY() + (sign * change));
         lastHeight = Arm.getArmY();
         if (Arm.getArmY() == height) {
