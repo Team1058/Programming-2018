@@ -14,13 +14,14 @@ public class Arm extends BaseSubsystem {
 
     public static void configurePID() {
         //FIXME PID VALS
-        Hardware.setPIDF(0, 0, 0, 0, hardware.armPivotMotor);
-        Hardware.setPIDF(0, 0, 0, 0, hardware.armExtendMotor);
-        Hardware.setPIDF(0, 0, 0, 0, hardware.wristPivotMotor);
+        Hardware.setPIDF(10, 0, 0, 0, hardware.armPivotMotor);
+        Hardware.setPIDF(1, 0, 0, 0, hardware.armExtendMotor);
+        Hardware.setPIDF(1, .001, 0, 0, hardware.wristPivotMotor);
 
     }
 
     public static void zeroArm() {
+    	
         hardware.armExtendMotor.set(ControlMode.Position, 0);
         hardware.armPivotMotor.set(ControlMode.Position, 0);
         hardware.wristPivotMotor.set(ControlMode.Position, THE_MIDDLE);
@@ -60,18 +61,20 @@ public class Arm extends BaseSubsystem {
 
     public static void pivotArm(double angleSetpoint) {
         //DEGREES WE CAN ROTATE
-        angleSetpoint = (1019 * (angleSetpoint / 270) + 5);
-        if (angleSetpoint < RobotMap.Ranges.PIVOT_ENCODER_MAX && angleSetpoint < RobotMap.Ranges.PIVOT_ENCODER_MIN)
+        angleSetpoint = (770 * ((angleSetpoint / 270.7)+116)) + 105;
+        if (angleSetpoint < RobotMap.Ranges.PIVOT_ENCODER_MAX && angleSetpoint > RobotMap.Ranges.PIVOT_ENCODER_MIN)
             hardware.armPivotMotor.set(ControlMode.Position, angleSetpoint);
     }
-
+ 
     public static double getPivotAngle() {
-        return ((hardware.armPivotMotor.getSelectedSensorPosition(0) - 5) / 1019) * 270;
+        //return -.0008783*Math.pow(hardware.armPivotMotor.getSensorCollection().getAnalogIn(),2)+1.382*hardware.armPivotMotor.getSensorCollection().getAnalogIn()-365.9;
+    	return .4*hardware.armPivotMotor.getSensorCollection().getAnalogIn()-109.2;
     }
 
     public static void moveXY(double x, double y) {
         double angle;
         double hyp;
+        
         //Make sure where within the perimeter either side
         if (Math.abs(x) > PIVOT_TO_MAX_PERIM) {
             x = PIVOT_TO_MAX_PERIM*(Math.abs(x)/x);

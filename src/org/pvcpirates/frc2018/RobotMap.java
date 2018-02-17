@@ -2,17 +2,17 @@ package org.pvcpirates.frc2018;
 
 public class RobotMap {
     public static final class CANTalonIds {
-        public static final int LEFT_DRIVE_1 = 2;
-        public static final int RIGHT_DRIVE_1 = 0;
-        public static final int LEFT_DRIVE_2 = 3;
-        public static final int RIGHT_DRIVE_2 = 1;
-        public static final int RIGHT_CUBE_GRABBER = 8;
+        public static final int LEFT_DRIVE_1 = 1;
+        public static final int RIGHT_DRIVE_1 = 2;
+        public static final int LEFT_DRIVE_2 = 7;
+        public static final int RIGHT_DRIVE_2 = 3;
+        public static final int RIGHT_CUBE_GRABBER = 6;
         public static final int LEFT_CUBE_GRABBER = 9;
         //TODO: TALON IDSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
-        public static final int ARM_PIVOT_TALON = 7;
-        public static final int ARM_EXTEND_TALON = 5;
-        public static final int ARM_EXTEND_TALON_FOLLOWER = 4;
-        public static final int WRIST_PIVOT_MOTOR = 6;
+        public static final int ARM_PIVOT_TALON = 5;
+        public static final int ARM_EXTEND_TALON = 4;
+        public static final int ARM_EXTEND_TALON_FOLLOWER = 8;
+        public static final int WRIST_PIVOT_MOTOR = 10;
     }
 
     public static final class SensorIDs {
@@ -45,14 +45,14 @@ public class RobotMap {
     }
 
     public static final class Ranges {
-        public static final int PIVOT_ENCODER_MAX = -1;
-        public static final int PIVOT_ENCODER_MIN = 1000000;
+        public static final int PIVOT_ENCODER_MAX = 870;
+        public static final int PIVOT_ENCODER_MIN = 110;
         //TODO GET THESE VALUES PLEAAAAAAAAAAAAAAAAAAAAAAAAAAAASE
-        public static final int WRIST_ENCODER_MAX = -1;
-        public static final int WRIST_ENCODER_MIN = 1000000000;
-        public static final int THE_MIDDLE = -1;
-        public static final int ARM_EXTEND_ENCODER_MAX = 10;
-        public static final int ARM_EXTEND_ENCODER_MIN = 1;
+        public static final int WRIST_ENCODER_MAX = 1936;
+        public static final int WRIST_ENCODER_MIN = 0;
+        public static final int THE_MIDDLE = 0;
+        public static final int ARM_EXTEND_ENCODER_MAX = 24500;
+        public static final int ARM_EXTEND_ENCODER_MIN = -1000;
 
     }
 

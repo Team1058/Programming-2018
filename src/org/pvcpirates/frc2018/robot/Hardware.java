@@ -1,8 +1,10 @@
 package org.pvcpirates.frc2018.robot;
 
+import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+import com.ctre.phoenix.motorcontrol.RemoteLimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.*;
@@ -53,25 +55,45 @@ public class Hardware {
         leftDrive2.follow(leftDrive1);
         rightDrive2.follow(rightDrive1);
 
-        //ALWAYS USE PROTECTION
+        
+        
+        // Set hard limit (limit switch) so that we don't attempt to retract further than physically possible
         armExtendMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
-        armExtendMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, ROBOT_TIMEOUT);
         armExtendMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, ROBOT_TIMEOUT);
-        armExtendMotor.configForwardSoftLimitThreshold(ARM_EXTEND_ENCODER_MAX, ROBOT_TIMEOUT);
-        armExtendMotor.configReverseSoftLimitThreshold(ARM_EXTEND_ENCODER_MIN, ROBOT_TIMEOUT);
+        // Set soft limits so that we don't over extend the arm
+        armExtendMotor.configForwardSoftLimitThreshold(RobotMap.Ranges.ARM_EXTEND_ENCODER_MAX, ROBOT_TIMEOUT);
         armExtendMotor.configForwardSoftLimitEnable(true, ROBOT_TIMEOUT);
-        armExtendMotor.configReverseSoftLimitEnable(true, ROBOT_TIMEOUT);
+        
+        armExtendMotor.setInverted(true);
+        armExtendMotor.setSensorPhase(true);
+        // Zero out encoder position if limit switch is hit
+        armExtendMotor.configSetParameter(ParamEnum.eClearPositionOnLimitR, 1, 0, 0, ROBOT_TIMEOUT);
+        
 
+       
+        armExtendMotorFollower.setInverted(true);
+        armExtendMotorFollower.follow(armExtendMotor);
+        
+        
+        
+        
+        
         armPivotMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, RobotMap.Constants.ROBOT_TIMEOUT);
-        armPivotMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, ROBOT_TIMEOUT);
-        armPivotMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, ROBOT_TIMEOUT);
+        armPivotMotor.configSetParameter(ParamEnum.eFeedbackNotContinuous,1,0x00,0x00,ROBOT_TIMEOUT);
+  
+        
+        
+        armPivotMotor.setSensorPhase(false);
         armPivotMotor.configForwardSoftLimitThreshold(RobotMap.Ranges.PIVOT_ENCODER_MAX, ROBOT_TIMEOUT);
         armPivotMotor.configReverseSoftLimitThreshold(RobotMap.Ranges.PIVOT_ENCODER_MIN, ROBOT_TIMEOUT);
         armPivotMotor.configForwardSoftLimitEnable(true, ROBOT_TIMEOUT);
         armPivotMotor.configReverseSoftLimitEnable(true, ROBOT_TIMEOUT);
 
 
-        armExtendMotorFollower.follow(armExtendMotor);
+        
+        
+        wristPivotMotor.setInverted(true);
+        wristPivotMotor.setSensorPhase(true);
     }
 
     public static Hardware getInstance() {
