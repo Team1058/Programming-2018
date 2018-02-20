@@ -22,7 +22,7 @@ public class TeleopState extends State {
 
     @Override
     public void init() {
-        //driverGamepad = new DriverGamepad(0);
+        driverGamepad = new DriverGamepad(0);
         operatorGamepad = new OperatorGamepad(1);
     	
     	//zeroArm.init();
@@ -35,14 +35,19 @@ public class TeleopState extends State {
     	//driverGamepad.executeCommands();
         //operatorGamepad.executeCommands();
     	
-    	//zeroArm.exec();
     	
+    	System.out.println("Wrist A: "+Arm.getWristAngle());
+    	System.out.println("Arm"+ Arm.getPivotAngle());
+    	System.out.println("Wrist Enc: "+ h.wristPivotMotor.getSensorCollection().getQuadraturePosition());
     	
-    	System.out.println(("Pot Value: "+ Hardware.getInstance().armPivotMotor.getSensorCollection().getAnalogIn()));
-    	System.out.println("Arm degrees: "+Arm.getPivotAngle());
-    	
-        h.armPivotMotor.set(ControlMode.PercentOutput, operatorGamepad.getAxis(GamepadEnum.LEFT_STICK_Y));
-        //h.armPivotMotor.set(ControlMode.Position, 330);
+    	if(operatorGamepad.getButton(GamepadEnum.A_BUTTON)){
+    		h.armPivotMotor.set(ControlMode.PercentOutput, operatorGamepad.getAxis(GamepadEnum.LEFT_STICK_Y));
+    		h.armExtendMotor.set(ControlMode.PercentOutput, operatorGamepad.getAxis(GamepadEnum.LEFT_STICK_X));
+    		h.wristPivotMotor.set(ControlMode.PercentOutput, operatorGamepad.getAxis(GamepadEnum.RIGHT_STICK_Y));
+    		//Arm.levelWrist();
+    	}else{
+    		//Arm.wristRotate(90);
+    	}
         
     }
 

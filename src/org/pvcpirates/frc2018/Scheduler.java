@@ -10,6 +10,7 @@ import org.pvcpirates.frc2018.commands.Command;
 import org.pvcpirates.frc2018.commands.DriveFor;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
+import org.pvcpirates.frc2018.robot.subsystems.Arm;
 import org.pvcpirates.frc2018.state.AutoState;
 import org.pvcpirates.frc2018.state.TeleopState;
 

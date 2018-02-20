@@ -1,6 +1,9 @@
 package org.pvcpirates.frc2018.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.pvcpirates.frc2018.RobotMap;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
@@ -13,10 +16,13 @@ public class Arm extends BaseSubsystem {
 
 
     public static void configurePID() {
+    	double[] pid = new double[4];
+    	//SmartDashboard.getNumberArray("PID", pid);
         //FIXME PID VALS
-        Hardware.setPIDF(10, 0, 0, 0, hardware.armPivotMotor);
+        Hardware.setPIDF(16, 0, 0, 0, hardware.armPivotMotor);
+    	//Hardware.setPIDF(pid[0], pid[1], pid[2], pid[3], hardware.armPivotMotor);
         Hardware.setPIDF(1, 0, 0, 0, hardware.armExtendMotor);
-        Hardware.setPIDF(1, .001, 0, 0, hardware.wristPivotMotor);
+        Hardware.setPIDF(1, 0, 0, 0, hardware.wristPivotMotor);
 
     }
 
@@ -28,15 +34,12 @@ public class Arm extends BaseSubsystem {
     }
 
     public static void levelWrist() {
-        double pivotAngle = getPivotAngle();
-        double suppliment = 180 - pivotAngle;
-        hardware.wristPivotMotor.set(ControlMode.Position, (suppliment / 360) * 1024);
-
+       
     }
 
     public static void wristRotate(double angleSetpoint) {
-        if (angleSetpoint < RobotMap.Ranges.WRIST_ENCODER_MAX && angleSetpoint < RobotMap.Ranges.WRIST_ENCODER_MIN)
-            hardware.wristPivotMotor.set(ControlMode.Position, angleSetpoint);
+    	angleSetpoint = -1 * angleSetpoint * 2111.0 / 180.0;
+    	hardware.wristPivotMotor.set(ControlMode.Position, angleSetpoint);
     }
 
     public static void extendArm(double distance) {
@@ -61,16 +64,18 @@ public class Arm extends BaseSubsystem {
 
     public static void pivotArm(double angleSetpoint) {
         //DEGREES WE CAN ROTATE
-        angleSetpoint = (770 * ((angleSetpoint / 270.7)+116)) + 105;
+        angleSetpoint = (angleSetpoint*(512.0/180.0))+256;
         if (angleSetpoint < RobotMap.Ranges.PIVOT_ENCODER_MAX && angleSetpoint > RobotMap.Ranges.PIVOT_ENCODER_MIN)
             hardware.armPivotMotor.set(ControlMode.Position, angleSetpoint);
     }
  
     public static double getPivotAngle() {
-        //return -.0008783*Math.pow(hardware.armPivotMotor.getSensorCollection().getAnalogIn(),2)+1.382*hardware.armPivotMotor.getSensorCollection().getAnalogIn()-365.9;
-    	return .4*hardware.armPivotMotor.getSensorCollection().getAnalogIn()-109.2;
+    	return (hardware.armPivotMotor.getSensorCollection().getAnalogIn() * (180.0/512.0))-90;
     }
 
+    //min -425
+    //max 929
+    //horiz 757
     public static void moveXY(double x, double y) {
         double angle;
         double hyp;
@@ -104,6 +109,11 @@ public class Arm extends BaseSubsystem {
         hardware.armExtendMotor.set(ControlMode.PercentOutput, 0);
         hardware.armPivotMotor.set(ControlMode.PercentOutput, 0);
     }
+
+	public static double getWristAngle() {
+		// TODO Auto-generated method stub
+		return (hardware.wristPivotMotor.getSensorCollection().getQuadraturePosition() * 180.0/ 2071.0)-90;
+	}
 
 
     //TODO SHOOT CUBE OVER ANOTHER CUBE ON THE SCALE

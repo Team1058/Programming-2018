@@ -46,12 +46,13 @@ public class Hardware {
 
     private Hardware() {
         compressor.setClosedLoopControl(true);
-        leftUltrasonic.setAutomaticMode(true);
-        leftDrive1.setSensorPhase(false);
-        leftDrive1.setInverted(true);
-        leftDrive2.setInverted(true);//rightUltrasonic.setAutomaticMode(true);
-        leftDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
-        rightDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
+                
+        //leftDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
+        //leftDrive1.setSensorPhase(false);
+        
+        //rightDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
+        //rightDrive1.setSensorPhase(true);
+        
         leftDrive2.follow(leftDrive1);
         rightDrive2.follow(rightDrive1);
 
@@ -94,6 +95,8 @@ public class Hardware {
         
         wristPivotMotor.setInverted(true);
         wristPivotMotor.setSensorPhase(true);
+        
+        wristPivotMotor.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);
     }
 
     public static Hardware getInstance() {
