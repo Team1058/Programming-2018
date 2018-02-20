@@ -17,16 +17,13 @@ public class DriveOpenLoop extends TeleopCommand {
 
     @Override
     public void exec() {
-        double fb = gamepad.getAxis(GamepadEnum.LEFT_STICK_Y);
-        double lr = gamepad.getAxis(GamepadEnum.RIGHT_STICK_X);
+        double fb = GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y),.1);
+        double lr = GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_X),.1);
         
         double lspd = fb - lr;
         double rspd = fb + lr;
         
-        
-        System.out.println("Left: "+lspd+"\tRight: "+rspd);
-        System.out.println("L1: "+h.leftDrive1.getMotorOutputPercent());
-        Drivetrain.setDrive(ControlMode.PercentOutput, lspd, rspd);
+        Drivetrain.setDrive(ControlMode.PercentOutput, -lspd, -rspd);
     }
 
 }

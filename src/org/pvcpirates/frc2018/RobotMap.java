@@ -2,9 +2,9 @@ package org.pvcpirates.frc2018;
 
 public class RobotMap {
     public static final class CANTalonIds {
-        public static final int LEFT_DRIVE_1 = 1;
+        public static final int LEFT_DRIVE_1 = 7;
         public static final int RIGHT_DRIVE_1 = 2;
-        public static final int LEFT_DRIVE_2 = 7;
+        public static final int LEFT_DRIVE_2 = 11;
         public static final int RIGHT_DRIVE_2 = 12;
         public static final int RIGHT_CUBE_GRABBER = 10;
         public static final int LEFT_CUBE_GRABBER = 6;
@@ -33,7 +33,7 @@ public class RobotMap {
         //FIXME LITERALLY all this bs
         public static final double DRIVE_DISTANCE_PER_TICK = 0; //Feet
         public static final double ARM_MASS = 0;
-        public static final double ARM_DISTANCE = 48;
+        public static final double ARM_DISTANCE = 38;
         public static final double PIVOT_POINT_HEIGHT = 0;
         public static final double MAX_ARM_HEIGHT = 71;
         public static final double PIVOT_HEIGHT = 38;

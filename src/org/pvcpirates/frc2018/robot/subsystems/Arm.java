@@ -1,15 +1,18 @@
 package org.pvcpirates.frc2018.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import static org.pvcpirates.frc2018.RobotMap.Constants.ARM_DISTANCE;
+import static org.pvcpirates.frc2018.RobotMap.Constants.GROUND_TO_PIVOT;
+import static org.pvcpirates.frc2018.RobotMap.Constants.MAX_ARM_HEIGHT;
+import static org.pvcpirates.frc2018.RobotMap.Constants.PIVOT_HEIGHT;
+import static org.pvcpirates.frc2018.RobotMap.Constants.PIVOT_TO_MAX_PERIM;
+import static org.pvcpirates.frc2018.RobotMap.Constants.SPROCKET_DIAMETER;
+import static org.pvcpirates.frc2018.RobotMap.Ranges.THE_MIDDLE;
 
 import org.pvcpirates.frc2018.RobotMap;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
 
-import static org.pvcpirates.frc2018.RobotMap.Constants.*;
-import static org.pvcpirates.frc2018.RobotMap.Ranges.THE_MIDDLE;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class Arm extends BaseSubsystem {
     private static Hardware hardware = Robot.getInstance().hardware;
@@ -43,15 +46,14 @@ public class Arm extends BaseSubsystem {
     }
 
     public static void extendArm(double distance) {
-        if (distance < RobotMap.Constants.ARM_DISTANCE && distance >= 0) {
-            distance = (distance / (SPROCKET_DIAMETER * Math.PI)) * 1024;
+    	distance = (distance / (SPROCKET_DIAMETER * Math.PI)) * 1024;
+        if (distance < RobotMap.Ranges.ARM_EXTEND_ENCODER_MAX && distance > RobotMap.Ranges.ARM_EXTEND_ENCODER_MIN)
             hardware.armExtendMotor.set(ControlMode.Position, distance);
-        }
 
     }
 
     public static double getArmExtension() {
-        return (hardware.armPivotMotor.getSensorCollection().getQuadraturePosition() / 1024) / (SPROCKET_DIAMETER * Math.PI);
+        return (hardware.armPivotMotor.getSensorCollection().getQuadraturePosition() / 1024.0) / (SPROCKET_DIAMETER * Math.PI);
     }
 
     public static double getArmY() {

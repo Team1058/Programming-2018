@@ -26,20 +26,17 @@ public class TeleopState extends State {
         operatorGamepad = new OperatorGamepad(1);
     	
     	//zeroArm.init();
+    	//zeroArm.exec();
     	
     	Arm.configurePID();
     }
 
     @Override
     public void exec() {
-    	//driverGamepad.executeCommands();
+    	driverGamepad.executeCommands();
         //operatorGamepad.executeCommands();
     	
-    	
-    	System.out.println("Wrist A: "+Arm.getWristAngle());
-    	System.out.println("Arm"+ Arm.getPivotAngle());
-    	System.out.println("Wrist Enc: "+ h.wristPivotMotor.getSensorCollection().getQuadraturePosition());
-    	
+        	
     	if(operatorGamepad.getButton(GamepadEnum.A_BUTTON)){
     		h.armPivotMotor.set(ControlMode.PercentOutput, operatorGamepad.getAxis(GamepadEnum.LEFT_STICK_Y));
     		h.armExtendMotor.set(ControlMode.PercentOutput, operatorGamepad.getAxis(GamepadEnum.LEFT_STICK_X));
@@ -47,6 +44,8 @@ public class TeleopState extends State {
     		//Arm.levelWrist();
     	}else{
     		//Arm.wristRotate(90);
+    		//Arm.extendArm(12 );
+    		//h.rightDrive1.set(ControlMode.PercentOutput, .5);
     	}
         
     }

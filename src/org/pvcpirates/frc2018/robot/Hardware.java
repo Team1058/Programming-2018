@@ -45,17 +45,22 @@ public class Hardware {
 
 
     private Hardware() {
+    	
         compressor.setClosedLoopControl(true);
                 
-        //leftDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
-        //leftDrive1.setSensorPhase(false);
+        leftDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
+        leftDrive1.setSensorPhase(true);
         
-        //rightDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
-        //rightDrive1.setSensorPhase(true);
+        rightDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
+        rightDrive1.setSensorPhase(true);        
+        
+        
+        rightDrive1.setInverted(true);
+        rightDrive2.setInverted(true);
+        
         
         leftDrive2.follow(leftDrive1);
         rightDrive2.follow(rightDrive1);
-
         
         
         // Set hard limit (limit switch) so that we don't attempt to retract further than physically possible
