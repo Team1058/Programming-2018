@@ -11,20 +11,24 @@ public class CubeGrabber extends TeleopCommand {
         super(gp);
     }
 
-
+    boolean closed = false;
     @Override
     public void exec() {
         if (gamepad.getButton(GamepadEnum.A_BUTTON)) {
             Grabber.intakeRollers();
-            Grabber.openGrabber();
-        } else if (gamepad.getButton(GamepadEnum.X_BUTTON)) {
+            
+        } else if (gamepad.getButton(GamepadEnum.Y_BUTTON)) {
             Grabber.outtakeRollers();
-            //openGrabber();
-        } else if (gamepad.getButton(GamepadEnum.B_BUTTON)) {
+        } else if (gamepad.getButton(GamepadEnum.X_BUTTON)) {
             Grabber.holdRollers();
-        } else {
+        } else if(gamepad.getButton(GamepadEnum.RIGHT_BUMPER)){
+        	Grabber.openGrabber();
+            closed = false;
+        } else if (!closed){
+        	closed = true;
             Grabber.stopRollers();
             Grabber.closeGrabber();
         }
+        
     }
 }

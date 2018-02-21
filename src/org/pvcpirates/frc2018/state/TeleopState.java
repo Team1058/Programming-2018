@@ -11,6 +11,8 @@ import org.pvcpirates.frc2018.gamepads.OperatorGamepad;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.robot.subsystems.Arm;
+import org.pvcpirates.frc2018.robot.subsystems.Grabber;
+import org.pvcpirates.frc2018.teleop.CubeGrabber;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
@@ -25,29 +27,22 @@ public class TeleopState extends State {
         driverGamepad = new DriverGamepad(0);
         operatorGamepad = new OperatorGamepad(1);
     	
-    	//zeroArm.init();
-    	//zeroArm.exec();
-    	
+    	zeroArm.init();
+    	while(zeroArm.getStatus() != Status.STOP)
+    		zeroArm.exec();
     	Arm.configurePID();
     }
 
     @Override
     public void exec() {
-    	driverGamepad.executeCommands();
-        //operatorGamepad.executeCommands();
     	
-        	
-    	if(operatorGamepad.getButton(GamepadEnum.A_BUTTON)){
-    		h.armPivotMotor.set(ControlMode.PercentOutput, operatorGamepad.getAxis(GamepadEnum.LEFT_STICK_Y));
-    		h.armExtendMotor.set(ControlMode.PercentOutput, operatorGamepad.getAxis(GamepadEnum.LEFT_STICK_X));
-    		h.wristPivotMotor.set(ControlMode.PercentOutput, operatorGamepad.getAxis(GamepadEnum.RIGHT_STICK_Y));
-    		//Arm.levelWrist();
-    	}else{
-    		//Arm.wristRotate(90);
-    		//Arm.extendArm(12 );
-    		//h.rightDrive1.set(ControlMode.PercentOutput, .5);
-    	}
-        
+   
+    		driverGamepad.executeCommands();
+            operatorGamepad.executeCommands();
+            //Arm.levelWrist();
+            //System.out.println(Arm.getWristAngle());
+    		//h.wristPivotMotor.set(ControlMode.Position, 1035.5);
+    		//System.out.println("WRIST "+h.wristPivotMotor.getSensorCollection().getQuadraturePosition());
     }
 
     @Override

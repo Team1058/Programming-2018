@@ -45,11 +45,11 @@ public class RobotMap {
     }
 
     public static final class Ranges {
-        public static final int PIVOT_ENCODER_MAX = 757;
-        public static final int PIVOT_ENCODER_MIN = -425;
+        public static final int PIVOT_ENCODER_MAX = 949;
+        public static final int PIVOT_ENCODER_MIN = 92;
         //TODO GET THESE VALUES PLEAAAAAAAAAAAAAAAAAAAAAAAAAAAASE
-        public static final int WRIST_ENCODER_MAX = 0;
-        public static final int WRIST_ENCODER_MIN = -2111;
+        public static final int WRIST_ENCODER_MAX = 2048;
+        public static final int WRIST_ENCODER_MIN = 0;
         public static final int THE_MIDDLE = 0;
         public static final int ARM_EXTEND_ENCODER_MAX = 24500;
         public static final int ARM_EXTEND_ENCODER_MIN = -1000;

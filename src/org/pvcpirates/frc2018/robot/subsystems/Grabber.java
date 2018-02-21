@@ -21,18 +21,18 @@ public class Grabber extends BaseSubsystem {
     }
 
     public static void intakeRollers() {
-        rightMotor.set(ControlMode.PercentOutput, -1);
-        leftMotor.set(ControlMode.PercentOutput, .75);
+        rightMotor.set(ControlMode.PercentOutput, 1);
+        leftMotor.set(ControlMode.PercentOutput, -.75);
     }
 
     public static void holdRollers() {
-        rightMotor.set(ControlMode.PercentOutput, -.1);
-        leftMotor.set(ControlMode.PercentOutput, .1);
+        rightMotor.set(ControlMode.PercentOutput, .1);
+        leftMotor.set(ControlMode.PercentOutput, -.1);
     }
 
     public static void outtakeRollers() {
-        rightMotor.set(ControlMode.PercentOutput, 1);
-        leftMotor.set(ControlMode.PercentOutput, -1);
+        rightMotor.set(ControlMode.PercentOutput, -1);
+        leftMotor.set(ControlMode.PercentOutput, 1);
     }
 
     public static void stopRollers() {

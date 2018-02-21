@@ -4,6 +4,7 @@ import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.RemoteLimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
@@ -74,7 +75,9 @@ public class Hardware {
         armExtendMotor.setSensorPhase(true);
         // Zero out encoder position if limit switch is hit
         armExtendMotor.configSetParameter(ParamEnum.eClearPositionOnLimitR, 1, 0, 0, ROBOT_TIMEOUT);
+        armExtendMotor.setNeutralMode(NeutralMode.Brake);
         
+        armExtendMotor.configClosedloopRamp(0, 0);
 
        
         armExtendMotorFollower.setInverted(true);
@@ -83,7 +86,7 @@ public class Hardware {
         
         
         
-        
+        armPivotMotor.setNeutralMode(NeutralMode.Brake);
         armPivotMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog, 0, RobotMap.Constants.ROBOT_TIMEOUT);
         armPivotMotor.configSetParameter(ParamEnum.eFeedbackNotContinuous,1,0x00,0x00,ROBOT_TIMEOUT);
   
@@ -97,11 +100,15 @@ public class Hardware {
 
 
         
-        
+        wristPivotMotor.setNeutralMode(NeutralMode.Brake);
         wristPivotMotor.setInverted(true);
         wristPivotMotor.setSensorPhase(true);
         
         wristPivotMotor.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);
+        
+        wristPivotMotor.configForwardSoftLimitThreshold(RobotMap.Ranges.WRIST_ENCODER_MAX,0);
+        wristPivotMotor.configReverseSoftLimitThreshold(RobotMap.Ranges.WRIST_ENCODER_MIN,0);
+        
     }
 
     public static Hardware getInstance() {
