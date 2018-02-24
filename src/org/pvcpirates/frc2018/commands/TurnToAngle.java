@@ -4,7 +4,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import org.pvcpirates.frc2018.Status;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.subsystems.Drivetrain;
-import org.pvcpirates.frc2018.util.PIDF;
 
 public class TurnToAngle extends Command {
 
@@ -27,7 +26,7 @@ public class TurnToAngle extends Command {
         current = Hardware.getInstance().navx.getPitch();
         if (Math.abs(goal - current) < 1) {
             this.setStatus(Status.STOP);
-        }else {
+        } else {
             output = (goal - current) / goal;
             Drivetrain.setDrive(ControlMode.PercentOutput, output, -output);
         }

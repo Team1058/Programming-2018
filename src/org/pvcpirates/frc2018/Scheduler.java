@@ -2,19 +2,13 @@ package org.pvcpirates.frc2018;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import org.pvcpirates.frc2018.autonomous.AutoType;
 import org.pvcpirates.frc2018.autonomous.StartingLocation;
 import org.pvcpirates.frc2018.commands.Command;
 import org.pvcpirates.frc2018.commands.DriveFor;
-import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
-import org.pvcpirates.frc2018.robot.subsystems.Arm;
 import org.pvcpirates.frc2018.state.AutoState;
 import org.pvcpirates.frc2018.state.TeleopState;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class Scheduler extends IterativeRobot {
 

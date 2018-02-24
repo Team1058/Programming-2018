@@ -1,6 +1,5 @@
 package org.pvcpirates.frc2018.robot;
 
-import org.pvcpirates.frc2018.robot.subsystems.Drivetrain;
 import org.pvcpirates.frc2018.state.State;
 
 public class Robot {
