@@ -37,7 +37,7 @@ public class RobotMap {
         public static final double PIVOT_POINT_HEIGHT = 0;
         public static final double MAX_ARM_HEIGHT = 71;
         public static final double PIVOT_HEIGHT = 38;
-        public static final double PIVOT_TO_MAX_PERIM = 32.5;
+        public static final double PIVOT_TO_MAX_PERIM = 31;
         public static final int ROBOT_TIMEOUT = 10;
         public static final double SPROCKET_DIAMETER = 1.751;
         public static final double GROUND_TO_PIVOT = 38;

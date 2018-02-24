@@ -107,8 +107,9 @@ public class Hardware {
         wristPivotMotor.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);
         
         wristPivotMotor.configForwardSoftLimitThreshold(RobotMap.Ranges.WRIST_ENCODER_MAX,0);
-        wristPivotMotor.configReverseSoftLimitThreshold(RobotMap.Ranges.WRIST_ENCODER_MIN,0);
-        
+        //wristPivotMotor.configReverseSoftLimitThreshold(RobotMap.Ranges.WRIST_ENCODER_MIN,0);
+        wristPivotMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+        wristPivotMotor.configSetParameter(ParamEnum.eClearPosOnLimitR, 1, 0, 0, 0);
     }
 
     public static Hardware getInstance() {

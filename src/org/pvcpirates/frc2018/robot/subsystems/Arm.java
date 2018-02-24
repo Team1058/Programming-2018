@@ -25,7 +25,7 @@ public class Arm extends BaseSubsystem {
         Hardware.setPIDF(16, 0, 0, 0, hardware.armPivotMotor);
     	//Hardware.setPIDF(pid[0], pid[1], pid[2], pid[3], hardware.armPivotMotor);
         Hardware.setPIDF(.1, 0, 0, 0, hardware.armExtendMotor);
-        Hardware.setPIDF(1, 0, 0, 0, hardware.wristPivotMotor);
+        Hardware.setPIDF(1.8, 0, 0, 0, hardware.wristPivotMotor);
 
     }
 
@@ -37,30 +37,27 @@ public class Arm extends BaseSubsystem {
     }
 
     public static void levelWrist() {
-       if (getPivotAngle() < 90)
+       if (getPivotAngle() < 85)
     	   wristRotate(getPivotAngle());
-       else
+       else if (getPivotAngle() >95)
     	   wristRotate(getPivotAngle()-180);
     }
 
     public static void wristRotate(double angleSetpoint) {
     	angleSetpoint += 90;
     	angleSetpoint = ( (angleSetpoint * 2071.0 / 180.0));
-    	System.out.println("ENCODERSSSSSSSSSSSSS "+angleSetpoint);
     	hardware.wristPivotMotor.set(ControlMode.Position, angleSetpoint);
     }
 
     public static void extendArm(double distance) {
     	//distance += 4;
     	distance = (distance / (SPROCKET_DIAMETER * Math.PI)) * 4096;
-    	System.out.println("Extendoooooo: "+distance);
         if (distance < RobotMap.Ranges.ARM_EXTEND_ENCODER_MAX && distance > RobotMap.Ranges.ARM_EXTEND_ENCODER_MIN)
             hardware.armExtendMotor.set(ControlMode.Position, distance);
 
     }
 
     public static double getArmExtension() {
-    	System.out.println("REEEEEEEEEEEEE: "+hardware.armExtendMotor.getSensorCollection().getQuadraturePosition());
         return (hardware.armExtendMotor.getSensorCollection().getQuadraturePosition() / 4096.0) * (SPROCKET_DIAMETER * Math.PI);
     }
 
@@ -69,7 +66,10 @@ public class Arm extends BaseSubsystem {
     }
 
     public static double getArmX() {
-        return Math.cos(getPivotAngle()) * getArmExtension();
+    	double rad = Arm.getPivotAngle() * Math.PI / 180.0;
+    	double ext = Arm.getArmExtension();
+    	
+        return Math.abs((Math.cos(rad)*(ext+15)));
     }
 
     public static void pivotArm(double angleSetpoint) {
@@ -106,17 +106,34 @@ public class Arm extends BaseSubsystem {
     }
     public static void moveArmPolar(double ext, double angle){
     	//PIVOT TO TIP CALC
-    	//ext+=14;
-    	double x = (Math.cos(angle)*(ext+10.5));
-    	if (Math.abs(x) > PIVOT_TO_MAX_PERIM)
-    		ext = (Math.cos(angle) /(PIVOT_TO_MAX_PERIM))-10.5;
-    	System.out.println("X: "+x);
+    	
+    	double x = Arm.getArmX() + Arm.getWristX();
+    	
+    	
+    	
+    	if (x > PIVOT_TO_MAX_PERIM){
+    		double radAngle = (Arm.getPivotAngle()>90? 180-Arm.getPivotAngle():Arm.getPivotAngle()) * (Math.PI/180);
+    		ext = ((PIVOT_TO_MAX_PERIM-Math.abs(Arm.getWristX())) / Math.cos(radAngle))-15;
+    		//System.out.println("Set to "+(PIVOT_TO_MAX_PERIM-Arm.getWristX()  )/(Math.cos(angle) )     );
+    		
+    		//System.out.println((((PIVOT_TO_MAX_PERIM-Math.abs(Arm.getWristX())) / Math.cos(radAngle))-15));
+    	}
+    	
+    	//System.out.println("Currently at "+Arm.getArmExtension());
+    	
+    	
+    	//if (x > PIVOT_TO_MAX_PERIM)
+    	//	Arm.pivotArm(Arm.getPivotAngle());
+    	//else
     	Arm.pivotArm(angle);
 		Arm.extendArm(ext);
     }
+    
 
-    public static void getWristX(){
-    	double angle = getWristAngle()+getPivotAngle();
+    public static double getWristX(){
+    	double rad = (Math.abs(getWristAngle())) * Math.PI / 180;
+    	
+    	return (Math.cos(rad) * 13.0);
     	
     }
     
