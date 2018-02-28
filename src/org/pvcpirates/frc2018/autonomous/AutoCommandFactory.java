@@ -72,10 +72,12 @@ public class AutoCommandFactory {
                 command.commands.add(new TurnToAngle(45));
                 command.commands.add(new DriveFor(0));
             } else if (gameData.charAt(0) == 'R') {
-                command.commands.add(new TurnToAngle(45));
-                command.commands.add(new DriveFor(0));
-                command.commands.add(new TurnToAngle(-45));
-                command.commands.add(new DriveFor(0));
+            	command.commands.add(new DriveFor(40));
+                command.commands.add(new TurnToAngle(90));
+                command.commands.add(new DriveFor(90));
+                command.commands.add(new TurnToAngle(-90));
+                command.commands.add(new DriveFor(120));
+                command.commands.add(new TurnToAngle(-90));
             }
         }
         return command;

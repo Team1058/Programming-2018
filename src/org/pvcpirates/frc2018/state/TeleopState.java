@@ -27,8 +27,8 @@ public class TeleopState extends State {
 
     @Override
     public void exec() {
-        //driverGamepad.executeCommands();
-        operatorGamepad.executeCommands();
+        driverGamepad.executeCommands();
+        //operatorGamepad.executeCommands();
         //Arm.wristRotate(0);
         //System.out.println("Wrist "+h.wristPivotMotor.getSensorCollection().getQuadraturePosition());
         System.out.println("Angle of the dangle " + Arm.getPivotAngle());

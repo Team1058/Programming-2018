@@ -23,12 +23,13 @@ public class TurnToAngle extends Command {
     @Override
     public void exec() {
         double output = 0;
-        current = Hardware.getInstance().navx.getPitch();
+        current = Hardware.getInstance().navx.getYaw();
+        System.out.println(current);
         if (Math.abs(goal - current) < 1) {
             this.setStatus(Status.STOP);
         } else {
-            output = (goal - current) / goal;
-            Drivetrain.setDrive(ControlMode.PercentOutput, output, -output);
+            output = (goal - current) / goal + .09;
+            Drivetrain.setDrive(ControlMode.PercentOutput, output, output);
         }
     }
 

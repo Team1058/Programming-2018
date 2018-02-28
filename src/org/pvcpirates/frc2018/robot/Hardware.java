@@ -35,6 +35,9 @@ public class Hardware {
 
     public final DoubleSolenoid cubeGrabberSolenoid = new DoubleSolenoid(RobotMap.PneumaticIds.GRABBER_1,
             RobotMap.PneumaticIds.GRABBER_2);
+    
+    public final Solenoid climberSolenoid = new Solenoid(RobotMap.PneumaticIds.CLIMBER); 
+    
     //replace channels with enums
     public final Ultrasonic leftUltrasonic = new Ultrasonic(0, 1);
     public final Ultrasonic rightUltrasonic = new Ultrasonic(2, 3);
@@ -45,16 +48,25 @@ public class Hardware {
     private Hardware() {
 
         compressor.setClosedLoopControl(true);
+        navx.reset();
 
         leftDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
         leftDrive1.setSensorPhase(true);
 
         rightDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
-        rightDrive1.setSensorPhase(true);
+        rightDrive1.setSensorPhase(false);
+        rightDrive2.setSensorPhase(false);
 
 
-        rightDrive1.setInverted(true);
-        rightDrive2.setInverted(true);
+        rightDrive1.setInverted(false);
+        rightDrive2.setInverted(false);
+        
+        leftDrive1.setInverted(true);
+        leftDrive2.setInverted(true);
+        
+        
+        leftDrive1.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);
+        rightDrive1.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);
 
 
         leftDrive2.follow(leftDrive1);
