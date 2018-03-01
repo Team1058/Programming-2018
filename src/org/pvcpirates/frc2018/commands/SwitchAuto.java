@@ -21,20 +21,44 @@ public class SwitchAuto extends Command {
 
 	private void configure() {
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+
+
+		//CENTER START
 		if(location == StartingLocation.CENTER){
 			if(gameData.charAt(0) == 'L'){
-				commands.add(new DriveFor(57.6));
+				commands.add(new DriveFor(20));
 				commands.add(new TurnToAngle(-45));
-				commands.add(new DriveFor(110.88));
+				commands.add(new DriveFor(54.5));
 				commands.add(new TurnToAngle(45));
+				commands.add(new DriveFor(74));
 			}else if(gameData.charAt(0) == 'R'){
-				commands.add(new DriveFor(57.6));
+				commands.add(new DriveFor(20));
 				commands.add(new TurnToAngle(45));
-				commands.add(new DriveFor(110.88));
+				commands.add(new DriveFor(54.5));
 				commands.add(new TurnToAngle(-45));
+				commands.add(new DriveFor(74));
 			}
 		}
-		
+
+		//RIGHT START
+		if(location == StartingLocation.RIGHT){
+			if(gameData.charAt(0) == 'R'){
+				commands.add(new DriveFor(172));
+				commands.add(new TurnToAngle(-90));
+			}else if(gameData.charAt(0) == 'L'){
+				return;
+			}
+		}
+
+		if(location == StartingLocation.LEFT){
+			if(gameData.charAt(0) == 'L'){
+				commands.add(new DriveFor(172));
+				commands.add(new TurnToAngle(-90));
+			}else if(gameData.charAt(0) == 'R'){
+				return;
+			}
+		}
+
 		commands.add(new PivotArm(60));
 		commands.add(new SpitCube());
 	}

@@ -27,7 +27,7 @@ public class RobotMap {
     public static final class PneumaticIds {
         public static final int GRABBER_1 = 1;
         public static final int GRABBER_2 = 2;
-		public static final int CLIMBER = -1;
+		public static final int CLIMBER = 3;
     }
 
     public static final class Constants {

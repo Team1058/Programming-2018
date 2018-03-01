@@ -31,9 +31,7 @@ public class TeleopState extends State {
         //operatorGamepad.executeCommands();
         //Arm.wristRotate(0);
         //System.out.println("Wrist "+h.wristPivotMotor.getSensorCollection().getQuadraturePosition());
-        System.out.println("Angle of the dangle " + Arm.getPivotAngle());
-        System.out.println("Extendo: " + Arm.getArmExtension());
-        System.out.println("Wrist "+Arm.getWristAngle());
+        System.out.println("Angle: "+h.navx.getYaw());
     }
 
     @Override

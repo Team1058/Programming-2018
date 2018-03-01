@@ -29,7 +29,7 @@ public class DriveMP extends Command {
         tankModifier.modify(wheelbaseWidth);
         trajectoryL = tankModifier.getLeftTrajectory();
         trajectoryR = tankModifier.getRightTrajectory();
-
+        System.out.println("reeeee");
     }
 
     @Override

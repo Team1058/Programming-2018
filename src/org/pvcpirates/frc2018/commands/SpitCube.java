@@ -5,7 +5,7 @@ import org.pvcpirates.frc2018.robot.subsystems.Grabber;
 
 public class SpitCube extends Command {
 
-	SpitCube() {
+	public SpitCube() {
 	}
 	@Override
 	public void init() {
