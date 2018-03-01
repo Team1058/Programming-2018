@@ -25,7 +25,7 @@ public class PivotArm extends Command {
 	
 	@Override
 	public void finished(){
-		
+		Arm.levelWrist();
 	}
 
 }

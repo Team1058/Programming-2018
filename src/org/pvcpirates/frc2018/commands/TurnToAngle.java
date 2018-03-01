@@ -9,6 +9,7 @@ public class TurnToAngle extends Command {
 
     double goal;
     double current;
+    boolean init;
 
     public TurnToAngle(double goal) {
         this.goal = goal;
@@ -16,19 +17,32 @@ public class TurnToAngle extends Command {
 
     @Override
     public void init() {
-        current = Hardware.getInstance().navx.getPitch();
+        current = Hardware.getInstance().navx.getAngle();
+       // if (goal)
         setStatus(Status.EXEC);
+        Hardware.getInstance().leftDrive1.configNominalOutputForward(.75, 10);
+        Hardware.getInstance().rightDrive1.configNominalOutputForward(.75, 10);
+        Hardware.getInstance().leftDrive1.configNominalOutputReverse(-.75, 10);
+        Hardware.getInstance().rightDrive1.configNominalOutputReverse(-.75, 10);
     }
 
     @Override
     public void exec() {
+    	current = Hardware.getInstance().navx.getAngle();
+    	if (!init){
+    		init = true;
+    		goal+= current;
+    	}
         double output = 0;
-        current = Hardware.getInstance().navx.getYaw();
+        
         System.out.println(current);
-        if (Math.abs(goal - current) < 1) {
+        System.out.println("Diff: "+(goal-current));
+        if (Math.abs(goal - current) < 10) {
+        	System.out.println("STOOOP");
             this.setStatus(Status.STOP);
+            this.finished();
         } else {
-            output = (goal - current) / goal + .09;
+            output = .3*((goal - current) / goal);
             Drivetrain.setDrive(ControlMode.PercentOutput, output, output);
         }
     }

@@ -1,9 +1,8 @@
 package org.pvcpirates.frc2018;
 
-import org.pvcpirates.frc2018.autonomous.AutoType;
-import org.pvcpirates.frc2018.autonomous.StartingLocation;
 import org.pvcpirates.frc2018.commands.Command;
 import org.pvcpirates.frc2018.commands.DriveFor;
+import org.pvcpirates.frc2018.commands.TurnAnglePosition;
 import org.pvcpirates.frc2018.commands.TurnToAngle;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.state.AutoState;
@@ -21,15 +20,15 @@ public class Scheduler extends IterativeRobot {
 
     @Override
     public void robotInit() {
-        autoChooser.addDefault("Drive ForwardCenter", new DriveFor(126));
-        autoChooser.addObject("Drive ReverseCenter", new DriveFor(-126));
-        autoChooser.addObject("Test boy", AutoState.autoCommandFactory.generate(StartingLocation.CENTER, temp ,AutoType.SWITCH));
-        autoChooser.addObject("Turny boy", new TurnToAngle(90));
+        autoChooser.addDefault("Drive Forward", new DriveFor( 80));
+        autoChooser.addObject("TurnyBoy", new TurnToAngle(90));
+        //autoChooser.addObject("Switch Middle", new SwitchAuto(StartingLocation.CENTER));
         SmartDashboard.putData("Auto Chooser",autoChooser);
+        System.out.println("RInit");
     }
 
     @Override
-    public void autonomousInit() {
+    public void autonomousInit() {System.out.println("AInit");
     	Robot.getInstance().hardware.navx.reset();
         robot.setState(new AutoState());
         robot.state.init();
@@ -42,6 +41,7 @@ public class Scheduler extends IterativeRobot {
 
     @Override
     public void teleopInit() {
+    	System.out.println("TInit");
         robot.setState(new TeleopState());
         robot.state.init();
     }
