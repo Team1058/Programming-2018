@@ -17,7 +17,7 @@ public class SafeMoveArmPolarSetpoint extends Command {
     public void init() {
         this.setStatus(Status.INIT);
     }
-    public void setPolar(double ext, double angle) {
+    public void set(double ext, double angle) {
         this.ext = ext;
         this.angle = angle;
     }

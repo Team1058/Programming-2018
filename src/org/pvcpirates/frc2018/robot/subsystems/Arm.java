@@ -102,7 +102,7 @@ public class Arm extends BaseSubsystem {
     public static void moveArmPolar(double ext, double angle) {
         //PIVOT TO TIP CALC
 
-        double x = Arm.getArmX() + Arm.getWristX();
+        double x = (Math.cos(angle*(Math.PI/180))*ext)+ Arm.getWristX(); //Arm.getArmX() + Arm.getWristX();
 
 
         if (x > PIVOT_TO_MAX_PERIM) {
@@ -111,6 +111,10 @@ public class Arm extends BaseSubsystem {
             //System.out.println("Set to "+(PIVOT_TO_MAX_PERIM-Arm.getWristX()  )/(Math.cos(angle) )     );
 
             //System.out.println((((PIVOT_TO_MAX_PERIM-Math.abs(Arm.getWristX())) / Math.cos(radAngle))-15));
+            Arm.extendArm(ext);
+        }else{
+            Arm.pivotArm(angle);
+            Arm.extendArm(ext);
         }
 
         //System.out.println("Currently at "+Arm.getArmExtension());
@@ -119,8 +123,7 @@ public class Arm extends BaseSubsystem {
         //if (x > PIVOT_TO_MAX_PERIM)
         //	Arm.pivotArm(Arm.getPivotAngle());
         //else
-        Arm.pivotArm(angle);
-        Arm.extendArm(ext);
+
     }
 
 

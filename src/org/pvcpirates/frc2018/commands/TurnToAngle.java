@@ -20,10 +20,10 @@ public class TurnToAngle extends Command {
         current = Hardware.getInstance().navx.getAngle();
        // if (goal)
         setStatus(Status.EXEC);
-        Hardware.getInstance().leftDrive1.configNominalOutputForward(.75, 10);
-        Hardware.getInstance().rightDrive1.configNominalOutputForward(.75, 10);
-        Hardware.getInstance().leftDrive1.configNominalOutputReverse(-.75, 10);
-        Hardware.getInstance().rightDrive1.configNominalOutputReverse(-.75, 10);
+        Hardware.getInstance().leftDrive1.configPeakOutputForward(.75, 10);
+        Hardware.getInstance().rightDrive1.configPeakOutputForward(.75, 10);
+        Hardware.getInstance().leftDrive1.configPeakOutputReverse(-.75, 10);
+        Hardware.getInstance().rightDrive1.configPeakOutputReverse(-.75, 10);
     }
 
     @Override
@@ -51,10 +51,11 @@ public class TurnToAngle extends Command {
     @Override
     public void finished() {
         Drivetrain.stopAll();
-        Hardware.getInstance().leftDrive1.configNominalOutputForward(1, 10);
-        Hardware.getInstance().rightDrive1.configNominalOutputForward(1, 10);
-        Hardware.getInstance().leftDrive1.configNominalOutputReverse(1, 10);
-        Hardware.getInstance().rightDrive1.configNominalOutputReverse(1, 10);
+
+        Hardware.getInstance().leftDrive1.configPeakOutputForward(1, 10);
+        Hardware.getInstance().rightDrive1.configPeakOutputForward(1, 10);
+        Hardware.getInstance().leftDrive1.configPeakOutputReverse(1, 10);
+        Hardware.getInstance().rightDrive1.configPeakOutputReverse(1, 10);
     }
 
 }
