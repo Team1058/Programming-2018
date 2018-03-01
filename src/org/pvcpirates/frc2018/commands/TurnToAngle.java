@@ -37,12 +37,13 @@ public class TurnToAngle extends Command {
         
         System.out.println(current);
         System.out.println("Diff: "+(goal-current));
-        if (Math.abs(goal - current) < 10) {
-        	System.out.println("STOOOP");
+
+        if (Math.abs(goal - current) < 5) {
             this.setStatus(Status.STOP);
             this.finished();
         } else {
-            output = .3*((goal - current) / goal);
+            output = 0.005*((goal - current) / goal);
+            System.out.println("out"+Hardware.getInstance().leftDrive1.getMotorOutputPercent());
             Drivetrain.setDrive(ControlMode.PercentOutput, output, output);
         }
     }
@@ -50,6 +51,10 @@ public class TurnToAngle extends Command {
     @Override
     public void finished() {
         Drivetrain.stopAll();
+        Hardware.getInstance().leftDrive1.configNominalOutputForward(1, 10);
+        Hardware.getInstance().rightDrive1.configNominalOutputForward(1, 10);
+        Hardware.getInstance().leftDrive1.configNominalOutputReverse(1, 10);
+        Hardware.getInstance().rightDrive1.configNominalOutputReverse(1, 10);
     }
 
 }
