@@ -22,8 +22,7 @@ public class DriveOpenLoop extends TeleopCommand {
 
         double lspd = fb - lr;
         double rspd = fb + lr;
-
-        Drivetrain.setDrive(ControlMode.PercentOutput, lspd, -rspd);
+        Drivetrain.setDrive(ControlMode.PercentOutput, -lspd, rspd);
     }
 
 }

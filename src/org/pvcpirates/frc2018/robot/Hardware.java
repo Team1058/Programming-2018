@@ -36,7 +36,7 @@ public class Hardware {
     public final DoubleSolenoid cubeGrabberSolenoid = new DoubleSolenoid(RobotMap.PneumaticIds.GRABBER_1,
             RobotMap.PneumaticIds.GRABBER_2);
     
-    public final Solenoid climberSolenoid = new Solenoid(RobotMap.PneumaticIds.CLIMBER); 
+   //public final Solenoid climberSolenoid = new Solenoid(RobotMap.PneumaticIds.CLIMBER); 
     
     //replace channels with enums
     public final Ultrasonic leftUltrasonic = new Ultrasonic(0, 1);

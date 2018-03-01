@@ -6,7 +6,10 @@ import org.pvcpirates.frc2018.commands.ZeroArm;
 import org.pvcpirates.frc2018.gamepads.DriverGamepad;
 import org.pvcpirates.frc2018.gamepads.OperatorGamepad;
 import org.pvcpirates.frc2018.robot.Hardware;
+import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.robot.subsystems.Arm;
+
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 public class TeleopState extends State {
     private DriverGamepad driverGamepad;
@@ -20,9 +23,14 @@ public class TeleopState extends State {
         operatorGamepad = new OperatorGamepad(1);
 
         zeroArm.init();
-        while (zeroArm.getStatus() != Status.STOP)
-            zeroArm.exec();
+       // while (zeroArm.getStatus() != Status.STOP)
+         //   zeroArm.exec();
         Arm.configurePID();
+        Robot.getInstance().hardware.rightDrive1.configClosedloopRamp(0, 10);
+        Robot.getInstance().hardware.leftDrive1.configClosedloopRamp(0, 10);
+        Robot.getInstance().hardware.rightDrive1.setNeutralMode(NeutralMode.Coast);
+        Robot.getInstance().hardware.leftDrive1.setNeutralMode(NeutralMode.Coast);
+
     }
 
     @Override
@@ -31,7 +39,7 @@ public class TeleopState extends State {
         //operatorGamepad.executeCommands();
         //Arm.wristRotate(0);
         //System.out.println("Wrist "+h.wristPivotMotor.getSensorCollection().getQuadraturePosition());
-        System.out.println("Angle: "+h.navx.getYaw());
+        System.out.println("ANGLE "+h.navx.getAngle());
     }
 
     @Override
