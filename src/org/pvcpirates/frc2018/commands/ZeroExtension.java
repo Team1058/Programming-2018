@@ -19,6 +19,7 @@ public class ZeroExtension extends Command {
 
     @Override
     public void exec() {
+    	System.out.println("Exec");
         if (Hardware.getInstance().armExtendMotor.getSensorCollection().isRevLimitSwitchClosed()) {
             Hardware.getInstance().armExtendMotor.set(ControlMode.PercentOutput, 0);
             setStatus(Status.STOP);
@@ -33,6 +34,5 @@ public class ZeroExtension extends Command {
     @Override
     public void finished() {
         Hardware.getInstance().armExtendMotor.set(ControlMode.PercentOutput, 0);
-        Arm.pivotArm(90);
     }
 }

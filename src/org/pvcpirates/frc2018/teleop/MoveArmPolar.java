@@ -11,7 +11,6 @@ public class MoveArmPolar extends TeleopCommand {
     public static final double PIVOT_INCREMENT = 40;
     double extend = 0;
     double pivot = 90;
-
     public MoveArmPolar(BaseGamepad gp) {
         super(gp);
     }
@@ -27,10 +26,16 @@ public class MoveArmPolar extends TeleopCommand {
             extend = Arm.getArmExtension() + GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1) * EXTEND_INCREMENT;
         if (Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1)) > .1)
             pivot = Arm.getPivotAngle() + GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1) * PIVOT_INCREMENT;
-
-
-        Arm.moveArmPolar(extend, pivot);
-        Arm.levelWrist();
+        
+        if ((Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1)) > .1)||(Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1)) > .1)){
+        	Arm.moveArmPolar(extend, pivot);
+        	Arm.levelWrist();
+        }else{
+        	extend = Arm.getArmExtension();
+        	pivot = Arm.getPivotAngle();
+        }
+        	
+        //Arm.levelWrist();
     }
 
 }

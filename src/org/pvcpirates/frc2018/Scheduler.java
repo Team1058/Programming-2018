@@ -1,7 +1,9 @@
 package org.pvcpirates.frc2018;
 
+import org.pvcpirates.frc2018.autonomous.StartingLocation;
 import org.pvcpirates.frc2018.commands.Command;
 import org.pvcpirates.frc2018.commands.DriveFor;
+import org.pvcpirates.frc2018.commands.SwitchAuto;
 import org.pvcpirates.frc2018.commands.TurnAnglePosition;
 import org.pvcpirates.frc2018.commands.TurnToAngle;
 import org.pvcpirates.frc2018.robot.Robot;
@@ -20,11 +22,9 @@ public class Scheduler extends IterativeRobot {
 
     @Override
     public void robotInit() {
-        autoChooser.addDefault("Drive Forward", new DriveFor( 80));
-        autoChooser.addObject("TurnyBoy", new TurnToAngle(90));
-        //autoChooser.addObject("Switch Middle", new SwitchAuto(StartingLocation.CENTER));
+        autoChooser.addDefault("Drive Forward", new DriveFor(120));
+        autoChooser.addObject("Switch Auto Center", new SwitchAuto(StartingLocation.CENTER));
         SmartDashboard.putData("Auto Chooser",autoChooser);
-        System.out.println("RInit");
     }
 
     @Override
@@ -41,7 +41,6 @@ public class Scheduler extends IterativeRobot {
 
     @Override
     public void teleopInit() {
-    	System.out.println("TInit");
         robot.setState(new TeleopState());
         robot.state.init();
     }

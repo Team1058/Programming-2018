@@ -26,7 +26,7 @@ public class RobotMap {
 
     public static final class PneumaticIds {
         public static final int GRABBER_1 = 1;
-        public static final int GRABBER_2 = 2;
+        public static final int GRABBER_2 = 0;
 		public static final int CLIMBER = 3;
     }
 
@@ -47,7 +47,7 @@ public class RobotMap {
 
     public static final class Ranges {
         public static final int PIVOT_ENCODER_MAX = 949;
-        public static final int PIVOT_ENCODER_MIN = 92;
+        public static final int PIVOT_ENCODER_MIN = 80;
         //TODO GET THESE VALUES PLEAAAAAAAAAAAAAAAAAAAAAAAAAAAASE
         public static final int WRIST_ENCODER_MAX = 2048;
         public static final int WRIST_ENCODER_MIN = 0;

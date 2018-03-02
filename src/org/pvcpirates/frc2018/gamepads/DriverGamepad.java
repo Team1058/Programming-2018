@@ -9,8 +9,6 @@ public class DriverGamepad extends BaseGamepad {
     }
 
     void mapCommandsToController() {
-        //teleopCommands.add(new DriveCommand(this));
-        //teleopCommands.add(new DriveOpenLoop(this));
         teleopCommands.add(new DriveOpenLoop(this));
     }
 

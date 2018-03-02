@@ -56,9 +56,9 @@ public abstract class BaseGamepad extends Joystick {
             case DPAD_UP:
                 return (getPOV(0) == 0);
             case DPAD_LEFT:
-                return (getPOV(0) <= 315) || (getPOV(0) >= 225);
+                return (getPOV(0) <= 315) && (getPOV(0) >= 225);
             case DPAD_RIGHT:
-                return (getPOV(0) <= 135) || (getPOV(0) >= 45);
+                return (getPOV(0) <= 135) && (getPOV(0) >= 45);
         }
         return false;
     }

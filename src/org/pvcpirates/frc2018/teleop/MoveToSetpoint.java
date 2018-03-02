@@ -1,6 +1,6 @@
 package org.pvcpirates.frc2018.teleop;
 
-import org.pvcpirates.frc2018.commands.Command;
+import org.pvcpirates.frc2018.Status;
 import org.pvcpirates.frc2018.commands.SafeMoveArmPolarSetpoint;
 import org.pvcpirates.frc2018.gamepads.BaseGamepad;
 import org.pvcpirates.frc2018.gamepads.GamepadEnum;
@@ -9,13 +9,16 @@ import org.pvcpirates.frc2018.robot.subsystems.Arm;
 public class MoveToSetpoint extends TeleopCommand {
 
     SafeMoveArmPolarSetpoint moveSetpoint = null;
-
+    double wrist;
     public MoveToSetpoint(BaseGamepad gp){
         super(gp);
+        moveSetpoint = new SafeMoveArmPolarSetpoint();
+        
     }
 
     @Override
     public void exec() {
+    	Arm.levelWrist();
         if (gamepad.getButton(GamepadEnum.A_BUTTON)) {
             //Intake Forward
             moveSetpoint.set(20, -60);
@@ -25,8 +28,10 @@ public class MoveToSetpoint extends TeleopCommand {
         } else if (gamepad.getButton(GamepadEnum.X_BUTTON)) {
             //Scale Low Forward
             moveSetpoint.set(18, 72);
+            System.out.println("X");
         } else if (gamepad.getButton(GamepadEnum.Y_BUTTON)) {
-            //TODO
+            //Scale High Front
+        	moveSetpoint.set(30.8, 83,60);
         } else if (gamepad.getDpad(GamepadEnum.DPAD_DOWN)) {
             //Intake Backward
             moveSetpoint.set(20, 240);
@@ -37,11 +42,11 @@ public class MoveToSetpoint extends TeleopCommand {
             //Scale Low Backward
             moveSetpoint.set(18, 108);
         } else if (gamepad.getDpad(GamepadEnum.DPAD_UP)) {
-            //TODO
-        }else{
-            moveSetpoint.set(Arm.getArmExtension(),Arm.getPivotAngle());
+        	//Scale High Backward
+            moveSetpoint.set(30.8, 97,-60);
+        }else if (moveSetpoint.getStatus() == Status.EXEC){
+        	moveSetpoint.exec();
         }
-        moveSetpoint.exec();
 
 
     }

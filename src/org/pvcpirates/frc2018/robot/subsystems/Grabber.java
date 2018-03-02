@@ -19,6 +19,9 @@ public class Grabber extends BaseSubsystem {
     public static void closeGrabber() {
         solenoid.set(DoubleSolenoid.Value.kReverse);
     }
+    public static void noGrabber(){
+    	solenoid.set(DoubleSolenoid.Value.kOff);
+    }
 
     public static void intakeRollers() {
         rightMotor.set(ControlMode.PercentOutput, 1);
