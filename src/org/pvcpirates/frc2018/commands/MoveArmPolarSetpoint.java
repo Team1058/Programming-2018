@@ -4,18 +4,18 @@ import org.pvcpirates.frc2018.Status;
 import org.pvcpirates.frc2018.commands.Command;
 import org.pvcpirates.frc2018.robot.subsystems.Arm;
 
-public class SafeMoveArmPolarSetpoint extends Command {
+public class MoveArmPolarSetpoint extends Command {
     private double ext;
     private double angle;
     private boolean inMin;
     private double wrist = -100000;
-    public SafeMoveArmPolarSetpoint(double ext, double angle) {
+    public MoveArmPolarSetpoint(double ext, double angle) {
         this.ext = ext;
         this.angle = angle;
         init();
     }
 
-    public SafeMoveArmPolarSetpoint(){
+    public MoveArmPolarSetpoint(){
     	init();
     }
     

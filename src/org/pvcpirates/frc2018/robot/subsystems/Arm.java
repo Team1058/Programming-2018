@@ -14,24 +14,13 @@ public class Arm extends BaseSubsystem {
     public static boolean running = false;
 
     public static void configurePID() {
-        double[] pid = new double[4];
-        //SmartDashboard.getNumberArray("PID", pid);
-        //FIXME PID VALS
         Hardware.setPIDF(16, 0, 0, 0, hardware.armPivotMotor);
-        //Hardware.setPIDF(pid[0], pid[1], pid[2], pid[3], hardware.armPivotMotor);
         Hardware.setPIDF(.7, 0, 0, 0, hardware.armExtendMotor);
         Hardware.setPIDF(1.8, 0, 0, 0, hardware.wristPivotMotor);
-
-    }
-
-    public static void zeroArm() {
-
-        hardware.armExtendMotor.set(ControlMode.Position, 0);
-        hardware.armPivotMotor.set(ControlMode.Position, 0);
-        hardware.wristPivotMotor.set(ControlMode.Position, THE_MIDDLE);
     }
 
     public static void levelWrist() {
+    	//flips wrist when arm is on the opposite side
         if (getPivotAngle() < 85)
             wristRotate(getPivotAngle());
         else if (getPivotAngle() > 95)
@@ -39,19 +28,20 @@ public class Arm extends BaseSubsystem {
     }
 
     public static void wristRotate(double angleSetpoint) {
+    	//allow for -90 to 90 range
         angleSetpoint += 90;
         angleSetpoint = ((angleSetpoint * RobotMap.Ranges.WRIST_ENCODER_MAX / 180.0));
         hardware.wristPivotMotor.set(ControlMode.Position, angleSetpoint);
     }
 
     public static void extendArm(double distance) {
-        //distance += 4;
+    	//convert inches to encoder ticks (4096 ticks per rotation)
         distance = (distance / (SPROCKET_DIAMETER * Math.PI)) * 4096;
         hardware.armExtendMotor.set(ControlMode.Position, distance);
-
     }
 
     public static double getArmExtension() {
+    	//convert encoder ticks to inches (4096 encoder ticks per rotation)
         return (hardware.armExtendMotor.getSensorCollection().getQuadraturePosition() / 4096.0) * (SPROCKET_DIAMETER * Math.PI);
     }
 
@@ -62,19 +52,19 @@ public class Arm extends BaseSubsystem {
     public static double getArmX() {
         double rad = Arm.getPivotAngle() * Math.PI / 180.0;
         double ext = Arm.getArmExtension();
-
+        //add 15in to compensate for the min extension
         return Math.abs((Math.cos(rad) * (ext + 15)));
     }
 
     public static void pivotArm(double angleSetpoint) {
-        //DEGREES WE CAN ROTATE
+        //convert angle setpoint to encoder ticks
         angleSetpoint = (angleSetpoint * (512.0 / 180.0)) + 256;
-        System.out.println(angleSetpoint);
-        //if (angleSetpoint < RobotMap.Ranges.PIVOT_ENCODER_MAX && angleSetpoint > RobotMap.Ranges.PIVOT_ENCODER_MIN)
-            hardware.armPivotMotor.set(ControlMode.Position, angleSetpoint);
+        hardware.armPivotMotor.set(ControlMode.Position, angleSetpoint);
     }
 
     public static double getPivotAngle() {
+    	//512 ticks in 180 degrees
+    	//subtract 90 to make arm behave like the unit circle
         return (hardware.armPivotMotor.getSensorCollection().getAnalogIn() * (180.0 / 512.0)) - 90;
     }
 
@@ -101,30 +91,18 @@ public class Arm extends BaseSubsystem {
     }
 
     public static void moveArmPolar(double ext, double angle) {
-        //PIVOT TO TIP CALC
 
-        double x = (Math.cos(angle*(Math.PI/180))*ext)+ Arm.getWristX(); //Arm.getArmX() + Arm.getWristX();
+        double x = (Math.cos(angle*(Math.PI/180))*ext)+ Arm.getWristX();
 
 
         if (x > PIVOT_TO_MAX_PERIM) {
             double radAngle = (Arm.getPivotAngle() > 90 ? 180 - Arm.getPivotAngle() : Arm.getPivotAngle()) * (Math.PI / 180);
             ext = ((PIVOT_TO_MAX_PERIM - Math.abs(Arm.getWristX())) / Math.cos(radAngle)) - 15;
-            //System.out.println("Set to "+(PIVOT_TO_MAX_PERIM-Arm.getWristX()  )/(Math.cos(angle) )     );
-
-            //System.out.println((((PIVOT_TO_MAX_PERIM-Math.abs(Arm.getWristX())) / Math.cos(radAngle))-15));
             Arm.extendArm(ext);
         }else{
             Arm.pivotArm(angle);
             Arm.extendArm(ext);
         }
-
-        //System.out.println("Currently at "+Arm.getArmExtension());
-
-
-        //if (x > PIVOT_TO_MAX_PERIM)
-        //	Arm.pivotArm(Arm.getPivotAngle());
-        //else
-
     }
 
 
@@ -151,10 +129,7 @@ public class Arm extends BaseSubsystem {
     }
 
     public static double getWristAngle() {
-        // TODO Auto-generated method stub
+        // 2071 ticks per 180 degrees
         return (hardware.wristPivotMotor.getSensorCollection().getQuadraturePosition() * 180.0 / 2071.0) - 90;
     }
-
-
-    //TODO SHOOT CUBE OVER ANOTHER CUBE ON THE SCALE
 }

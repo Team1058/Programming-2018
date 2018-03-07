@@ -2,7 +2,7 @@ package org.pvcpirates.frc2018.autonomous;
 
 import org.pvcpirates.frc2018.commands.Command;
 import org.pvcpirates.frc2018.commands.DriveFor;
-import org.pvcpirates.frc2018.commands.SafeMoveArmPolarSetpoint;
+import org.pvcpirates.frc2018.commands.MoveArmPolarSetpoint;
 import org.pvcpirates.frc2018.commands.SpitCube;
 import org.pvcpirates.frc2018.commands.TurnToAngle;
 import org.pvcpirates.frc2018.commands.WristRotate;
@@ -55,7 +55,7 @@ public class ScaleAuto extends Command {
 			if(gameData.charAt(1) == 'L'){
 				commands.add(new DriveFor(250));
 				commands.add(new TurnToAngle(-35));
-				commands.add(new SafeMoveArmPolarSetpoint(31, 83));
+				commands.add(new MoveArmPolarSetpoint(31, 83));
 				commands.add(new DriveFor(60));
 				
 			}else if(gameData.charAt(1) == 'R'){
@@ -63,7 +63,7 @@ public class ScaleAuto extends Command {
 				commands.add(new TurnToAngle(-90));
 				commands.add(new DriveFor(190));
 				commands.add(new TurnToAngle(90));
-				commands.add(new SafeMoveArmPolarSetpoint(31, 83));
+				commands.add(new MoveArmPolarSetpoint(31, 83));
 				commands.add(new DriveFor(70));
 				return;
 			}

@@ -1,7 +1,7 @@
 package org.pvcpirates.frc2018.teleop;
 
 import org.pvcpirates.frc2018.Status;
-import org.pvcpirates.frc2018.commands.SafeMoveArmPolarSetpoint;
+import org.pvcpirates.frc2018.commands.MoveArmPolarSetpoint;
 import org.pvcpirates.frc2018.commands.ZeroArm;
 import org.pvcpirates.frc2018.gamepads.BaseGamepad;
 import org.pvcpirates.frc2018.gamepads.GamepadEnum;
@@ -9,12 +9,12 @@ import org.pvcpirates.frc2018.robot.subsystems.Arm;
 
 public class MoveToSetpoint extends TeleopCommand {
 
-    SafeMoveArmPolarSetpoint moveSetpoint = null;
+    MoveArmPolarSetpoint moveSetpoint = null;
     ZeroArm zeroArm = new ZeroArm();
     double wrist;
     public MoveToSetpoint(BaseGamepad gp){
         super(gp);
-        moveSetpoint = new SafeMoveArmPolarSetpoint();
+        moveSetpoint = new MoveArmPolarSetpoint();
     }
 
     @Override
