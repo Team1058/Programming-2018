@@ -4,14 +4,12 @@ import org.pvcpirates.frc2018.autonomous.StartingLocation;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
-public class SwitchAuto extends Command {
-	
+public class ScaleAuto extends Command {
 	StartingLocation location;
-	
-	public SwitchAuto(StartingLocation location){
+	public ScaleAuto(StartingLocation location) {
 		this.location = location;
+		// TODO Auto-generated constructor stub
 	}
-	
 	@Override
 	public void init(){
 		configure();
@@ -21,7 +19,7 @@ public class SwitchAuto extends Command {
 	private void configure() {
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
-
+		
 		//CENTER START
 		if(location == StartingLocation.CENTER){
 			if(gameData.charAt(0) == 'L'){
@@ -42,24 +40,31 @@ public class SwitchAuto extends Command {
 		//RIGHT START
 		if(location == StartingLocation.RIGHT){
 			if(gameData.charAt(0) == 'R'){
-				commands.add(new DriveFor(172));
-				commands.add(new TurnToAngle(90));
+				return;
 			}else if(gameData.charAt(0) == 'L'){
 				return;
 			}
 		}
 
 		if(location == StartingLocation.LEFT){
-			if(gameData.charAt(0) == 'L'){
-				commands.add(new DriveFor(172));
+			if(gameData.charAt(1) == 'L'){
+				commands.add(new DriveFor(250));
+				commands.add(new TurnToAngle(-35));
+				commands.add(new SafeMoveArmPolarSetpoint(31, 83));
+				commands.add(new DriveFor(60));
+				
+			}else if(gameData.charAt(1) == 'R'){
+				commands.add(new DriveFor(250));
+				commands.add(new TurnToAngle(-90));
+				commands.add(new DriveFor(190));
 				commands.add(new TurnToAngle(90));
-			}else if(gameData.charAt(0) == 'R'){
+				commands.add(new SafeMoveArmPolarSetpoint(31, 83));
+				commands.add(new DriveFor(70));
 				return;
 			}
 		}
-		
-		//commands.add(new PivotArm(60));
 		commands.add(new WristRotate(90));
 		commands.add(new SpitCube());
+		
 	}
 }

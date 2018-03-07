@@ -2,17 +2,17 @@ package org.pvcpirates.frc2018;
 
 public class RobotMap {
     public static final class CANTalonIds {
-        public static final int LEFT_DRIVE_1 = 7;
-        public static final int RIGHT_DRIVE_1 = 2;
-        public static final int LEFT_DRIVE_2 = 11;
-        public static final int RIGHT_DRIVE_2 = 12;
-        public static final int RIGHT_CUBE_GRABBER = 10;
-        public static final int LEFT_CUBE_GRABBER = 6;
+        public static final int LEFT_DRIVE_1 = 6;
+        public static final int RIGHT_DRIVE_1 = 10;
+        public static final int LEFT_DRIVE_2 = 3;
+        public static final int RIGHT_DRIVE_2 = 9;
+        public static final int RIGHT_CUBE_GRABBER = 0;
+        public static final int LEFT_CUBE_GRABBER = 1;
         //TODO: TALON IDSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
-        public static final int ARM_PIVOT_TALON = 5;
-        public static final int ARM_EXTEND_TALON = 9;
-        public static final int ARM_EXTEND_TALON_FOLLOWER = 8;
-        public static final int WRIST_PIVOT_MOTOR = 4;
+        public static final int ARM_PIVOT_TALON = 1;
+        public static final int ARM_EXTEND_TALON = 2;
+        public static final int ARM_EXTEND_TALON_FOLLOWER = 11;
+        public static final int WRIST_PIVOT_MOTOR = 0;
     }
 
     public static final class SensorIDs {
@@ -46,10 +46,10 @@ public class RobotMap {
     }
 
     public static final class Ranges {
-        public static final int PIVOT_ENCODER_MAX = 949;
+        public static final int PIVOT_ENCODER_MAX = 940;
         public static final int PIVOT_ENCODER_MIN = 80;
         //TODO GET THESE VALUES PLEAAAAAAAAAAAAAAAAAAAAAAAAAAAASE
-        public static final int WRIST_ENCODER_MAX = 2048;
+        public static final int WRIST_ENCODER_MAX = 2073;
         public static final int WRIST_ENCODER_MIN = 0;
         public static final int THE_MIDDLE = 0;
         public static final int ARM_EXTEND_ENCODER_MAX = 24500;

@@ -20,8 +20,9 @@ public class ZeroExtension extends Command {
     @Override
     public void exec() {
     	System.out.println("Exec");
-        if (Hardware.getInstance().armExtendMotor.getSensorCollection().isRevLimitSwitchClosed()) {
+        if (!Hardware.getInstance().armExtendMotor.getSensorCollection().isRevLimitSwitchClosed()) {
             Hardware.getInstance().armExtendMotor.set(ControlMode.PercentOutput, 0);
+            Hardware.getInstance().armExtendMotor.getSensorCollection().setQuadraturePosition(0,10);
             setStatus(Status.STOP);
             finished();
             return;

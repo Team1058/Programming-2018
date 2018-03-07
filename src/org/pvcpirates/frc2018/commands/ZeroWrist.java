@@ -19,14 +19,14 @@ public class ZeroWrist extends Command {
 
     @Override
     public void exec() {
-        if (Hardware.getInstance().wristPivotMotor.getSensorCollection().isRevLimitSwitchClosed()) {
+        if (!Hardware.getInstance().wristPivotMotor.getSensorCollection().isRevLimitSwitchClosed()) {
             System.out.println("ZERO");
             Hardware.getInstance().wristPivotMotor.set(ControlMode.PercentOutput, 0);
+            Hardware.getInstance().wristPivotMotor.getSensorCollection().setQuadraturePosition(0,10);
             setStatus(Status.STOP);
             finished();
             return;
         } else {
-            System.out.println(Arm.getWristAngle());
             Hardware.getInstance().wristPivotMotor.set(ControlMode.PercentOutput, -.4);
         }
     }

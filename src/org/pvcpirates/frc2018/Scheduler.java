@@ -19,11 +19,16 @@ public class Scheduler extends IterativeRobot {
     public static final Robot robot = Robot.getInstance();
     public static SendableChooser<Command> autoChooser = new SendableChooser<>();
     private Command temp;
-
     @Override
     public void robotInit() {
-        autoChooser.addDefault("Drive Forward", new DriveFor(120));
+    	/*
+    	 * 
+    	 */
+        autoChooser.addDefault("Drive Forward", new DriveFor(220));
+        autoChooser.addObject("Nothing", new DriveFor(0));
         autoChooser.addObject("Switch Auto Center", new SwitchAuto(StartingLocation.CENTER));
+        autoChooser.addObject("TURN TEST!!!!!!!!!!", new TurnToAngle(45));
+        
         SmartDashboard.putData("Auto Chooser",autoChooser);
     }
 
@@ -32,6 +37,7 @@ public class Scheduler extends IterativeRobot {
     	Robot.getInstance().hardware.navx.reset();
         robot.setState(new AutoState());
         robot.state.init();
+
     }
 
     @Override

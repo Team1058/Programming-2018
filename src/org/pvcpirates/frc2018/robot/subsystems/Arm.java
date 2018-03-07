@@ -10,7 +10,7 @@ import static org.pvcpirates.frc2018.RobotMap.Ranges.THE_MIDDLE;
 
 public class Arm extends BaseSubsystem {
     private static Hardware hardware = Robot.getInstance().hardware;
-
+    public static boolean running = false;
 
     public static void configurePID() {
         double[] pid = new double[4];
@@ -18,7 +18,7 @@ public class Arm extends BaseSubsystem {
         //FIXME PID VALS
         Hardware.setPIDF(16, 0, 0, 0, hardware.armPivotMotor);
         //Hardware.setPIDF(pid[0], pid[1], pid[2], pid[3], hardware.armPivotMotor);
-        Hardware.setPIDF(.1, 0, 0, 0, hardware.armExtendMotor);
+        Hardware.setPIDF(.7, 0, 0, 0, hardware.armExtendMotor);
         Hardware.setPIDF(1.8, 0, 0, 0, hardware.wristPivotMotor);
 
     }
@@ -39,15 +39,14 @@ public class Arm extends BaseSubsystem {
 
     public static void wristRotate(double angleSetpoint) {
         angleSetpoint += 90;
-        angleSetpoint = ((angleSetpoint * 2071.0 / 180.0));
+        angleSetpoint = ((angleSetpoint * RobotMap.Ranges.WRIST_ENCODER_MAX / 180.0));
         hardware.wristPivotMotor.set(ControlMode.Position, angleSetpoint);
     }
 
     public static void extendArm(double distance) {
         //distance += 4;
         distance = (distance / (SPROCKET_DIAMETER * Math.PI)) * 4096;
-        if (distance < RobotMap.Ranges.ARM_EXTEND_ENCODER_MAX && distance > RobotMap.Ranges.ARM_EXTEND_ENCODER_MIN)
-            hardware.armExtendMotor.set(ControlMode.Position, distance);
+        hardware.armExtendMotor.set(ControlMode.Position, distance);
 
     }
 
@@ -69,7 +68,8 @@ public class Arm extends BaseSubsystem {
     public static void pivotArm(double angleSetpoint) {
         //DEGREES WE CAN ROTATE
         angleSetpoint = (angleSetpoint * (512.0 / 180.0)) + 256;
-        if (angleSetpoint < RobotMap.Ranges.PIVOT_ENCODER_MAX && angleSetpoint > RobotMap.Ranges.PIVOT_ENCODER_MIN)
+        System.out.println(angleSetpoint);
+        //if (angleSetpoint < RobotMap.Ranges.PIVOT_ENCODER_MAX && angleSetpoint > RobotMap.Ranges.PIVOT_ENCODER_MIN)
             hardware.armPivotMotor.set(ControlMode.Position, angleSetpoint);
     }
 

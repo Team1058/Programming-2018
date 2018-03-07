@@ -8,7 +8,6 @@ public class SafeMoveArmPolarSetpoint extends Command {
     private double ext;
     private double angle;
     private boolean inMin;
-    boolean zeroed;
     private double wrist = -100000;
     public SafeMoveArmPolarSetpoint(double ext, double angle) {
         this.ext = ext;
@@ -31,7 +30,6 @@ public class SafeMoveArmPolarSetpoint extends Command {
         this.setStatus(Status.EXEC);
         inMin = (angle <=-33||angle>=205);
         this.wrist = -100000;
-        zeroed = false;
     }
     public void set(double ext, double angle,double wrist) {
         this.ext = ext;
@@ -39,34 +37,32 @@ public class SafeMoveArmPolarSetpoint extends Command {
         this.setStatus(Status.EXEC);
         inMin = (angle <=-33||angle>=205);
         this.wrist = wrist;
-        zeroed = false;
     }
     
     @Override
     public void exec() {
     	boolean inRange =(Arm.getPivotAngle() <=-33||Arm.getPivotAngle()>=205);
-        if (Arm.getPivotAngle() <= angle + 3 && Arm.getPivotAngle() >= angle - 3) {
-            this.setStatus(Status.STOP);
-            this.finished();
-        }else if(inRange && Arm.getArmExtension() < ext-2 && inMin && zeroed ){
+        if (Arm.getPivotAngle() <= angle + 4 && Arm.getPivotAngle() >= angle - 4) {
+            //this.setStatus(Status.STOP);
+            if (Math.abs(Arm.getArmExtension() - ext) < 5){
+            	this.setStatus(Status.STOP);
+            	this.finished();
+            }else
+            	Arm.extendArm(ext);
+        }else if(inRange && Arm.getArmExtension() < ext-2 && inMin && Math.abs(Arm.getPivotAngle()-angle)<90 ){
         	Arm.pivotArm(angle);
         	Arm.extendArm(ext);
         	System.out.println("waaaa");
         }else{
         	
-	        if (Arm.getArmExtension() < 4||(inRange&&inMin) && zeroed){
+	        if (Arm.getArmExtension() < 4||(inRange&&inMin&& Math.abs(Arm.getPivotAngle()-angle)<90)){
 	        	System.out.println("RUNRUNRUN"+angle);
 	    		Arm.pivotArm(angle);
 	        }else{
         		Arm.pivotArm(Arm.getPivotAngle());
-        		System.out.println("gaaaa");
+        		Arm.extendArm(0);
 	        }
 	        
-	        if(!(Arm.getPivotAngle() <=-38||Arm.getPivotAngle()>=215 )||!zeroed){
-	        	Arm.extendArm(0);
-	        	if (Arm.getArmExtension() < 4)
-	        		zeroed = true;
-	        }
 	        
         }
     }
@@ -74,11 +70,11 @@ public class SafeMoveArmPolarSetpoint extends Command {
     @Override
     public void finished() {
     	System.out.println("EXTENDO");
-        Arm.extendArm(ext);
+        
+    	Arm.pivotArm(angle);
         
         if (wrist !=-100000){
         	Arm.wristRotate(wrist);
-        	System.out.println("wrist");
         }
     }
 
