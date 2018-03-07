@@ -6,6 +6,6 @@
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRE_Phoenix.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/navx_frc.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/1058/wpilib/user/java/lib/Pathfinder-Java-1.8.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/Pathfinder-Java-1.8.jar"/>
 	<classpathentry kind="output" path="out/production/Programming-2018"/>
 </classpath>

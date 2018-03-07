@@ -7,24 +7,32 @@ import org.pvcpirates.frc2018.robot.subsystems.Grabber;
 public class CubeGrabber extends TeleopCommand {
 
 
+    boolean toggle = false;
+
     public CubeGrabber(BaseGamepad gp) {
         super(gp);
     }
-
-
+    
     @Override
     public void exec() {
-        if (gamepad.getButton(GamepadEnum.A_BUTTON)) {
-            Grabber.intakeRollers();
+        if (gamepad.getButton(GamepadEnum.RIGHT_BUMPER )) {
+        	
+	            Grabber.holdRollers();
+	            Grabber.closeGrabber();
+	        
+        	
+        } else if (gamepad.getTrigger(GamepadEnum.RIGHT_TRIGGER)) {
             Grabber.openGrabber();
-        } else if (gamepad.getButton(GamepadEnum.X_BUTTON)) {
+        } else if (gamepad.getButton(GamepadEnum.START_BUTTON)) {
             Grabber.outtakeRollers();
-            //openGrabber();
-        } else if (gamepad.getButton(GamepadEnum.B_BUTTON)) {
-            Grabber.holdRollers();
-        } else {
-            Grabber.stopRollers();
-            Grabber.closeGrabber();
+        } else if (gamepad.getButton(GamepadEnum.BACK_BUTTON)){
+        	Grabber.intakeRollers();
+        	Grabber.noGrabber();
+        }else{
+        	
+	        	Grabber.stopRollers();
+	        	Grabber.noGrabber();
         }
+
     }
 }

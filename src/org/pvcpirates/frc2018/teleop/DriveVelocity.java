@@ -1,7 +1,6 @@
 package org.pvcpirates.frc2018.teleop;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.pvcpirates.frc2018.gamepads.BaseGamepad;
 import org.pvcpirates.frc2018.gamepads.GamepadEnum;
 import org.pvcpirates.frc2018.robot.subsystems.Drivetrain;
@@ -31,7 +30,5 @@ public class DriveVelocity extends TeleopCommand {
         double lspd = fb - lr;
         double rspd = fb + lr;
         Drivetrain.setDrive(ControlMode.Velocity, vel * lspd, vel * rspd);
-        SmartDashboard.putNumber("rspd", vel * rspd);
-        SmartDashboard.putNumber("lspd", vel * lspd);
     }
 }
