@@ -8,7 +8,6 @@ public class WristRotate extends Command {
 
 	double degrees;
 	public WristRotate(double degrees) {
-		// TODO Auto-generated constructor stub
 		this.degrees = degrees;
 	}
 
@@ -19,16 +18,17 @@ public class WristRotate extends Command {
 
 	@Override
 	public void exec() {
-		// TODO Auto-generated method stub
-		Arm.wristRotate(degrees);
+		//Hold whatever we have
 		Grabber.holdRollers();
 		Grabber.closeGrabber();
+		//rotate
+		Arm.wristRotate(degrees);
+		
 		this.setStatus(Status.STOP);
 	}
 
 	@Override
 	public void finished() {
-		// TODO Auto-generated method stub
 		
 	}
 	

@@ -1,4 +1,4 @@
-package org.pvcpirates.frc2018;
+package org.pvcpirates.frc2018.util;
 
 public class RobotMap {
     public static final class CANTalonIds {

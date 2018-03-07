@@ -1,5 +1,9 @@
 package org.pvcpirates.frc2018.robot;
 
+import static org.pvcpirates.frc2018.util.RobotMap.Constants.ROBOT_TIMEOUT;
+
+import org.pvcpirates.frc2018.util.RobotMap;
+
 import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
@@ -10,9 +14,6 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
-import org.pvcpirates.frc2018.RobotMap;
-
-import static org.pvcpirates.frc2018.RobotMap.Constants.ROBOT_TIMEOUT;
 
 
 public class Hardware {

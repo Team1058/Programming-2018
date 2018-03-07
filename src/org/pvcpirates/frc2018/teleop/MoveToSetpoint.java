@@ -15,11 +15,11 @@ public class MoveToSetpoint extends TeleopCommand {
     public MoveToSetpoint(BaseGamepad gp){
         super(gp);
         moveSetpoint = new SafeMoveArmPolarSetpoint();
-        
     }
 
     @Override
     public void exec() {
+    	//Level the wrist after a setpoint is hit
     	Arm.levelWrist();
         if (gamepad.getButton(GamepadEnum.A_BUTTON)) {
             //Intake Forward
@@ -35,7 +35,6 @@ public class MoveToSetpoint extends TeleopCommand {
         	moveSetpoint.set(31, 83,60);
         } else if (gamepad.getDpad(GamepadEnum.DPAD_DOWN)) {
             //Intake Backward
-        	
             moveSetpoint.set(22, 240);
         } else if (gamepad.getDpad(GamepadEnum.DPAD_LEFT)) {
             //Switch Backward

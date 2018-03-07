@@ -1,12 +1,13 @@
 package org.pvcpirates.frc2018.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import org.pvcpirates.frc2018.RobotMap;
+
+import static org.pvcpirates.frc2018.util.RobotMap.Constants.*;
+import static org.pvcpirates.frc2018.util.RobotMap.Ranges.THE_MIDDLE;
+
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
-
-import static org.pvcpirates.frc2018.RobotMap.Constants.*;
-import static org.pvcpirates.frc2018.RobotMap.Ranges.THE_MIDDLE;
+import org.pvcpirates.frc2018.util.RobotMap;
 
 public class Arm extends BaseSubsystem {
     private static Hardware hardware = Robot.getInstance().hardware;

@@ -1,7 +1,5 @@
 package org.pvcpirates.frc2018.util;
 
-import org.pvcpirates.frc2018.RobotMap;
-
 public class PIDF {
 
     private double p;

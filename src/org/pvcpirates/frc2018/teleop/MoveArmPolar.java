@@ -5,11 +5,11 @@ import org.pvcpirates.frc2018.gamepads.GamepadEnum;
 import org.pvcpirates.frc2018.robot.subsystems.Arm;
 import org.pvcpirates.frc2018.util.GamepadHelper;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 public class MoveArmPolar extends TeleopCommand {
 
-    public static final double EXTEND_INCREMENT = -10;
-    public static final double PIVOT_INCREMENT = 40;
-    double extend = 0;
+    double extend;
     double pivot = 90;
     public MoveArmPolar(BaseGamepad gp) {
         super(gp);
@@ -18,24 +18,15 @@ public class MoveArmPolar extends TeleopCommand {
 
     @Override
     public void exec() {
-
-        extend = Arm.getArmExtension();
-        pivot = Arm.getPivotAngle();
-
-        if (Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1)) > .1)
-            extend = Arm.getArmExtension() + GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1) * EXTEND_INCREMENT;
-        if (Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1)) > .1)
-            pivot = Arm.getPivotAngle() + GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1) * PIVOT_INCREMENT;
+    	//Move arm using percent output (as well as apply a deadband)
+       hardware.armExtendMotor.set(ControlMode.PercentOutput, GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1)); 
+       hardware.armPivotMotor.set(ControlMode.PercentOutput, GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1));
         
-        if ((Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1)) > .1)||(Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1)) > .1)){
-        	Arm.moveArmPolar(extend, pivot);
-        	
-        }//else if (!Arm.running){
-//        	Arm.extendArm(Arm.getArmExtension());
-//        	Arm.pivotArm(Arm.getPivotAngle());
-//        }
-        	
-        //Arm.levelWrist();
+        
+       extend = Arm.getArmExtension();
+       pivot = Arm.getPivotAngle();
+       //Hold the current position of the arm
+       Arm.moveArmPolar(extend, pivot);
     }
 
 }
