@@ -55,12 +55,13 @@ public class SwitchAuto extends Command {
 				commands.add(new SafeMoveArmPolarSetpoint(22,-60));
 				commands.add(new DriveFor(32.5));
 				commands.add(new TurnToAngle(-90));
+				commands.add(new DriveFor(20));
 				commands.add(new CubeGrab());
 				commands.add(new DriveFor(-82.65));
 				commands.add(new SafeMoveArmPolarSetpoint(31,97,-60));
 				commands.add(new SpitCube());
 				}else if(gameData.charAt(0) == 'R' && gameData.charAt(1)=='L'){
-				//Going for Switch on right and scale on left sides
+					//Going for Switch on right and scale on left sides
 					commands.add(new DriveFor(160));
 					commands.add(new TurnToAngle(-90));
 					commands.add(new DriveFor(41.125));
@@ -70,7 +71,10 @@ public class SwitchAuto extends Command {
 					commands.add(new SafeMoveArmPolarSetpoint(22,-60));
 					commands.add(new DriveFor(32.5));
 					commands.add(new TurnToAngle(-90));
+					commands.add(new DriveFor(20));
 					commands.add(new CubeGrab());
+					commands.add(new DriveFor(-26));
+					commands.add(new TurnToAngle(90));
 					}else if (gameData.charAt(0) == 'L') {
 		}
 
