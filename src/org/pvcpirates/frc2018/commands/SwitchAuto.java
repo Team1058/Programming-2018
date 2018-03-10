@@ -1,14 +1,12 @@
 package org.pvcpirates.frc2018.commands;
 
 import org.pvcpirates.frc2018.autonomous.StartingLocation;
-import org.pvcpirates.frc2018.teleop.MoveToSetpoint;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
 public class SwitchAuto extends Command {
 	
 	StartingLocation location;
-	SafeMoveArmPolarSetpoint SetSetpoint = null;
 	
 	public SwitchAuto(StartingLocation location){
 		this.location = location;
@@ -45,7 +43,7 @@ public class SwitchAuto extends Command {
 
 		//RIGHT START
 		if(location == StartingLocation.RIGHT){
-			if(gameData.charAt(0) == 'R' && gameData.charAt(1)=='R'){
+			if(gameData.charAt(0) == 'R') {// && gameData.charAt(1)=='R'){
 				//Going for Switch 
 				//and Scale if they are both on the right side
 				commands.add(new DriveFor(160));
