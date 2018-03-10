@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 public class SwitchAuto extends Command {
 	
 	StartingLocation location;
+	SafeMoveArmPolarSetpoint SetSetpoint = null;
 	
 	public SwitchAuto(StartingLocation location){
 		this.location = location;

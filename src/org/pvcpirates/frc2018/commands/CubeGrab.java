@@ -29,7 +29,7 @@ public class CubeGrab extends Command {
 			
 	@Override
 	public void finished() {				
-	  System.out.println("Picked");
+	  System.out.println("Grabbed");
 	}		
 			
 

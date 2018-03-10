@@ -15,15 +15,23 @@ public class SafeMoveArmPolarSetpoint extends Command {
         init();
     }
 
+    public SafeMoveArmPolarSetpoint(double ext, double angle, double wrist) {
+    	set(ext, angle, wrist);
+    	init();
+    }
+    
     public SafeMoveArmPolarSetpoint(){
     	init();
     }
+
+    
     
     @Override
     public void init() {
         this.setStatus(Status.INIT);
         inMin = (angle <=-38||angle>=215);
     }
+    
     public void set(double ext, double angle) {
         this.ext = ext;
         this.angle = angle;
