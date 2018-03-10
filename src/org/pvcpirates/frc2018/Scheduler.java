@@ -10,6 +10,8 @@ import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.state.AutoState;
 import org.pvcpirates.frc2018.state.TeleopState;
 
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,9 +23,9 @@ public class Scheduler extends IterativeRobot {
     private Command temp;
     @Override
     public void robotInit() {
-    	/*
-    	 * 
-    	 */
+    	
+        CameraServer.getInstance().startAutomaticCapture();
+    	
         autoChooser.addDefault("Drive Forward", new DriveFor(220));
         autoChooser.addObject("Nothing", new DriveFor(0));
         autoChooser.addObject("Switch Auto Center", new SwitchAuto(StartingLocation.CENTER));
