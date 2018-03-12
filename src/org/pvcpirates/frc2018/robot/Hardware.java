@@ -12,8 +12,16 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.*;
+
+import edu.wpi.first.wpilibj.ADXL345_I2C;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.cscore.UsbCamera;
 
 
 public class Hardware {
@@ -21,6 +29,7 @@ public class Hardware {
     //possibly move instance creation to constructor??
 
     private static Hardware ourInstance;
+    
     public final TalonSRX leftDrive1 = new TalonSRX(RobotMap.CANTalonIds.LEFT_DRIVE_1);
     public final TalonSRX rightDrive1 = new TalonSRX(RobotMap.CANTalonIds.RIGHT_DRIVE_1);
     public final TalonSRX leftDrive2 = new TalonSRX(RobotMap.CANTalonIds.LEFT_DRIVE_2);
@@ -33,8 +42,11 @@ public class Hardware {
     public final TalonSRX armExtendMotor = new TalonSRX(RobotMap.CANTalonIds.ARM_EXTEND_TALON);
     public final TalonSRX armExtendMotorFollower = new TalonSRX(RobotMap.CANTalonIds.ARM_EXTEND_TALON_FOLLOWER);
     public final TalonSRX wristPivotMotor = new TalonSRX(RobotMap.CANTalonIds.WRIST_PIVOT_MOTOR);
+    
     public final ADXL345_I2C wristAccel = new ADXL345_I2C(I2C.Port.kOnboard, Range.k4G);
-
+    
+    public final UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+    
     public final DoubleSolenoid cubeGrabberSolenoid = new DoubleSolenoid(RobotMap.PneumaticIds.GRABBER_1,
             RobotMap.PneumaticIds.GRABBER_2);
     
@@ -49,6 +61,9 @@ public class Hardware {
 
     private Hardware() {
 
+    	camera.setResolution(128,72);
+    	camera.setFPS(15);
+    	
         compressor.setClosedLoopControl(true);
         navx.reset();
 

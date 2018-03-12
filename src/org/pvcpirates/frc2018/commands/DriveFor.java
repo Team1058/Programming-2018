@@ -31,9 +31,8 @@ public class DriveFor extends Command {
     public void init() {
     	Hardware.getInstance().leftDrive1.getSensorCollection().setQuadraturePosition(0, 10);
     	Hardware.getInstance().rightDrive1.getSensorCollection().setQuadraturePosition(0, 10);
-        //FIXME TUNE PID
-        Drivetrain.setPIDF(.065, 0.0, 0, 0);
-        Hardware.setPIDF(0.0686, 0, 0, 0, h.leftDrive1);
+        Drivetrain.setPIDF(.022, 0.0, 0, 0);
+        Hardware.setPIDF(0.027625, 0, 0, 0, h.leftDrive1);
         encTicks = (inches / (6 * Math.PI)) * 1024 * (17.3);
         //encTicks+=h.leftDrive1.getSensorCollection().getQuadraturePosition();
         h.leftDrive1.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);
