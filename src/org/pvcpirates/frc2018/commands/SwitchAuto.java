@@ -25,17 +25,19 @@ public class SwitchAuto extends Command {
 		//CENTER START
 		if(location == StartingLocation.CENTER){
 			if(gameData.charAt(0) == 'L'){
+				commands.add(new DriveFor(20));
 				commands.add(new TurnToAngle(20));
-				commands.add(new DriveFor(104));
+				commands.add(new DriveFor(80));
 				commands.add(new TurnToAngle(-20));
-				commands.add(new DriveFor(1));
+				commands.add(new DriveFor(15));
 				commands.add(new SafeMoveArmPolarSetpoint(0,-10));
 				commands.add(new SpitCube());
 			}else if(gameData.charAt(0) == 'R'){
+				commands.add(new DriveFor(20));
 				commands.add(new TurnToAngle(-20));
-				commands.add(new DriveFor(104));
+				commands.add(new DriveFor(80));
 				commands.add(new TurnToAngle(20));
-				commands.add(new DriveFor(1));
+				commands.add(new DriveFor(15));
 				commands.add(new SafeMoveArmPolarSetpoint(0,-10));
 				commands.add(new SpitCube());
 			}
