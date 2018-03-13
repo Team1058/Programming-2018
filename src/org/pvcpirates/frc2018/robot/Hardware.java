@@ -1,17 +1,19 @@
 package org.pvcpirates.frc2018.robot;
 
+import static org.pvcpirates.frc2018.util.RobotMap.Constants.ROBOT_TIMEOUT;
+
+import org.pvcpirates.frc2018.util.RobotMap;
+
 import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer.Range;
-import org.pvcpirates.frc2018.RobotMap;
-
-import static org.pvcpirates.frc2018.RobotMap.Constants.ROBOT_TIMEOUT;
 
 
 public class Hardware {
@@ -24,8 +26,8 @@ public class Hardware {
     public final TalonSRX leftDrive2 = new TalonSRX(RobotMap.CANTalonIds.LEFT_DRIVE_2);
     public final TalonSRX rightDrive2 = new TalonSRX(RobotMap.CANTalonIds.RIGHT_DRIVE_2);
 
-    public final TalonSRX rightCubeGrabMotor = new TalonSRX(RobotMap.CANTalonIds.RIGHT_CUBE_GRABBER);
-    public final TalonSRX leftCubeGrabMotor = new TalonSRX(RobotMap.CANTalonIds.LEFT_CUBE_GRABBER);
+    public final VictorSPX rightCubeGrabMotor = new VictorSPX(RobotMap.CANTalonIds.RIGHT_CUBE_GRABBER);
+    public final VictorSPX leftCubeGrabMotor = new VictorSPX(RobotMap.CANTalonIds.LEFT_CUBE_GRABBER);
 
     public final TalonSRX armPivotMotor = new TalonSRX(RobotMap.CANTalonIds.ARM_PIVOT_TALON);
     public final TalonSRX armExtendMotor = new TalonSRX(RobotMap.CANTalonIds.ARM_EXTEND_TALON);
@@ -51,7 +53,7 @@ public class Hardware {
         navx.reset();
 
         leftDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
-        leftDrive1.setSensorPhase(true);
+        leftDrive1.setSensorPhase(false);
 
         rightDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
         rightDrive1.setSensorPhase(false);
@@ -61,8 +63,8 @@ public class Hardware {
         rightDrive1.setInverted(false);
         rightDrive2.setInverted(false);
         
-        leftDrive1.setInverted(true);
-        leftDrive2.setInverted(true);
+        leftDrive1.setInverted(false);
+        leftDrive2.setInverted(false);
         
         
         leftDrive1.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);
@@ -75,15 +77,16 @@ public class Hardware {
 
         // Set hard limit (limit switch) so that we don't attempt to retract further than physically possible
         armExtendMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
-        armExtendMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, ROBOT_TIMEOUT);
+        armExtendMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed, ROBOT_TIMEOUT);
+        armExtendMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed, ROBOT_TIMEOUT);
         // Set soft limits so that we don't over extend the arm
         armExtendMotor.configForwardSoftLimitThreshold(RobotMap.Ranges.ARM_EXTEND_ENCODER_MAX, ROBOT_TIMEOUT);
-        armExtendMotor.configForwardSoftLimitEnable(true, ROBOT_TIMEOUT);
+        armExtendMotor.configForwardSoftLimitEnable(false, ROBOT_TIMEOUT);
 
         armExtendMotor.setInverted(true);
         armExtendMotor.setSensorPhase(true);
         // Zero out encoder position if limit switch is hit
-        armExtendMotor.configSetParameter(ParamEnum.eClearPositionOnLimitR, 1, 0, 0, ROBOT_TIMEOUT);
+        armExtendMotor.configSetParameter(ParamEnum.eClearPositionOnLimitR, 0, 0, 0, ROBOT_TIMEOUT);
         armExtendMotor.setNeutralMode(NeutralMode.Brake);
 
         armExtendMotor.configClosedloopRamp(0, 0);
@@ -113,8 +116,11 @@ public class Hardware {
 
         wristPivotMotor.configForwardSoftLimitThreshold(RobotMap.Ranges.WRIST_ENCODER_MAX, 0);
         //wristPivotMotor.configReverseSoftLimitThreshold(RobotMap.Ranges.WRIST_ENCODER_MIN,0);
-        wristPivotMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-        wristPivotMotor.configSetParameter(ParamEnum.eClearPosOnLimitR, 1, 0, 0, 0);
+        wristPivotMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed, 0);
+        wristPivotMotor.configSetParameter(ParamEnum.eClearPosOnLimitR, 0, 0, 0, 0);
+        
+        rightCubeGrabMotor.setInverted(false);
+        leftCubeGrabMotor.setInverted(true);
     }
 
     public static Hardware getInstance() {

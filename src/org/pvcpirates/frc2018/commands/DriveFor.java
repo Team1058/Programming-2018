@@ -1,12 +1,13 @@
 package org.pvcpirates.frc2018.commands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+
+import static org.pvcpirates.frc2018.util.RobotMap.Constants.ROBOT_TIMEOUT;
+
 import org.pvcpirates.frc2018.Status;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.robot.subsystems.Drivetrain;
-
-import static org.pvcpirates.frc2018.RobotMap.Constants.ROBOT_TIMEOUT;
 
 
 public class DriveFor extends Command {
@@ -28,9 +29,11 @@ public class DriveFor extends Command {
 
     @Override
     public void init() {
+    	Hardware.getInstance().leftDrive1.getSensorCollection().setQuadraturePosition(0, 10);
+    	Hardware.getInstance().rightDrive1.getSensorCollection().setQuadraturePosition(0, 10);
         //FIXME TUNE PID
-        Drivetrain.setPIDF(.022, 0.0, 0, 0);
-        Hardware.setPIDF(0.027625, 0, 0, 0, h.leftDrive1);
+        Drivetrain.setPIDF(.065, 0.0, 0, 0);
+        Hardware.setPIDF(0.0686, 0, 0, 0, h.leftDrive1);
         encTicks = (inches / (6 * Math.PI)) * 1024 * (17.3);
         //encTicks+=h.leftDrive1.getSensorCollection().getQuadraturePosition();
         h.leftDrive1.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);
@@ -47,14 +50,25 @@ public class DriveFor extends Command {
     @Override
     public void exec() {
     	int sign = turn?-1:1;
-    		h.leftDrive1.set(ControlMode.Position, encTicks);
-        	h.rightDrive1.set(ControlMode.Position, sign*-encTicks);
-        	System.out.println("left "+h.leftDrive1.getSensorCollection().getQuadraturePosition());
-        	System.out.println("right "+h.rightDrive1.getSensorCollection().getQuadraturePosition());
-        	System.out.println("Target "+encTicks);
-        if((h.leftDrive1.getSensorCollection().getQuadraturePosition() > encTicks - 150 && h.leftDrive1.getSensorCollection().getQuadraturePosition() < encTicks + 150)
-        		&&(h.rightDrive1.getSensorCollection().getQuadraturePosition() > encTicks - 150 && h.rightDrive1.getSensorCollection().getQuadraturePosition() < encTicks + 150)){
+    	boolean rInRange = false;
+    	boolean lInRange = false;
+    	double rEnc = h.rightDrive1.getSensorCollection().getQuadraturePosition();
+    	double lEnc = h.leftDrive1.getSensorCollection().getQuadraturePosition();
+    	System.out.println("E: "+encTicks);
+		h.leftDrive1.set(ControlMode.Position, encTicks);
+    	h.rightDrive1.set(ControlMode.Position, sign*-encTicks);
+    	System.out.println("left "+h.leftDrive1.getSensorCollection().getQuadraturePosition());
+    	System.out.println("right "+h.rightDrive1.getSensorCollection().getQuadraturePosition());
+    	System.out.println("Target "+encTicks);
+   
+    	rInRange = (Math.abs(rEnc)  >encTicks - 1000); //&& (Math.abs(rEnc) > encTicks-1000);
+    	lInRange = (Math.abs(lEnc) > encTicks - 1000); //&& (Math.abs(lEnc) > encTicks-1000);
+    	System.out.println("LR: "+lInRange);
+    	System.out.println("RR: "+rInRange);
+    	
+        if(rInRange){
         	setStatus(Status.STOP);
+        	this.finished();
         }
     }
 

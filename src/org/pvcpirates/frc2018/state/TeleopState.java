@@ -1,13 +1,9 @@
 package org.pvcpirates.frc2018.state;
 
-import org.pvcpirates.frc2018.Status;
-import org.pvcpirates.frc2018.commands.Command;
-import org.pvcpirates.frc2018.commands.SafeMoveArmPolarSetpoint;
-import org.pvcpirates.frc2018.commands.ZeroArm;
 import org.pvcpirates.frc2018.gamepads.DriverGamepad;
+import org.pvcpirates.frc2018.gamepads.GamepadEnum;
 import org.pvcpirates.frc2018.gamepads.OperatorGamepad;
 import org.pvcpirates.frc2018.robot.Hardware;
-import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.robot.subsystems.Arm;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -15,25 +11,28 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 public class TeleopState extends State {
     private DriverGamepad driverGamepad;
     private OperatorGamepad operatorGamepad;
-    private Hardware h = Hardware.getInstance();
-    private Command zeroArm = new ZeroArm(); 
+    private Hardware hardware;
 
+    boolean noWrist = false;
     @Override
     public void init() {
         driverGamepad = new DriverGamepad(0);
         operatorGamepad = new OperatorGamepad(1);
-
-        zeroArm.init();
-        while (zeroArm.getStatus() != Status.STOP)
-           zeroArm.exec();
+        hardware = Hardware.getInstance();
+        //Reset ramp set in auto
+        hardware.rightDrive1.configClosedloopRamp(0, 10);
+        hardware.leftDrive1.configClosedloopRamp(0, 10);
         
+        hardware.leftDrive1.configPeakOutputForward(1, 10);
+        hardware.rightDrive1.configPeakOutputForward(1, 10);
+        hardware.leftDrive1.configPeakOutputReverse(-1, 10);
+        hardware.rightDrive1.configPeakOutputReverse(-1, 10);
         
-        Arm.configurePID();
-        
-        Robot.getInstance().hardware.rightDrive1.configClosedloopRamp(0, 10);
-        Robot.getInstance().hardware.leftDrive1.configClosedloopRamp(0, 10);
-        Robot.getInstance().hardware.rightDrive1.setNeutralMode(NeutralMode.Coast);
-        Robot.getInstance().hardware.leftDrive1.setNeutralMode(NeutralMode.Coast);
+        //Change motors to coast mode
+        hardware.rightDrive1.setNeutralMode(NeutralMode.Coast);
+        hardware.rightDrive2.setNeutralMode(NeutralMode.Coast);
+        hardware.leftDrive1.setNeutralMode(NeutralMode.Coast);
+        hardware.leftDrive2.setNeutralMode(NeutralMode.Coast);
 
     }
 
@@ -41,7 +40,17 @@ public class TeleopState extends State {
     public void exec() {
         driverGamepad.executeCommands();
         operatorGamepad.executeCommands();
-        System.out.println(Robot.getInstance().hardware.armExtendMotor.getSensorCollection().getQuadraturePosition());
+        
+        //If the drive hits that back button toggle the wrist moving backwards
+    	if (driverGamepad.getButton(GamepadEnum.BACK_BUTTON)){
+    		noWrist = !noWrist;
+    	}
+    	
+        if(noWrist){
+        	Arm.wristRotate(-90);
+        }else{
+        	Arm.levelWrist();
+        }
     }
 
     @Override

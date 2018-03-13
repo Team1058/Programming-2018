@@ -1,12 +1,13 @@
 package org.pvcpirates.frc2018.teleop;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+
+import static org.pvcpirates.frc2018.util.RobotMap.Constants.MAX_VELOCITY;
+
 import org.pvcpirates.frc2018.gamepads.BaseGamepad;
 import org.pvcpirates.frc2018.gamepads.GamepadEnum;
 import org.pvcpirates.frc2018.robot.subsystems.Drivetrain;
 import org.pvcpirates.frc2018.util.GamepadHelper;
-
-import static org.pvcpirates.frc2018.RobotMap.Constants.MAX_VELOCITY;
 
 public class DriveVelocity extends TeleopCommand {
     //FIXME PID REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE

@@ -1,6 +1,10 @@
-package org.pvcpirates.frc2018.commands;
+package org.pvcpirates.frc2018.autonomous;
 
-import org.pvcpirates.frc2018.autonomous.StartingLocation;
+import org.pvcpirates.frc2018.commands.Command;
+import org.pvcpirates.frc2018.commands.DriveFor;
+import org.pvcpirates.frc2018.commands.SpitCube;
+import org.pvcpirates.frc2018.commands.TurnToAngle;
+import org.pvcpirates.frc2018.commands.WristRotate;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
@@ -16,27 +20,26 @@ public class SwitchAuto extends Command {
 	public void init(){
 		configure();
 		super.init();
-		System.out.println("Bleh");
 	}
 
 	private void configure() {
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
-
+		
 
 		//CENTER START
 		if(location == StartingLocation.CENTER){
 			if(gameData.charAt(0) == 'L'){
-				commands.add(new DriveFor(20));
-				commands.add(new TurnToAngle(-45));
-				commands.add(new DriveFor(54.5));
+				commands.add(new DriveFor(30));
 				commands.add(new TurnToAngle(45));
-				commands.add(new DriveFor(74));
+				commands.add(new DriveFor(83));
+				commands.add(new TurnToAngle(-45));
+				commands.add(new DriveFor(35));
 			}else if(gameData.charAt(0) == 'R'){
-				commands.add(new DriveFor(20));
-				commands.add(new TurnToAngle(45));
-				commands.add(new DriveFor(54.5));
+				commands.add(new DriveFor(30));
 				commands.add(new TurnToAngle(-45));
-				commands.add(new DriveFor(74));
+				commands.add(new DriveFor(83));
+				commands.add(new TurnToAngle(45));
+				commands.add(new DriveFor(37));
 			}
 		}
 
@@ -44,7 +47,7 @@ public class SwitchAuto extends Command {
 		if(location == StartingLocation.RIGHT){
 			if(gameData.charAt(0) == 'R'){
 				commands.add(new DriveFor(172));
-				commands.add(new TurnToAngle(-90));
+				commands.add(new TurnToAngle(90));
 			}else if(gameData.charAt(0) == 'L'){
 				return;
 			}
@@ -53,13 +56,14 @@ public class SwitchAuto extends Command {
 		if(location == StartingLocation.LEFT){
 			if(gameData.charAt(0) == 'L'){
 				commands.add(new DriveFor(172));
-				commands.add(new TurnToAngle(-90));
+				commands.add(new TurnToAngle(90));
 			}else if(gameData.charAt(0) == 'R'){
 				return;
 			}
 		}
-
-		commands.add(new PivotArm(60));
+		
+		//commands.add(new PivotArm(60));
+		commands.add(new WristRotate(90));
 		commands.add(new SpitCube());
 	}
 }
