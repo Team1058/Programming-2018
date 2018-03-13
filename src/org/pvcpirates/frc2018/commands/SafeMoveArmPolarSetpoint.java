@@ -48,25 +48,21 @@ public class SafeMoveArmPolarSetpoint extends Command {
         if (Arm.getPivotAngle() <= angle + 3 && Arm.getPivotAngle() >= angle - 3) {
             this.setStatus(Status.STOP);
             this.finished();
-        }else if(inRange && Arm.getArmExtension() < ext-2 && inMin && zeroed ){
+        }else if(inRange && Arm.getArmExtension() < ext-2 && inMin && Math.abs(Arm.getPivotAngle()-angle)<90){
         	Arm.pivotArm(angle);
         	Arm.extendArm(ext);
         	System.out.println("waaaa");
         }else{
         	
-	        if (Arm.getArmExtension() < 4||(inRange&&inMin) && zeroed){
+	        if (Arm.getArmExtension() < 4||(inRange&&inMin&& Math.abs(Arm.getPivotAngle()-angle)<90)){
 	        	System.out.println("RUNRUNRUN"+angle);
 	    		Arm.pivotArm(angle);
 	        }else{
         		Arm.pivotArm(Arm.getPivotAngle());
         		System.out.println("gaaaa");
+                Arm.extendArm(0);
 	        }
-	        
-	        if(!(Arm.getPivotAngle() <=-38||Arm.getPivotAngle()>=215 )||!zeroed){
-	        	Arm.extendArm(0);
-	        	if (Arm.getArmExtension() < 4)
-	        		zeroed = true;
-	        }
+
 	        
         }
     }
