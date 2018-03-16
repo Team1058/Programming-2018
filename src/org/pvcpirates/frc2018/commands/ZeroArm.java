@@ -7,11 +7,10 @@ public class ZeroArm extends Command {
     public ZeroArm() {
         super();
         this.parallel = true;
+        //commands.add(new PivotArm(90));
         commands.add(new ZeroExtension());
         commands.add(new ZeroWrist());
-        //Pivot Upwards so full zero can occur
-        Arm.pivotArm(90);
-
+        
+        
     }
-
 }

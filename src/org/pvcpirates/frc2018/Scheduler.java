@@ -1,9 +1,17 @@
 package org.pvcpirates.frc2018;
 
+import org.pvcpirates.frc2018.autonomous.ScaleAuto;
 import org.pvcpirates.frc2018.autonomous.StartingLocation;
 import org.pvcpirates.frc2018.autonomous.SwitchAuto;
 import org.pvcpirates.frc2018.commands.Command;
 import org.pvcpirates.frc2018.commands.DriveFor;
+import org.pvcpirates.frc2018.commands.DriveForMM;
+import org.pvcpirates.frc2018.commands.ExtendArm;
+import org.pvcpirates.frc2018.commands.PivotArm;
+import org.pvcpirates.frc2018.commands.SpitCube;
+import org.pvcpirates.frc2018.commands.TurnToAngle;
+import org.pvcpirates.frc2018.commands.WristRotate;
+import org.pvcpirates.frc2018.commands.SpitCube.SPEEDS;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.robot.subsystems.Arm;
 import org.pvcpirates.frc2018.state.AutoState;
@@ -20,8 +28,19 @@ public class Scheduler extends IterativeRobot {
     
     @Override
     public void robotInit() {
-        autoChooser.addDefault("Drive Forward", new DriveFor(220));
+    	Command c = new Command();
+    	c.commands.add(new ExtendArm(31));
+    	c.commands.add(new PivotArm(83));
+    	c.commands.add(new WristRotate(20));
+    	Command b = new Command();
+    	b.parallel = false;
+    	b.commands.add(c);
+    	b.commands.add(new SpitCube(SPEEDS.HALF,false));
+        autoChooser.addDefault("Drive Forward", new DriveFor(259));
+        autoChooser.addObject("Drive Reverse", new DriveFor(-259));
         autoChooser.addObject("Nothing", new DriveFor(0));
+        autoChooser.addObject("ScaleRight", new ScaleAuto(StartingLocation.RIGHT));
+        autoChooser.addDefault("CCCC", b);
         autoChooser.addObject("Switch Auto Center", new SwitchAuto(StartingLocation.CENTER));
         
         SmartDashboard.putData("Auto Chooser",autoChooser);

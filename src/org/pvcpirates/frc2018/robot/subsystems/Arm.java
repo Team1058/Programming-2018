@@ -29,6 +29,7 @@ public class Arm extends BaseSubsystem {
 
     public static void wristRotate(double angleSetpoint) {
     	//allow for -90 to 90 range
+    	System.out.println("Reeee"+angleSetpoint);
         angleSetpoint += 90;
         angleSetpoint = ((angleSetpoint * RobotMap.Ranges.WRIST_ENCODER_MAX / 180.0));
         hardware.wristPivotMotor.set(ControlMode.Position, angleSetpoint);
@@ -67,7 +68,11 @@ public class Arm extends BaseSubsystem {
     	//subtract 90 to make arm behave like the unit circle
         return (hardware.armPivotMotor.getSensorCollection().getAnalogIn() * (180.0 / 512.0)) - 90;
     }
-
+    public static double getPivotAngleClosedLoopTarget() {
+    	//512 ticks in 180 degrees
+    	//subtract 90 to make arm behave like the unit circle
+        return (hardware.armPivotMotor.getClosedLoopTarget(0) * (180.0 / 512.0)) - 90;
+    }
     //min -425
     //max 929
     //horiz 757
@@ -132,4 +137,10 @@ public class Arm extends BaseSubsystem {
         // 2071 ticks per 180 degrees
         return (hardware.wristPivotMotor.getSensorCollection().getQuadraturePosition() * 180.0 / 2071.0) - 90;
     }
+    public static double getArmExtensionClosedLoopTarget() {
+    	//convert encoder ticks to inches (4096 encoder ticks per rotation)
+        return (hardware.armExtendMotor.getClosedLoopTarget(0) / 4096.0) * (SPROCKET_DIAMETER * Math.PI);
+    }
+
+
 }

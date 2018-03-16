@@ -14,7 +14,8 @@ public class TurnAnglePosition extends Command {
 	@Override
 	public void init() {
 		double feet =((angle/360.0)*(20.96*Math.PI));
-		drive = new DriveFor(feet,true);
+		
+		drive = new DriveFor(feet,-feet);
 		drive.init();
 		//pid must be after reeee
 		Drivetrain.setPIDF(.1, 0.0, 0, 0);

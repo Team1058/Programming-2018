@@ -15,17 +15,27 @@ public class MoveArmPolarPercent extends TeleopCommand {
 		// TODO Auto-generated constructor stub
 	}
 
+	boolean hold;
+	double extendo;
+	double pivoto;
 	@Override
 	public void exec() {
-		 if (Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1)) > .1)
-	            Hardware.getInstance().armExtendMotor.set(ControlMode.PercentOutput, GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1)); 
-	     if (Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1)) > .1)
-	    	 Hardware.getInstance().armExtendMotor.set(ControlMode.PercentOutput, GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1));
+		 if (Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1)) > .1){
+	            Hardware.getInstance().armExtendMotor.set(ControlMode.PercentOutput, -GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1));
+	            extendo=Arm.getArmExtension();
+	            hold = true;
+		 }
+	     if (Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1)) > .1){
+	    	 Hardware.getInstance().armPivotMotor.set(ControlMode.PercentOutput, GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1));
+	    	 pivoto=Arm.getPivotAngle();
+	    	 hold = true;
+	     }
 	        
-	        if (!Arm.running&&!((Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1)) > .1)||(Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1)) > .1))){
-	        	Arm.extendArm(Arm.getArmExtension());
-	        	Arm.pivotArm(Arm.getPivotAngle());
-	        }
+        if (hold&&!((Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1)) > .1)||(Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1)) > .1))){
+        	Arm.extendArm(extendo);
+        	Arm.pivotArm(pivoto);
+        	hold = false;
+        }
 	}
 	
 

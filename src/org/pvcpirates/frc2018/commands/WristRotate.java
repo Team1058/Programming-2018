@@ -7,10 +7,15 @@ import org.pvcpirates.frc2018.robot.subsystems.Grabber;
 public class WristRotate extends Command {
 
 	double degrees;
+	boolean sequential;
 	public WristRotate(double degrees) {
 		this.degrees = degrees;
+		sequential = false;
 	}
-
+	public WristRotate(double degrees,boolean sequential) {
+		this.degrees = degrees;
+		this.sequential = sequential;
+	}
 	@Override
 	public void init() {
 		setStatus(Status.EXEC);
@@ -23,8 +28,8 @@ public class WristRotate extends Command {
 		Grabber.closeGrabber();
 		//rotate
 		Arm.wristRotate(degrees);
-		
-		this.setStatus(Status.STOP);
+		if (sequential||(Arm.getWristAngle() > degrees-3 && Arm.getWristAngle() < degrees+3 ))
+			this.setStatus(Status.STOP);
 	}
 
 	@Override

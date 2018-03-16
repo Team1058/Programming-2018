@@ -25,31 +25,36 @@ public class TurnToAngle extends Command {
         Hardware.getInstance().leftDrive1.configPeakOutputReverse(-.65, 10);
         Hardware.getInstance().rightDrive1.configPeakOutputReverse(-.65, 10);
         
-
     }
 
     @Override
     public void exec() {
-    	sign = (int) (Math.abs(goal-current)/(goal-current));
-    	current = Hardware.getInstance().navx.getAngle()+1;
-    	if (!init){
-    		init = true;
-    		goal+= current;
-    	}
-        double output = 0;
-        System.out.println("goal"+goal);
-        System.out.println("NAVX"+current);
-        System.out.println("Diff: "+(goal-current));
-        
-        if (Math.abs(goal - current) < 10) {
-            this.setStatus(Status.STOP);
-            this.finished();
-        } else {
-        	
-            output = 3.5*(Math.abs(goal - current) / goal);
-            System.out.println("out"+Hardware.getInstance().leftDrive1.getMotorOutputPercent());
-            System.out.println("SANITY"+output);
-            Drivetrain.setDrive(ControlMode.PercentOutput,sign*-output, sign*-output);
+    	if (this.status != Status.STOP){
+	    	sign = (int) (Math.abs(goal-current)/(goal-current));
+	    	System.out.println("Sign "+sign);
+	    	current = Hardware.getInstance().navx.getAngle()+1;
+	    	if (!init){
+	    		init = true;
+	    		goal+= current;
+	    	}
+	        double output = 0;
+	        System.out.println("goal"+goal);
+	        System.out.println("NAVX"+current);
+	        System.out.println("Diff: "+(goal-current));
+	        
+	        if (Math.abs(goal - current) < 5) {
+	            this.setStatus(Status.STOP);
+	            this.finished();
+	        } else {
+	            output = Math.abs(3*(Math.abs(goal - current) / goal));
+	            System.out.println("out"+Hardware.getInstance().leftDrive1.getMotorOutputPercent());
+	            System.out.println("SANITY"+output);
+	            if (sign == -1)
+	            	Drivetrain.setDrive(ControlMode.PercentOutput,output, output);
+	            else
+	            	Drivetrain.setDrive(ControlMode.PercentOutput,-output, -output);
+	        }
+	        
         }
     }
 
