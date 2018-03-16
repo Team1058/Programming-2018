@@ -8,6 +8,8 @@ import org.pvcpirates.frc2018.robot.subsystems.Arm;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
+import edu.wpi.first.wpilibj.CameraServer;
+
 public class TeleopState extends State {
     private DriverGamepad driverGamepad;
     private OperatorGamepad operatorGamepad;
@@ -33,24 +35,30 @@ public class TeleopState extends State {
         hardware.rightDrive2.setNeutralMode(NeutralMode.Coast);
         hardware.leftDrive1.setNeutralMode(NeutralMode.Coast);
         hardware.leftDrive2.setNeutralMode(NeutralMode.Coast);
-
+        
+        
+        hardware.leftDrive1.getSensorCollection().setQuadraturePosition(0, 10);
+        hardware.rightDrive1.getSensorCollection().setQuadraturePosition(0, 10);
+        
     }
 
     @Override
     public void exec() {
         driverGamepad.executeCommands();
         operatorGamepad.executeCommands();
+        //System.out.println("Angle of arm "+Arm.getPivotAngle());
+ 
+        /*System.out.println("Arm "+Arm.getPivotAngle());
+        if (Arm.getPivotAngle() < 85)
+            System.out.println("Less "+Arm.getPivotAngle());
+        else if (Arm.getPivotAngle() > 95)
+            System.out.println("Greater "+(Arm.getPivotAngle() - 180));
+        System.out.println("Wrist "+Arm.getWristAngle());*/
         
-        //If the drive hits that back button toggle the wrist moving backwards
-    	if (driverGamepad.getButton(GamepadEnum.BACK_BUTTON)){
-    		noWrist = !noWrist;
-    	}
+        System.out.println("L: "+hardware.leftDrive1.getSensorCollection().getQuadraturePosition());
+        System.out.println("R: "+hardware.rightDrive1.getSensorCollection().getQuadraturePosition());
+        
     	
-        if(noWrist){
-        	Arm.wristRotate(-90);
-        }else{
-        	Arm.levelWrist();
-        }
     }
 
     @Override

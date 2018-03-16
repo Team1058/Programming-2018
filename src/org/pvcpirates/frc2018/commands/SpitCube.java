@@ -5,8 +5,19 @@ import org.pvcpirates.frc2018.robot.subsystems.Arm;
 import org.pvcpirates.frc2018.robot.subsystems.Grabber;
 
 public class SpitCube extends Command {
-
+	public static enum SPEEDS{
+		FULL,HALF,QUARTER;
+	}
+	SPEEDS speed;
+	boolean open;
 	public SpitCube() {
+		speed = SPEEDS.QUARTER;
+		open = true;
+	}
+	
+	public SpitCube(SPEEDS speed,boolean open){
+		this.speed = speed;
+		this.open = open;
 	}
 	@Override
 	public void init() {
@@ -16,11 +27,16 @@ public class SpitCube extends Command {
 
 	@Override					  
 	public void exec()				{
-		if (Arm.getWristAngle()>80){
-		Grabber.outtakeRollers();
-		Grabber.openGrabber();
-		setStatus(Status.STOP);		
+		//if (Arm.getWristAngle()>80){
+		switch(speed){
+		case QUARTER:Grabber.outtakeRollersQuarter();break;
+		case HALF:Grabber.outtakeRollersHalf();break;
+		case FULL:Grabber.outtakeRollers();break;
 		}
+		if (open)
+			Grabber.openGrabber();
+		setStatus(Status.STOP);		
+		//}
 		
 									}
 

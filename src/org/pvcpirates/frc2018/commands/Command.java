@@ -4,10 +4,10 @@ import org.pvcpirates.frc2018.Status;
 
 import java.util.LinkedList;
 
-public abstract class Command {
+public class Command {
 
     public LinkedList<Command> commands;
-    protected boolean parallel = false;
+    public boolean parallel = false;
     Status status = Status.INIT;
     private Command current;
 
@@ -67,7 +67,7 @@ public abstract class Command {
         return this.status;
     }
 
-    protected void setStatus(Status status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

@@ -20,7 +20,6 @@ public class MoveToSetpoint extends TeleopCommand {
     @Override
     public void exec() {
     	//Level the wrist after a setpoint is hit
-    	Arm.levelWrist();
         if (gamepad.getButton(GamepadEnum.A_BUTTON)) {
             //Intake Forward
             moveSetpoint.set(22, -60);
@@ -32,7 +31,7 @@ public class MoveToSetpoint extends TeleopCommand {
             moveSetpoint.set(18, 72);
         } else if (gamepad.getButton(GamepadEnum.Y_BUTTON)) {
             //Scale High Front
-        	moveSetpoint.set(31, 83,60);
+        	moveSetpoint.set(31, 83,20);
         } else if (gamepad.getDpad(GamepadEnum.DPAD_DOWN)) {
             //Intake Backward
             moveSetpoint.set(22, 240);
@@ -44,16 +43,14 @@ public class MoveToSetpoint extends TeleopCommand {
             moveSetpoint.set(18, 108);
         } else if (gamepad.getDpad(GamepadEnum.DPAD_UP)) {
         	//Scale High Backward
-            moveSetpoint.set(31, 97,-60);
+            moveSetpoint.set(31, 97,-20);
         }else if(gamepad.getTrigger(GamepadEnum.LEFT_TRIGGER)){
+        	if (zeroArm.getStatus() == Status.STOP)
+        		zeroArm = new ZeroArm();        	
         	zeroArm.exec();
+        	
         }else if (moveSetpoint.getStatus() == Status.EXEC){
         	moveSetpoint.exec();
-        	Arm.running = true;
-        }else{
-        	Arm.running = false;
         }
-
-
     }
 }

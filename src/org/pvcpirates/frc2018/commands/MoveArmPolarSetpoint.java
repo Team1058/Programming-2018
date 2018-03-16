@@ -8,14 +8,23 @@ public class MoveArmPolarSetpoint extends Command {
     private double ext;
     private double angle;
     private boolean inMin;
-    private double wrist = -100000;
+    private double wrist;
+    private boolean levelWrist = false;
     public MoveArmPolarSetpoint(double ext, double angle) {
         this.ext = ext;
         this.angle = angle;
+        levelWrist = true;
         init();
+        
     }
 
     public MoveArmPolarSetpoint(){
+    	init();
+    }
+    
+    public MoveArmPolarSetpoint(double ext, double angle,double wrist){
+    	this.wrist = wrist;
+    	levelWrist = false;
     	init();
     }
     
@@ -30,6 +39,7 @@ public class MoveArmPolarSetpoint extends Command {
         this.setStatus(Status.EXEC);
         inMin = (angle <=-33||angle>=205);
         this.wrist = -100000;
+        levelWrist = true;
     }
     public void set(double ext, double angle,double wrist) {
         this.ext = ext;
@@ -37,11 +47,13 @@ public class MoveArmPolarSetpoint extends Command {
         this.setStatus(Status.EXEC);
         inMin = (angle <=-33||angle>=205);
         this.wrist = wrist;
+        levelWrist = false;
     }
     
     @Override
     public void exec() {
     	boolean inRange =(Arm.getPivotAngle() <=-33||Arm.getPivotAngle()>=205);
+    	Arm.levelWrist();
         if (Arm.getPivotAngle() <= angle + 4 && Arm.getPivotAngle() >= angle - 4) {
             //this.setStatus(Status.STOP);
             if (Math.abs(Arm.getArmExtension() - ext) < 5){
@@ -72,10 +84,14 @@ public class MoveArmPolarSetpoint extends Command {
     	System.out.println("EXTENDO");
         
     	Arm.pivotArm(angle);
-        
-        if (wrist !=-100000){
+        if (levelWrist){
+        	Arm.levelWrist();
+        	System.out.println("NOOOO");
+        }else{
+        	System.out.println("Wrist "+wrist);
         	Arm.wristRotate(wrist);
         }
+        levelWrist = true;
     }
 
 
