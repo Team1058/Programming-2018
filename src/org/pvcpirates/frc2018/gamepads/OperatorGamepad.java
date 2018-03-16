@@ -16,8 +16,8 @@ public class OperatorGamepad extends BaseGamepad {
         teleopCommands.add(new CubeGrabber(this));
         //Manual Movement
         teleopCommands.add(new MoveArmPolar(this));
-        //TODO: COMMENT ME
-        teleopCommands.add(new MoveToSetpoint(this));
+        //Old Setpoints
+        //teleopCommands.add(new MoveToSetpoint(this));
        
     }
 }
