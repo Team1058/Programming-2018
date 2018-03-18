@@ -17,15 +17,17 @@ public class DriveOpenLoop extends TeleopCommand {
 
     @Override
     public void exec() {
-        double fb = GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1);
-        double lr = GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_X), .1);
+        double fb = GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .15);
+        double lr = GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_X), .15);
 
         double lspd = fb - lr;
         double rspd = fb + lr;
-        if (!gamepad.getButton(GamepadEnum.LEFT_BUMPER))
+        if (gamepad.getButton(GamepadEnum.LEFT_BUMPER))
+        	Drivetrain.setDrive(ControlMode.PercentOutput, lspd*.5, -rspd*.5);
+        else if (gamepad.getButton(GamepadEnum.RIGHT_BUMPER))
         	Drivetrain.setDrive(ControlMode.PercentOutput, lspd, -rspd);
         else
-        	Drivetrain.setDrive(ControlMode.PercentOutput, lspd*.5, -rspd*.5);
+        	Drivetrain.setDrive(ControlMode.PercentOutput, lspd*.85, -rspd*.85);
     }
 
 }

@@ -15,7 +15,7 @@ public class Arm extends BaseSubsystem {
 
     public static void configurePID() {
         Hardware.setPIDF(16, 0, 0, 0, hardware.armPivotMotor);
-        Hardware.setPIDF(.7, 0, 0, 0, hardware.armExtendMotor);
+        Hardware.setPIDF(.455, 0, 0, 0, hardware.armExtendMotor);
         Hardware.setPIDF(1.8, 0, 0, 0, hardware.wristPivotMotor);
     }
 

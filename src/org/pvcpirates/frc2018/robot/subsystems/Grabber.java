@@ -4,6 +4,7 @@ import org.pvcpirates.frc2018.robot.Hardware;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
@@ -11,8 +12,8 @@ public class Grabber extends BaseSubsystem {
 
     private static Hardware hardware = Hardware.getInstance();
     private static final DoubleSolenoid solenoid = hardware.cubeGrabberSolenoid;
-    private static final TalonSRX rightMotor = hardware.rightCubeGrabMotor;
-    private static final TalonSRX leftMotor = hardware.leftCubeGrabMotor;
+    private static final VictorSPX rightMotor = hardware.rightCubeGrabMotor;
+    private static final VictorSPX leftMotor = hardware.leftCubeGrabMotor;
 
     public static void openGrabber() {
         solenoid.set(DoubleSolenoid.Value.kForward);

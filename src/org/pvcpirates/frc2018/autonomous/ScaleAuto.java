@@ -2,6 +2,8 @@ package org.pvcpirates.frc2018.autonomous;
 
 import org.pvcpirates.frc2018.commands.Command;
 import org.pvcpirates.frc2018.commands.DriveFor;
+import org.pvcpirates.frc2018.commands.DriveForGyro;
+import org.pvcpirates.frc2018.commands.DriveForMM;
 import org.pvcpirates.frc2018.commands.ExtendArm;
 import org.pvcpirates.frc2018.commands.MoveArmPolarSetpoint;
 import org.pvcpirates.frc2018.commands.PivotArm;
@@ -37,29 +39,40 @@ public class ScaleAuto extends Command {
 		//RIGHT START
 		if(location == StartingLocation.RIGHT){
 			if(gameData.charAt(1) == 'R'){
-				commands.add(new DriveFor(269));
+				commands.add(new DriveForGyro(269));
 				commands.add(new TurnToAngle(-45));
 				commands.add(c);
+				commands.add(new SpitCube(SPEEDS.HALF,false));
 				
 			}else if(gameData.charAt(1) == 'L'){
-				commands.add(new DriveFor(228));
+				commands.add(new DriveForGyro(228));
 				commands.add(new TurnToAngle(-90));
-				
+				//FIND MEEEEE
+				commands.add(new DriveForGyro(190));
+				commands.add(new TurnToAngle(0));
+				commands.add(new DriveForGyro(41));
 			}
 		}
 
 		if(location == StartingLocation.LEFT){
 			if(gameData.charAt(1) == 'L'){
-				commands.add(new DriveFor(269));
-				commands.add(new TurnToAngle(45));
+				commands.add(new DriveForGyro(249));
+				commands.add(new TurnToAngle(20));
 				commands.add(c);
+				commands.add(new SpitCube(SPEEDS.FULL,false));
 				
 			}else if(gameData.charAt(1) == 'R'){
-				
+				//commands.add(new DriveForGyro(228));
+				commands.add(new DriveForGyro(40));
+				commands.add(new TurnToAngle(90));
+				//FIND MEEEEE
+				commands.add(new DriveForGyro(190));
+				//commands.add(new TurnToAngle(0));
+				//commands.add(new DriveForGyro(41));
 				
 			}
 		}
-		commands.add(new SpitCube(SPEEDS.HALF,false));
+		
 		
 	}
 }

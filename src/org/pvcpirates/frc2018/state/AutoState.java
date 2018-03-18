@@ -6,10 +6,9 @@ import org.pvcpirates.frc2018.autonomous.AutoCommandFactory;
 import org.pvcpirates.frc2018.commands.Command;
 import org.pvcpirates.frc2018.commands.ZeroArm;
 import org.pvcpirates.frc2018.robot.Hardware;
-import org.pvcpirates.frc2018.robot.Robot;
-import org.pvcpirates.frc2018.robot.subsystems.Arm;
 import org.pvcpirates.frc2018.robot.subsystems.Grabber;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 public class AutoState extends State {
@@ -28,13 +27,17 @@ public class AutoState extends State {
 		//Zero Arm
 		zeroArm = new ZeroArm();
 		zeroArm.init();
-		while (zeroArm.getStatus() != Status.STOP)
+		Hardware.getInstance().navx.reset();
+		while (zeroArm.getStatus() != Status.STOP || Hardware.getInstance().navx.isCalibrating())
 			zeroArm.exec();
 		//Hold cube during auto
 		Grabber.closeGrabber();
 		Grabber.holdRollers();
 		
-		
+		Hardware.getInstance().leftDrive1.configPeakOutputForward(.45, 0);
+		Hardware.getInstance().rightDrive1.configPeakOutputForward(.42, 0);
+        Hardware.getInstance().leftDrive1.configPeakOutputReverse(-.45, 0);
+        Hardware.getInstance().rightDrive1.configPeakOutputReverse(-.42, 0);
 		Scheduler.autoChooser.getSelected().init();
 		
 	}
@@ -43,7 +46,6 @@ public class AutoState extends State {
 	public void exec() {
 		Scheduler.autoChooser.getSelected().exec();
 		//System.out.println("Inches "+((Hardware.getInstance().rightDrive1.getSensorCollection().getQuadraturePosition()/(1024 * 11.25))*(6 * Math.PI)));
-		
 	}
 
 	@Override

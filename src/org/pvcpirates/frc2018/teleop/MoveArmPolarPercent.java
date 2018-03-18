@@ -20,17 +20,18 @@ public class MoveArmPolarPercent extends TeleopCommand {
 	double pivoto;
 	@Override
 	public void exec() {
-		 if (Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1)) > .1){
+		if(gamepad.getButton(GamepadEnum.LEFT_BUMPER)){
+		 if (Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .15)) > .15){
 	            Hardware.getInstance().armExtendMotor.set(ControlMode.PercentOutput, -GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1));
 	            extendo=Arm.getArmExtension();
 	            hold = true;
 		 }
-	     if (Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1)) > .1){
+	     if (Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .15)) > .15){
 	    	 Hardware.getInstance().armPivotMotor.set(ControlMode.PercentOutput, GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1));
 	    	 pivoto=Arm.getPivotAngle();
 	    	 hold = true;
 	     }
-	        
+		}    
         if (hold&&!((Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1)) > .1)||(Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1)) > .1))){
         	Arm.extendArm(extendo);
         	Arm.pivotArm(pivoto);

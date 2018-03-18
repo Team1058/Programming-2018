@@ -49,7 +49,7 @@ public class Hardware {
     
     public final ADXL345_I2C wristAccel = new ADXL345_I2C(I2C.Port.kOnboard, Range.k4G);
 
-    public final UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+    //public final UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 
     public final DoubleSolenoid cubeGrabberSolenoid = new DoubleSolenoid(RobotMap.PneumaticIds.GRABBER_1,
             RobotMap.PneumaticIds.GRABBER_2);
@@ -76,11 +76,11 @@ public class Hardware {
         rightDrive2.setSensorPhase(false);
 
 
-        rightDrive1.setInverted(false);
-        rightDrive2.setInverted(false);
+        rightDrive1.setInverted(true);
+        rightDrive2.setInverted(true);
         
-        leftDrive1.setInverted(false);
-        leftDrive2.setInverted(false);
+        leftDrive1.setInverted(true);
+        leftDrive2.setInverted(true);
         
         
         leftDrive1.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);

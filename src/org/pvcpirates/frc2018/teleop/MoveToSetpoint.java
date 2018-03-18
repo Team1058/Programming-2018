@@ -5,7 +5,6 @@ import org.pvcpirates.frc2018.commands.MoveArmPolarSetpoint;
 import org.pvcpirates.frc2018.commands.ZeroArm;
 import org.pvcpirates.frc2018.gamepads.BaseGamepad;
 import org.pvcpirates.frc2018.gamepads.GamepadEnum;
-import org.pvcpirates.frc2018.robot.subsystems.Arm;
 
 public class MoveToSetpoint extends TeleopCommand {
 

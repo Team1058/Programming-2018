@@ -37,7 +37,7 @@ public class MoveArmPolarSetpoint extends Command {
         this.ext = ext;
         this.angle = angle;
         this.setStatus(Status.EXEC);
-        inMin = (angle <=-33||angle>=205);
+        inMin = (angle <=-25||angle>=195);
         this.wrist = -100000;
         levelWrist = true;
     }
@@ -45,16 +45,16 @@ public class MoveArmPolarSetpoint extends Command {
         this.ext = ext;
         this.angle = angle;
         this.setStatus(Status.EXEC);
-        inMin = (angle <=-33||angle>=205);
+        inMin = (angle <=-25||angle>=195);
         this.wrist = wrist;
         levelWrist = false;
     }
     
     @Override
     public void exec() {
-    	boolean inRange =(Arm.getPivotAngle() <=-33||Arm.getPivotAngle()>=205);
+	boolean inRange =(Arm.getPivotAngle() <=-25||Arm.getPivotAngle()>=195);
     	Arm.levelWrist();
-        if (Arm.getPivotAngle() <= angle + 4 && Arm.getPivotAngle() >= angle - 4) {
+        if (Arm.getPivotAngle() <= angle + 10 && Arm.getPivotAngle() >= angle - 10) {
             //this.setStatus(Status.STOP);
             if (Math.abs(Arm.getArmExtension() - ext) < 5){
             	this.setStatus(Status.STOP);

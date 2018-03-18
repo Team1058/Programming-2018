@@ -77,11 +77,11 @@ public class DriveFor extends Command {
 	    	
 	    	
 	    	if(direction == -1){
-	    		rInRange = (rEnc < encTicksR + 1000); 
-		    	lInRange = (lEnc < encTicksL + 1000); 
+	    		rInRange = (rEnc < encTicksR + 1500); 
+		    	lInRange = (lEnc < encTicksL + 1500); 
 	    	}else{
-	    		rInRange = (rEnc > encTicksR - 1000); 
-		    	lInRange = (lEnc > encTicksL - 1000);
+	    		rInRange = (rEnc > encTicksR - 1500); 
+		    	lInRange = (lEnc > encTicksL - 1500);
 	    	}
 	    	System.out.println("encTicksR "+encTicksR);
 	    	System.out.println("R"+rEnc);
