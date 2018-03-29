@@ -7,6 +7,7 @@ import org.pvcpirates.frc2018.commands.Command;
 import org.pvcpirates.frc2018.commands.DriveFor;
 import org.pvcpirates.frc2018.commands.DriveForGyro;
 import org.pvcpirates.frc2018.commands.DriveForMM;
+import org.pvcpirates.frc2018.commands.DrivePath;
 import org.pvcpirates.frc2018.commands.ExtendArm;
 import org.pvcpirates.frc2018.commands.PivotArm;
 import org.pvcpirates.frc2018.commands.SpitCube;
@@ -23,6 +24,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import jaci.pathfinder.Waypoint;
 
 public class Scheduler extends IterativeRobot {
 
@@ -31,12 +33,13 @@ public class Scheduler extends IterativeRobot {
     Command c;
     @Override
     public void robotInit() {
-    	 
+    	Waypoint[] wp = {new Waypoint(0,0,0)};
         autoChooser.addObject("Drive Forward", new DriveForGyro(259));
         autoChooser.addDefault("Nothing", new DriveFor(0));
         autoChooser.addObject("ScaleRight", new ScaleAuto(StartingLocation.RIGHT));
         autoChooser.addObject("ScaleLeft", new ScaleAuto(StartingLocation.LEFT));
         autoChooser.addObject("Switch Auto Center", new SwitchAuto(StartingLocation.CENTER));
+        autoChooser.addObject("MP", new DrivePath(wp));
         //autoChooser.addObject("TURN RIGHT", new TurnToAngle(90));
        
         SmartDashboard.putData("Auto Chooser",autoChooser);

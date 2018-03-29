@@ -12,16 +12,24 @@ import org.pvcpirates.frc2018.robot.subsystems.Drivetrain;
 public class DriveForGyro extends Command{
     private double inches;
     private double encTicks;
+    private double r;
+    private double l;
     private double start;
     private boolean init;
     private double maxOutput =.75;
 double direction;
+	double angle;
+	boolean diffAngle;
+	
 Hardware h = Hardware.getInstance();
     public DriveForGyro(double inches) {
         this.inches = inches;
+        diffAngle = false;
     }
-
-
+    public DriveForGyro(double inches,double angle) {
+        this.inches = inches;
+        diffAngle = true;
+    }
     @Override
     public void init() {
         //FIXME TUNE PID
@@ -37,6 +45,18 @@ Hardware h = Hardware.getInstance();
         init = false;
         setStatus(Status.EXEC);
         direction = (int) (Math.abs(inches)/inches);
+        l = encTicks;
+        r = encTicks;
+    }
+    public void setAngle(double angle){
+    	this.angle = angle;
+    	this.setStatus(Status.EXEC);
+ 
+    }
+    public void setPosition(double l, double r){
+    	this.l = l;
+    	this.r = r;
+    	this.setStatus(Status.EXEC);
     }
 
     @Override
@@ -48,15 +68,18 @@ Hardware h = Hardware.getInstance();
 	        double rightOutput = .5;
 	        //Balancing constant
 	        if (!init){
-	        	start =h.navx.getAngle();
+	        	if (diffAngle)
+	        		start = angle;
+	        	else
+	        		start =h.navx.getAngle();
 	        	init = true;
 	        }
 	        double Kp = .00003;
 	        double KGp = .05;
 	        double current = h.navx.getAngle();
 	        
-	        leftOutput = Kp*(encTicks-lEnc);
-	       rightOutput = Kp*(encTicks+rEnc);
+	        leftOutput = Kp*(l-lEnc);
+	       rightOutput = Kp*(r+rEnc);
 	       
 	       if(leftOutput>maxOutput){
 	    	   leftOutput = maxOutput;
