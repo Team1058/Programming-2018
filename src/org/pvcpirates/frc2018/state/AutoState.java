@@ -17,6 +17,7 @@ public class AutoState extends State {
 
 	@Override
 	public void init() {
+		System.out.println("========================================================");
 		Hardware.getInstance().leftDrive1.getSensorCollection().setQuadraturePosition(0, 10);
 		Hardware.getInstance().rightDrive1.getSensorCollection().setQuadraturePosition(0, 10);
 		zeroArm = new ZeroArm();

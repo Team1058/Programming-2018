@@ -6,9 +6,12 @@ import org.pvcpirates.frc2018.commands.DriveFor;
 import org.pvcpirates.frc2018.commands.SwitchAuto;
 import org.pvcpirates.frc2018.commands.TurnAnglePosition;
 import org.pvcpirates.frc2018.commands.TurnToAngle;
+import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.state.AutoState;
 import org.pvcpirates.frc2018.state.TeleopState;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -43,6 +46,7 @@ public class Scheduler extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
         robot.state.exec();
+        System.out.println("LIM: "+Hardware.getInstance().armExtendMotor.getSensorCollection().isRevLimitSwitchClosed());
     }
 
     @Override
