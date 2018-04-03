@@ -16,22 +16,22 @@ public class MoveArmSetpoints extends TeleopCommand {
 
     @Override
     public void exec() {
-        run = true;
-        //FIXME SETPOINTS NEED TO BE DID
-        if (gamepad.getButton(GamepadEnum.A_BUTTON))
-            setpoint = 40;
-        else if (gamepad.getButton(GamepadEnum.B_BUTTON))
-            setpoint = 10;
-        else
-            run = false;
-
-        if (run) {
-            if (currCommand.getStatus() == Status.EXEC)
-                currCommand.finished();
-            else if (currCommand.height != setpoint)
-                currCommand = new MoveArmPerimeter(setpoint);
-            currCommand.exec();
-        }
+//        run = true;
+//        //FIXME SETPOINTS NEED TO BE DID
+//        if (gamepad.getButton(GamepadEnum.A_BUTTON))
+//            setpoint = 40;
+//        else if (gamepad.getButton(GamepadEnum.B_BUTTON))
+//            setpoint = 10;
+//        else
+//            run = false;
+//
+//        if (run) {
+//            if (currCommand.getStatus() == Status.EXEC)
+//                currCommand.finished();
+//            else if (currCommand.height != setpoint)
+//                currCommand = new MoveArmPerimeter(setpoint);
+//            currCommand.exec();
+//        }
 
     }
 }

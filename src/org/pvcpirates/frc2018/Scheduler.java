@@ -69,6 +69,7 @@ public class Scheduler extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         robot.state.exec();
+        System.out.println("Arm Angle: "+Arm.getPivotAngle());
     }
 
     @Override

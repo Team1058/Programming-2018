@@ -141,6 +141,14 @@ public class Arm extends BaseSubsystem {
     	//convert encoder ticks to inches (4096 encoder ticks per rotation)
         return (hardware.armExtendMotor.getClosedLoopTarget(0) / 4096.0) * (SPROCKET_DIAMETER * Math.PI);
     }
+    
+    public static double getMaxExtension(double angle){
+    	angle = Math.toRadians(angle);
+    	//inches
+    	double minExtension = 15;
+    	return (16+minExtension)/Math.cos(angle);
+    	
+    }
 
 
 }
