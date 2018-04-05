@@ -7,7 +7,6 @@ import org.pvcpirates.frc2018.commands.Command;
 import org.pvcpirates.frc2018.commands.DriveFor;
 import org.pvcpirates.frc2018.commands.DriveForGyro;
 import org.pvcpirates.frc2018.commands.DriveForMM;
-import org.pvcpirates.frc2018.commands.DrivePath;
 import org.pvcpirates.frc2018.commands.ExtendArm;
 import org.pvcpirates.frc2018.commands.PivotArm;
 import org.pvcpirates.frc2018.commands.SpitCube;
@@ -39,7 +38,6 @@ public class Scheduler extends IterativeRobot {
         autoChooser.addObject("ScaleRight", new ScaleAuto(StartingLocation.RIGHT));
         autoChooser.addObject("ScaleLeft", new ScaleAuto(StartingLocation.LEFT));
         autoChooser.addObject("Switch Auto Center", new SwitchAuto(StartingLocation.CENTER));
-        autoChooser.addObject("MP", new DrivePath(wp));
         //autoChooser.addObject("TURN RIGHT", new TurnToAngle(90));
        
         SmartDashboard.putData("Auto Chooser",autoChooser);

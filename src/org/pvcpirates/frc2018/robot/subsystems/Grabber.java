@@ -12,8 +12,8 @@ public class Grabber extends BaseSubsystem {
 
     private static Hardware hardware = Hardware.getInstance();
     private static final DoubleSolenoid solenoid = hardware.cubeGrabberSolenoid;
-    private static final VictorSPX rightMotor = hardware.rightCubeGrabMotor;
-    private static final VictorSPX leftMotor = hardware.leftCubeGrabMotor;
+    private static final TalonSRX rightMotor = hardware.rightCubeGrabMotor;
+    private static final TalonSRX leftMotor = hardware.leftCubeGrabMotor;
 
     public static void openGrabber() {
         solenoid.set(DoubleSolenoid.Value.kForward);
