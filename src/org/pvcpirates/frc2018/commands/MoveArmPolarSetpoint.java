@@ -10,6 +10,8 @@ public class MoveArmPolarSetpoint extends Command {
     private boolean inMin;
     private double wrist;
     private boolean levelWrist = false;
+    private double minAngle = -20;
+    private double maxAngle = 200;
     public MoveArmPolarSetpoint(double ext, double angle) {
         this.ext = ext;
         this.angle = angle;
@@ -31,13 +33,14 @@ public class MoveArmPolarSetpoint extends Command {
     @Override
     public void init() {
         this.setStatus(Status.INIT);
-        inMin = (angle <=-38||angle>=215);
+        inMin = (angle <=minAngle||angle>=maxAngle);
     }
     public void set(double ext, double angle) {
         this.ext = ext;
         this.angle = angle;
         this.setStatus(Status.EXEC);
-        inMin = (angle <=-25||angle>=195);
+
+        inMin = (angle <=minAngle||angle>=maxAngle);
         this.wrist = -100000;
         levelWrist = true;
     }
@@ -45,17 +48,22 @@ public class MoveArmPolarSetpoint extends Command {
         this.ext = ext;
         this.angle = angle;
         this.setStatus(Status.EXEC);
-        inMin = (angle <=-25||angle>=195);
+
+        inMin = (angle <=minAngle||angle>=maxAngle);
         this.wrist = wrist;
         levelWrist = false;
     }
     
     @Override
     public void exec() {
-	boolean inRange =(Arm.getPivotAngle() <=-25||Arm.getPivotAngle()>=195);
     	Arm.levelWrist();
-        if (Arm.getPivotAngle() <= angle + 10 && Arm.getPivotAngle() >= angle - 10) {
+
+    	boolean inRange =(Arm.getPivotAngle() <=minAngle||Arm.getPivotAngle()>=maxAngle);
+    	Arm.levelWrist();
+    	System.out.println("INOMINO: "+inMin + inRange);
+        if (Arm.getPivotAngle() <= angle + 4 && Arm.getPivotAngle() >= angle - 4) {
             //this.setStatus(Status.STOP);
+        	System.out.println("AAWWFWF");
             if (Math.abs(Arm.getArmExtension() - ext) < 5){
             	this.setStatus(Status.STOP);
             	this.finished();
@@ -67,11 +75,21 @@ public class MoveArmPolarSetpoint extends Command {
         	System.out.println("waaaa");
         }else{
         	
-	        if (Arm.getArmExtension() < 4||(inRange&&inMin&& Math.abs(Arm.getPivotAngle()-angle)<90)){
+	        if ((Arm.getArmExtension() < 4)||(inRange&&inMin&& Math.abs(Arm.getPivotAngle()-angle)<90&&Arm.getArmExtension() > 600)){
 	        	System.out.println("RUNRUNRUN"+angle);
-	    		Arm.pivotArm(angle);
+	        	if (inMin && !inRange)
+	        		Arm.pivotArm(angle < 90? minAngle:maxAngle);
+	        	else
+	        		Arm.pivotArm(angle);
 	        }else{
-        		Arm.pivotArm(Arm.getPivotAngle());
+	        	System.out.println("kill me pls");
+        		//Arm.extendArm(Arm.getArmExtensionClosedLoopTarget());
+	        	if (Arm.getPivotAngleClosedLoopTarget()<minAngle||Arm.getPivotAngleClosedLoopTarget()>maxAngle)
+	        		Arm.stopPivot();
+	        	else
+	        		//Arm.stopPivot();
+	        		Arm.pivotArm(Arm.getPivotAngleClosedLoopTarget());
+	        	
         		Arm.extendArm(0);
 	        }
 	        

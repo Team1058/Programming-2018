@@ -28,11 +28,13 @@ public class Arm extends BaseSubsystem {
     }
 
     public static void wristRotate(double angleSetpoint) {
-    	//allow for -90 to 90 range
-    	System.out.println("Reeee"+angleSetpoint);
+    	//allow for -90 to 90 range66
         angleSetpoint += 90;
         angleSetpoint = ((angleSetpoint * RobotMap.Ranges.WRIST_ENCODER_MAX / 180.0));
         hardware.wristPivotMotor.set(ControlMode.Position, angleSetpoint);
+    }
+    public static void stopPivot(){
+    	hardware.armPivotMotor.set(ControlMode.PercentOutput, 0);
     }
 
     public static void extendArm(double distance) {

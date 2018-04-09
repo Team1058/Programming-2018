@@ -34,10 +34,10 @@ public class AutoState extends State {
 		Grabber.closeGrabber();
 		Grabber.holdRollers();
 		
-		Hardware.getInstance().leftDrive1.configPeakOutputForward(.45, 0);
-		Hardware.getInstance().rightDrive1.configPeakOutputForward(.42, 0);
-        Hardware.getInstance().leftDrive1.configPeakOutputReverse(-.45, 0);
-        Hardware.getInstance().rightDrive1.configPeakOutputReverse(-.42, 0);
+		Hardware.getInstance().leftDrive1.configPeakOutputForward(1, 0);
+		Hardware.getInstance().rightDrive1.configPeakOutputForward(1, 0);
+        Hardware.getInstance().leftDrive1.configPeakOutputReverse(-1, 0);
+        Hardware.getInstance().rightDrive1.configPeakOutputReverse(-1, 0);
 		Scheduler.autoChooser.getSelected().init();
 		
 	}

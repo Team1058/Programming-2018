@@ -1,3 +1,4 @@
+
 package org.pvcpirates.frc2018.commands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -15,10 +16,16 @@ public class TurnToAngle extends Command {
     double goal;
     double current;
     boolean init;
+    double Kg;
     int sign = 1;
     
     public TurnToAngle(double goal) {
         this.goal = goal;
+        this.Kg = .2;
+    }
+    public TurnToAngle(double goal,double Kg) {
+        this.goal = goal;
+        this.Kg = Kg;
     }
 
     @Override
@@ -30,10 +37,10 @@ public class TurnToAngle extends Command {
         current = Hardware.getInstance().navx.getAngle()+1;
        // if (goal)
         setStatus(Status.EXEC);
-        Hardware.getInstance().leftDrive1.configPeakOutputForward(.65, 10);
-        Hardware.getInstance().rightDrive1.configPeakOutputForward(.65, 10);
-        Hardware.getInstance().leftDrive1.configPeakOutputReverse(-.65, 10);
-        Hardware.getInstance().rightDrive1.configPeakOutputReverse(-.65, 10);
+        Hardware.getInstance().leftDrive1.configPeakOutputForward(.35, 10);
+        Hardware.getInstance().rightDrive1.configPeakOutputForward(.35, 10);
+        Hardware.getInstance().leftDrive1.configPeakOutputReverse(-.35, 10);
+        Hardware.getInstance().rightDrive1.configPeakOutputReverse(-.35, 10);
         
     }
 
@@ -49,11 +56,11 @@ public class TurnToAngle extends Command {
 	        System.out.println("NAVX"+current);
 	        System.out.println("Diff: "+(goal-current));
 	        
-	        if (Math.abs(goal - current) < 2.5/*&&Hardware.getInstance().getInstance().leftDrive1.getSensorCollection().getQuadratureVelocity()>1000*/) {
+	        if (Math.abs(goal - current) < 2.3&&Hardware.getInstance().leftDrive1.getMotorOutputPercent()<.3/*&&Hardware.getInstance().getInstance().leftDrive1.getSensorCollection().getQuadratureVelocity()>1000*/) {
 	            this.setStatus(Status.STOP);
 	            this.finished();
 	        } else {
-	            output = Math.abs(.2*(goal - current));
+	            output = Math.abs(Kg*(goal - current));
 	            System.out.println("out"+Hardware.getInstance().leftDrive1.getMotorOutputPercent());
 	            System.out.println("SANITY"+output);
 	            if (sign == -1){

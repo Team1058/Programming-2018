@@ -2,6 +2,7 @@ package org.pvcpirates.frc2018.autonomous;
 
 import org.pvcpirates.frc2018.commands.Command;
 import org.pvcpirates.frc2018.commands.DriveFor;
+import org.pvcpirates.frc2018.commands.DriveForGyro;
 import org.pvcpirates.frc2018.commands.DriveForMM;
 import org.pvcpirates.frc2018.commands.PivotArm;
 import org.pvcpirates.frc2018.commands.SpitCube;
@@ -26,30 +27,29 @@ public class SwitchAuto extends Command {
 
 	private void configure() {
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
-		
-
+		double Kp=.00012;
 		//CENTER START
 		if(location == StartingLocation.CENTER){
 			if(gameData.charAt(0) == 'L'){
-				commands.add(new DriveForMM(24));
+				commands.add(new DriveForGyro(14,Kp));
 				commands.add(new TurnToAngle(-38));
-				commands.add(new DriveForMM(75));
+				commands.add(new DriveForGyro(45,Kp));
 				
 				commands.add(new TurnToAngle(0));
 				commands.add(new PivotArm(0,true));
 				commands.add(new WristRotate(0,true));
-				commands.add(new DriveForMM(17));
+				commands.add(new DriveForGyro(17,Kp));
 				
 				
 			}else if(gameData.charAt(0) == 'R'){
-				commands.add(new DriveForMM(30));
+				commands.add(new DriveForGyro(30,Kp));
 				commands.add(new TurnToAngle(42));
-				commands.add(new DriveForMM(42));
+				commands.add(new DriveForGyro(42,Kp));
 				
 				commands.add(new TurnToAngle(0));
 				commands.add(new PivotArm(0,true));
 				commands.add(new WristRotate(0,true));
-				commands.add(new DriveForMM(50));
+				commands.add(new DriveForGyro(50,Kp));
 				
 			}
 		}

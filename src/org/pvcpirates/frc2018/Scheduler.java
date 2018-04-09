@@ -32,14 +32,22 @@ public class Scheduler extends IterativeRobot {
     Command c;
     @Override
     public void robotInit() {
-    	Waypoint[] wp = {new Waypoint(0,0,0)};
-        autoChooser.addObject("Drive Forward", new DriveForGyro(259));
-        autoChooser.addDefault("Nothing", new DriveFor(0));
+    	Command c = new Command();
+    	c.commands.add(new ExtendArm(31));
+    	c.commands.add(new PivotArm(83));
+    	c.commands.add(new WristRotate(20));
+    	Command b = new Command();
+    	
+    	b.parallel = false;
+    	b.commands.add(c);
+    	b.commands.add(new SpitCube(SPEEDS.HALF,false));
+    	
+        autoChooser.addDefault("Drive Forward", new DriveFor(259));
+        autoChooser.addObject("Drive Reverse", new DriveForGyro(-40));
+        autoChooser.addObject("Nothing", new DriveFor(0));
         autoChooser.addObject("ScaleRight", new ScaleAuto(StartingLocation.RIGHT));
         autoChooser.addObject("ScaleLeft", new ScaleAuto(StartingLocation.LEFT));
         autoChooser.addObject("Switch Auto Center", new SwitchAuto(StartingLocation.CENTER));
-        //autoChooser.addObject("TURN RIGHT", new TurnToAngle(90));
-       
         SmartDashboard.putData("Auto Chooser",autoChooser);
         
         Arm.configurePID();

@@ -2,7 +2,7 @@ package org.pvcpirates.frc2018.state;
 
 import org.pvcpirates.frc2018.gamepads.DriverGamepad;
 import org.pvcpirates.frc2018.gamepads.OperatorGamepad;
-import org.pvcpirates.frc2018.gamepads.VJoyEnum;
+
 import org.pvcpirates.frc2018.gamepads.VJoyKeyboard;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.subsystems.Arm;
@@ -50,6 +50,11 @@ public class TeleopState extends State {
         driverGamepad.executeCommands();
         operatorGamepad.executeCommands();
         vJoyKeyboard.executeCommands();
+
+        
+        System.out.println("Angle of arm "+Arm.getPivotAngle());
+ 
+ 
     }
 
     @Override
