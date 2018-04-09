@@ -15,11 +15,11 @@ public class CubeGrabber extends TeleopCommand {
     
     @Override
     public void exec() {
-        if (gamepad.getButton(GamepadEnum.LEFT_BUMPER )) {
+        if (gamepad.getButton(GamepadEnum.RIGHT_BUMPER )) {
         	//Hold a cube
         	Grabber.holdRollers();
         	Grabber.closeGrabber();
-        } else if (gamepad.getTrigger(GamepadEnum.Y_BUTTON)) {
+        } else if (gamepad.getButton(GamepadEnum.Y_BUTTON)) {
             Grabber.openGrabber();
         } else if (gamepad.getButton(GamepadEnum.A_BUTTON)) {
             Grabber.outtakeRollers();

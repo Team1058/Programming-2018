@@ -88,8 +88,8 @@ public class Hardware {
         leftDrive2.setSensorPhase(false);
         
         rightDrive1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.Constants.ROBOT_TIMEOUT);
-        rightDrive1.setSensorPhase(false);
-        rightDrive2.setSensorPhase(false);
+        rightDrive1.setSensorPhase(true);
+        rightDrive2.setSensorPhase(true);
 
 
         rightDrive1.setInverted(true);

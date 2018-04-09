@@ -1,18 +1,19 @@
 package org.pvcpirates.frc2018.state;
 
 import org.pvcpirates.frc2018.gamepads.DriverGamepad;
-import org.pvcpirates.frc2018.gamepads.GamepadEnum;
 import org.pvcpirates.frc2018.gamepads.OperatorGamepad;
+
+import org.pvcpirates.frc2018.gamepads.VJoyKeyboard;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.subsystems.Arm;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-
-import edu.wpi.first.wpilibj.CameraServer;
 
 public class TeleopState extends State {
     private DriverGamepad driverGamepad;
     private OperatorGamepad operatorGamepad;
+    private VJoyKeyboard vJoyKeyboard;
     private Hardware hardware;
 
     boolean noWrist = false;
@@ -20,6 +21,8 @@ public class TeleopState extends State {
     public void init() {
         driverGamepad = new DriverGamepad(0);
         operatorGamepad = new OperatorGamepad(1);
+        vJoyKeyboard = new VJoyKeyboard(2);
+        
         hardware = Hardware.getInstance();
         //Reset ramp set in auto
         hardware.rightDrive1.configClosedloopRamp(0, 10);
@@ -46,19 +49,12 @@ public class TeleopState extends State {
     public void exec() {
         driverGamepad.executeCommands();
         operatorGamepad.executeCommands();
-        //System.out.println("Angle of arm "+Arm.getPivotAngle());
+        vJoyKeyboard.executeCommands();
+
+        
+        System.out.println("Angle of arm "+Arm.getPivotAngle());
  
-        /*System.out.println("Arm "+Arm.getPivotAngle());
-        if (Arm.getPivotAngle() < 85)
-            System.out.println("Less "+Arm.getPivotAngle());
-        else if (Arm.getPivotAngle() > 95)
-            System.out.println("Greater "+(Arm.getPivotAngle() - 180));
-        System.out.println("Wrist "+Arm.getWristAngle());*/
-        
-        System.out.println("L: "+hardware.leftDrive1.getSensorCollection().getQuadraturePosition());
-        System.out.println("R: "+hardware.rightDrive1.getSensorCollection().getQuadraturePosition());
-        
-    	
+ 
     }
 
     @Override

@@ -9,60 +9,122 @@ import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.robot.subsystems.Drivetrain;
 
-public class DriveForGyro extends Command{
-    private double inches;
-    private double encTicks;
+public class DriveForGyro extends Command {
+	private double inches;
+	private double encTicks;
+	private double lEncTicks;
+	private double rEncTicks;
+	private double start;
+	private boolean init;
+	private double maxOutput = .85;
+	private double Kp;
+	double direction;
+	Hardware h = Hardware.getInstance();
 
-    public DriveForGyro(double inches) {
-        this.inches = inches;
-    }
+	public DriveForGyro(double inches) {
+		this.inches = inches;
+		Kp =(Math.abs(inches) / inches)>=0? .000005:.0001;
+		
+	}
+	public DriveForGyro(double inches,double Kp) {
+		this.inches = inches;
+		this.Kp = Kp;
+	}
+	@Override
+	public void init() {
+		
+		encTicks = (inches / (6.0 * Math.PI)) * 1024.0 * (11.25);
+		// h.leftDrive1.getSensorCollection().setQuadraturePosition(0,
+		// ROBOT_TIMEOUT);
+		// h.rightDrive1.getSensorCollection().setQuadraturePosition(0,
+		// ROBOT_TIMEOUT);
+		// Manually change instead of super.init() b/c there is no command list
 
+		h.rightDrive1.configClosedloopRamp(0, 10);
+		h.leftDrive1.configClosedloopRamp(0, 10);
+		rEncTicks = encTicks;
+		lEncTicks = encTicks;
+		lEncTicks += h.leftDrive1.getSensorCollection().getQuadraturePosition();
+		rEncTicks -= h.rightDrive1.getSensorCollection().getQuadraturePosition();
+		init = false;
+		setStatus(Status.EXEC);
+		direction = (Math.abs(inches) / inches);
+	}
 
-    @Override
-    public void init() {
-        //FIXME TUNE PID
-        Drivetrain.setPIDF(.022, 0.0, 0, 0);
-        Hardware.setPIDF(0.027625, 0, 0, 0, Robot.getInstance().hardware.leftDrive1);
-        encTicks = (inches / (6 * Math.PI)) * 1024 * (17.3);
-        Robot.getInstance().hardware.leftDrive1.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);
-        Robot.getInstance().hardware.rightDrive1.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);
-        //Manually change instead of super.init() b/c there is no command list
+	@Override
+	public void exec() {
+		if (this.status != Status.STOP) {
+			double rEnc = h.rightDrive1.getSensorCollection().getQuadraturePosition();
+			double lEnc = h.leftDrive1.getSensorCollection().getQuadraturePosition();
+			double leftOutput = .5;
+			double rightOutput = .5;
+			// Balancing constant
+			System.out.println(" STARTO" + start);
+			if (!init) {
+				start = h.navx.getAngle();
 
-        Robot.getInstance().hardware.rightDrive1.configClosedloopRamp(.2, 10);
-        Robot.getInstance().hardware.leftDrive1.configClosedloopRamp(.2, 10);
+				init = true;
+			} else {
+				
+				
+				double KGp = .07;
+				double current = h.navx.getAngle();
 
-        setStatus(Status.EXEC);
-    }
+				leftOutput = Kp * (encTicks + direction*lEnc);
+				rightOutput = Kp * (encTicks - direction*rEnc);
 
-    @Override
-    public void exec() {
-        double leftOutput = 0;
-        double rightOutput = 0;
-        //Balancing constant
-        double Kp = 0;
-        double current = Robot.getInstance().hardware.navx.getYaw();
+				if (leftOutput > maxOutput) {
+					leftOutput = maxOutput;
 
-        Robot.getInstance().hardware.leftDrive1.set(ControlMode.Position, encTicks);
-        Robot.getInstance().hardware.rightDrive1.set(ControlMode.Position, -encTicks);
+				}
+				if (leftOutput < -maxOutput) {
 
-        leftOutput =  Robot.getInstance().hardware.leftDrive1.getMotorOutputPercent();
-        rightOutput = Robot.getInstance().hardware.rightDrive1.getMotorOutputPercent();
+					leftOutput = -maxOutput;
+				}
+				if (rightOutput > maxOutput) {
+					rightOutput = maxOutput;
 
-        leftOutput += Kp * current;
-        rightOutput -= Kp * current;
+				}
+				if (rightOutput < -maxOutput) {
 
-        Drivetrain.setDrive(ControlMode.PercentOutput,leftOutput, rightOutput);
+					rightOutput = -maxOutput;
+				}
+				Drivetrain.setDrive(ControlMode.PercentOutput, -(leftOutput + KGp * (start - current)),
+						(rightOutput -
+								KGp * (start - current)));
 
-        if(Robot.getInstance().hardware.leftDrive1.getSensorCollection().getQuadraturePosition() > encTicks + 250 || Robot.getInstance().hardware.leftDrive1.getSensorCollection().getQuadraturePosition()  < encTicks - 250){
-            setStatus(Status.STOP);
-        }
-    }
+				// Drivetrain.setDrive(ControlMode.PercentOutput,-(-KGp*(start+current)),
+				// KGp*(start+current));
+				boolean rInRange = false;
+				boolean lInRange = false;
+				System.out.println(-rEnc + "R" + encTicks);
+				System.out.println(lEnc + "L" + encTicks);
+				System.out.println(start + " " + current);
+				System.out.println("R" + ((rightOutput + KGp * (start - current))));
+				System.out.println("L" + (-(leftOutput - KGp * (start - current))));
+				System.out.println("MOD"+(rightOutput + KGp * (start - current)));
+				System.out.println(direction + "D   " + leftOutput + "     " + rightOutput);
+				if (direction == -1) {
+					rInRange = (-rEnc < rEncTicks + 1500);
+					lInRange = (lEnc < lEncTicks + 1500);
+				} else {
+					rInRange = (-rEnc > rEncTicks - 1500);
+					lInRange = (lEnc > lEncTicks - 1500);
+				}
+				if (rInRange || lInRange) {
+					System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+					setStatus(Status.STOP);
+					this.finished();
+				}
+			}
+		}
+	}
 
-    @Override
-    public void finished() {
-        Robot.getInstance().hardware.rightDrive1.configClosedloopRamp(0, 10);
-        Robot.getInstance().hardware.leftDrive1.configClosedloopRamp(0, 10);
-        Drivetrain.stopAll();
-    }
+	@Override
+	public void finished() {
+		h.rightDrive1.configClosedloopRamp(0, 10);
+		h.leftDrive1.configClosedloopRamp(0, 10);
+		Drivetrain.stopAll();
+	}
 
 }

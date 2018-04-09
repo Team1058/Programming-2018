@@ -1,13 +1,11 @@
 package org.pvcpirates.frc2018.commands;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
-import static org.pvcpirates.frc2018.util.RobotMap.Constants.ROBOT_TIMEOUT;
-
 import org.pvcpirates.frc2018.Status;
+import org.pvcpirates.frc2018.util.RobotMap.Constants;
 import org.pvcpirates.frc2018.robot.Hardware;
-import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.robot.subsystems.Drivetrain;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 
 public class DriveFor extends Command {
@@ -45,8 +43,8 @@ public class DriveFor extends Command {
         encTicksR = (rInches / (6 * Math.PI)) * 1024 * (11.25);
         encTicksL = (rInches / (6 * Math.PI)) * 1024 * (11.25);
         //encTicks+=h.leftDrive1.getSensorCollection().getQuadraturePosition();
-        h.leftDrive1.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);
-        h.rightDrive1.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);
+        h.leftDrive1.getSensorCollection().setQuadraturePosition(0, Constants.ROBOT_TIMEOUT);
+        h.rightDrive1.getSensorCollection().setQuadraturePosition(0, Constants.ROBOT_TIMEOUT);
         //Manually change instead of super.init() b/c there is no command list
         
         h.rightDrive1.configClosedloopRamp(0, 10);
@@ -77,11 +75,11 @@ public class DriveFor extends Command {
 	    	
 	    	
 	    	if(direction == -1){
-	    		rInRange = (rEnc < encTicksR + 1000); 
-		    	lInRange = (lEnc < encTicksL + 1000); 
+	    		rInRange = (rEnc < encTicksR + 1500); 
+		    	lInRange = (lEnc < encTicksL + 1500); 
 	    	}else{
-	    		rInRange = (rEnc > encTicksR - 1000); 
-		    	lInRange = (lEnc > encTicksL - 1000);
+	    		rInRange = (rEnc > encTicksR - 1500); 
+		    	lInRange = (lEnc > encTicksL - 1500);
 	    	}
 	    	System.out.println("encTicksR "+encTicksR);
 	    	System.out.println("R"+rEnc);

@@ -6,7 +6,7 @@ import org.pvcpirates.frc2018.robot.subsystems.Grabber;
 
 public class SpitCube extends Command {
 	public static enum SPEEDS{
-		FULL,HALF,QUARTER;
+		FULL,HALF,QUARTER,ZERO;
 	}
 	SPEEDS speed;
 	boolean open;
@@ -29,6 +29,7 @@ public class SpitCube extends Command {
 	public void exec()				{
 		//if (Arm.getWristAngle()>80){
 		switch(speed){
+		case ZERO:Grabber.stopRollers();break;
 		case QUARTER:Grabber.outtakeRollersQuarter();break;
 		case HALF:Grabber.outtakeRollersHalf();break;
 		case FULL:Grabber.outtakeRollers();break;

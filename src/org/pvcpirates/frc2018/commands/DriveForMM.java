@@ -52,20 +52,20 @@ public class DriveForMM extends Command {
         
         h.rightDrive1.configClosedloopRamp(0, 10);
         h.leftDrive1.configClosedloopRamp(0, 10);
-        h.leftDrive1.configPeakOutputForward(.33, 0);
-        h.rightDrive1.configPeakOutputForward(.3, 0);
-        h.leftDrive1.configPeakOutputReverse(-.33, 0);
-        h.rightDrive1.configPeakOutputReverse(-.3, 0);
+        h.leftDrive1.configPeakOutputForward(.666, 0);
+        h.rightDrive1.configPeakOutputForward(.666, 0);
+        h.leftDrive1.configPeakOutputReverse(-.666, 0);
+        h.rightDrive1.configPeakOutputReverse(-.666, 0);
         
         h.leftDrive1.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 20, 20);
         h.rightDrive1.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 20, 20);
         
         
-        h.leftDrive1.configMotionCruiseVelocity(2000, 10);
-        h.rightDrive1.configMotionCruiseVelocity(2000, 10);
+        h.leftDrive1.configMotionCruiseVelocity(5750, 10);
+        h.rightDrive1.configMotionCruiseVelocity(5750, 10);
         
-        h.leftDrive1.configMotionAcceleration(4000, 10);
-        h.rightDrive1.configMotionAcceleration(4000, 10);
+        h.leftDrive1.configMotionAcceleration(7000, 10);
+        h.rightDrive1.configMotionAcceleration(7000, 10);
         
         setStatus(Status.EXEC);
         direction = (int) (Math.abs(rInches)/rInches);
@@ -82,23 +82,22 @@ public class DriveForMM extends Command {
 	    	
 	    	System.out.println("L: "+lEnc);
 	    	System.out.println("R: "+rEnc);
+	    	System.out.println("Goal"+encTicksR);
 	    	
-	    	
-			h.leftDrive1.set(ControlMode.MotionMagic, -encTicksR);
-	    	h.rightDrive1.set(ControlMode.MotionMagic, encTicksL);
+			h.leftDrive1.set(ControlMode.MotionMagic, -encTicksL);
+	    	h.rightDrive1.set(ControlMode.MotionMagic, encTicksR);
 	    	//h.leftDrive1.set(ControlMode.Velocity, direction*300);
 	    	//h.rightDrive1.set(ControlMode.Velocity, direction*-300);
-	    	
-	    	
 	    	if(direction == -1){
-	    		rInRange = (rEnc < encTicksR + 500); 
-		    	lInRange = (-lEnc < encTicksL + 500); 
+	    		rInRange = (-rEnc < encTicksR + 1500); 
+		    	lInRange = (lEnc < encTicksL + 1500); 
 	    	}else{
-	    		rInRange = (rEnc > encTicksR - 500); 
-		    	lInRange = (-lEnc > encTicksL - 500);
+	    		rInRange = (-rEnc > encTicksR - 1500); 
+		    	lInRange = (lEnc > encTicksL - 1500);
 	    	}
+
 	    	
-	        if(rInRange&&lInRange){
+	        if((rInRange&&lInRange)){
 	        	setStatus(Status.STOP);
 	        	this.finished();
 	        }
