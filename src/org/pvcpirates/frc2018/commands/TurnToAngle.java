@@ -37,10 +37,10 @@ public class TurnToAngle extends Command {
         current = Hardware.getInstance().navx.getAngle()+1;
        // if (goal)
         setStatus(Status.EXEC);
-        Hardware.getInstance().leftDrive1.configPeakOutputForward(.35, 10);
-        Hardware.getInstance().rightDrive1.configPeakOutputForward(.35, 10);
-        Hardware.getInstance().leftDrive1.configPeakOutputReverse(-.35, 10);
-        Hardware.getInstance().rightDrive1.configPeakOutputReverse(-.35, 10);
+        Hardware.getInstance().leftDrive1.configPeakOutputForward(.5, 10);
+        Hardware.getInstance().rightDrive1.configPeakOutputForward(.5, 10);
+        Hardware.getInstance().leftDrive1.configPeakOutputReverse(-.5, 10);
+        Hardware.getInstance().rightDrive1.configPeakOutputReverse(-.5, 10);
         
     }
 
@@ -48,15 +48,14 @@ public class TurnToAngle extends Command {
     public void exec() {
     	if (this.status != Status.STOP){
 	    	sign = (int) (Math.abs(goal-current)/(goal-current));
-	    	System.out.println("Sign "+sign);
 	    	current = Hardware.getInstance().navx.getAngle()+1;
 	    	
 	        double output = 0;
 	        System.out.println("goal"+goal);
 	        System.out.println("NAVX"+current);
 	        System.out.println("Diff: "+(goal-current));
-	        
-	        if (Math.abs(goal - current) < 2.3&&Hardware.getInstance().leftDrive1.getMotorOutputPercent()<.3/*&&Hardware.getInstance().getInstance().leftDrive1.getSensorCollection().getQuadratureVelocity()>1000*/) {
+	        System.out.println("VELOCITY"+Hardware.getInstance().leftDrive1.getSensorCollection().getQuadratureVelocity());
+	        if (Math.abs(goal - current) < 1.3&&Hardware.getInstance().leftDrive1.getMotorOutputPercent()<.3/*&&Hardware.getInstance().getInstance().leftDrive1.getSensorCollection().getQuadratureVelocity()>1000*/) {
 	            this.setStatus(Status.STOP);
 	            this.finished();
 	        } else {

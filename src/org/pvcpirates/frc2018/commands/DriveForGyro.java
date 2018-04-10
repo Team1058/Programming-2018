@@ -30,6 +30,11 @@ public class DriveForGyro extends Command {
 		this.inches = inches;
 		this.Kp = Kp;
 	}
+	public DriveForGyro(double inches,double Kp,double maxOutput) {
+		this.inches = inches;
+		this.Kp = Kp;
+		this.maxOutput = maxOutput;
+	}
 	@Override
 	public void init() {
 		
@@ -39,9 +44,6 @@ public class DriveForGyro extends Command {
 		// h.rightDrive1.getSensorCollection().setQuadraturePosition(0,
 		// ROBOT_TIMEOUT);
 		// Manually change instead of super.init() b/c there is no command list
-
-		h.rightDrive1.configClosedloopRamp(0, 10);
-		h.leftDrive1.configClosedloopRamp(0, 10);
 		rEncTicks = encTicks;
 		lEncTicks = encTicks;
 		lEncTicks += h.leftDrive1.getSensorCollection().getQuadraturePosition();
@@ -67,12 +69,15 @@ public class DriveForGyro extends Command {
 			} else {
 				
 				
-				double KGp = .07;
+				double KGp = .04;
 				double current = h.navx.getAngle();
 
 				leftOutput = Kp * (encTicks + direction*lEnc);
 				rightOutput = Kp * (encTicks - direction*rEnc);
-
+				
+				leftOutput = -(leftOutput + KGp * (start - current));
+				rightOutput = (rightOutput - KGp * (start - current));
+				
 				if (leftOutput > maxOutput) {
 					leftOutput = maxOutput;
 
@@ -89,9 +94,7 @@ public class DriveForGyro extends Command {
 
 					rightOutput = -maxOutput;
 				}
-				Drivetrain.setDrive(ControlMode.PercentOutput, -(leftOutput + KGp * (start - current)),
-						(rightOutput -
-								KGp * (start - current)));
+				Drivetrain.setDrive(ControlMode.PercentOutput, leftOutput,rightOutput);
 
 				// Drivetrain.setDrive(ControlMode.PercentOutput,-(-KGp*(start+current)),
 				// KGp*(start+current));

@@ -68,7 +68,7 @@ public class Arm extends BaseSubsystem {
     public static double getPivotAngle() {
     	//512 ticks in 180 degrees
     	//subtract 90 to make arm behave like the unit circle
-        return (hardware.armPivotMotor.getSensorCollection().getAnalogIn() * (180.0 / 512.0)) - 90;
+        return (hardware.armPivotMotor.getSensorCollection().getAnalogInRaw() * (180.0 / 512.0)) - 90;
     }
     public static double getPivotAngleClosedLoopTarget() {
     	//512 ticks in 180 degrees

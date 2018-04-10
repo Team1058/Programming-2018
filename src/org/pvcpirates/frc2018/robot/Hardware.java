@@ -64,10 +64,10 @@ public class Hardware {
 
 
     private Hardware() {
-    	//camera.setVideoMode(PixelFormat.kMJPEG, 128, 72, 15);
-    	camera.setResolution(128, 72);
-    	camera.setFPS(15);
-    	/*new Thread(()->{
+    	camera.setVideoMode(PixelFormat.kMJPEG, 128, 72, 15);
+    	//camera.setResolution(128, 72);
+    	//camera.setFPS(15);
+    	new Thread(()->{
     		CvSink cvSink = CameraServer.getInstance().getVideo();
     		CvSource outputStream = CameraServer.getInstance().putVideo("Camera Stream", 128, 72);
     		Mat source = new Mat();
@@ -76,7 +76,7 @@ public class Hardware {
     			outputStream.putFrame(source);
     		}
     		
-    	}).start();*/
+    	}).start();
     	
     	
     	

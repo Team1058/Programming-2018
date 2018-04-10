@@ -67,29 +67,28 @@ public class MoveArmPolarSetpoint extends Command {
             if (Math.abs(Arm.getArmExtension() - ext) < 5){
             	this.setStatus(Status.STOP);
             	this.finished();
-            }else
+            }else{
             	Arm.extendArm(ext);
+            	Arm.pivotArm(Arm.getPivotAngleClosedLoopTarget());
+            }
         }else if(inRange && Arm.getArmExtension() < ext-2 && inMin && Math.abs(Arm.getPivotAngle()-angle)<90 ){
         	Arm.pivotArm(angle);
         	Arm.extendArm(ext);
         	System.out.println("waaaa");
         }else{
         	
-	        if ((Arm.getArmExtension() < 4)||(inRange&&inMin&& Math.abs(Arm.getPivotAngle()-angle)<90&&Arm.getArmExtension() > 600)){
+	        if ((Arm.getArmExtension() < 4)||(inRange&&inMin&& Math.abs(Arm.getPivotAngle()-angle)<90)){
 	        	System.out.println("RUNRUNRUN"+angle);
 	        	if (inMin && !inRange)
 	        		Arm.pivotArm(angle < 90? minAngle:maxAngle);
 	        	else
 	        		Arm.pivotArm(angle);
 	        }else{
-	        	System.out.println("kill me pls");
-        		//Arm.extendArm(Arm.getArmExtensionClosedLoopTarget());
+	        	
 	        	if (Arm.getPivotAngleClosedLoopTarget()<minAngle||Arm.getPivotAngleClosedLoopTarget()>maxAngle)
 	        		Arm.stopPivot();
 	        	else
-	        		//Arm.stopPivot();
 	        		Arm.pivotArm(Arm.getPivotAngleClosedLoopTarget());
-	        	
         		Arm.extendArm(0);
 	        }
 	        
