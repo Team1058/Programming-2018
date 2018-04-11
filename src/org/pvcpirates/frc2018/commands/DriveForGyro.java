@@ -75,8 +75,8 @@ public class DriveForGyro extends Command {
 				leftOutput = Kp * (encTicks + direction*lEnc);
 				rightOutput = Kp * (encTicks - direction*rEnc);
 				
-				leftOutput = -(leftOutput + KGp * (start - current));
-				rightOutput = (rightOutput - KGp * (start - current));
+				leftOutput = -(leftOutput - KGp * (start - current));
+				rightOutput = (rightOutput + KGp * (start - current));
 				
 				if (leftOutput > maxOutput) {
 					leftOutput = maxOutput;

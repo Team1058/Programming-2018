@@ -3,16 +3,16 @@ package org.pvcpirates.frc2018.util;
 public class RobotMap {
     public static final class CANTalonIds {
         public static final int LEFT_DRIVE_1 = 6;
-        public static final int RIGHT_DRIVE_1 = 2;
-        public static final int LEFT_DRIVE_2 = 11;
-        public static final int RIGHT_DRIVE_2 = 13;
-        public static final int RIGHT_CUBE_GRABBER = 10;
-        public static final int LEFT_CUBE_GRABBER = 14;
+        public static final int RIGHT_DRIVE_1 = 10;
+        public static final int LEFT_DRIVE_2 = 3;
+        public static final int RIGHT_DRIVE_2 = 9;
+        public static final int RIGHT_CUBE_GRABBER = 0;
+        public static final int LEFT_CUBE_GRABBER = 1;
         //TODO: TALON IDSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
-        public static final int ARM_PIVOT_TALON = 5;
-        public static final int ARM_EXTEND_TALON = 9;
-        public static final int ARM_EXTEND_TALON_FOLLOWER = 8;
-        public static final int WRIST_PIVOT_MOTOR = 4;
+        public static final int ARM_PIVOT_TALON = 1;
+        public static final int ARM_EXTEND_TALON = 2;
+        public static final int ARM_EXTEND_TALON_FOLLOWER = 11;
+        public static final int WRIST_PIVOT_MOTOR = 0;
     }
 
     public static final class SensorIDs {
@@ -27,7 +27,7 @@ public class RobotMap {
     public static final class PneumaticIds {
         public static final int GRABBER_1 = 1;
         public static final int GRABBER_2 = 0;
-		public static final int CLIMBER = 3;
+        public static final int CLIMBER = 3;
     }
 
     public static final class Constants {
