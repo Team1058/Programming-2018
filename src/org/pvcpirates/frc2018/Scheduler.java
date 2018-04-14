@@ -6,24 +6,20 @@ import org.pvcpirates.frc2018.autonomous.SwitchAuto;
 import org.pvcpirates.frc2018.commands.Command;
 import org.pvcpirates.frc2018.commands.DriveFor;
 import org.pvcpirates.frc2018.commands.DriveForGyro;
-import org.pvcpirates.frc2018.commands.DriveForMM;
 import org.pvcpirates.frc2018.commands.ExtendArm;
 import org.pvcpirates.frc2018.commands.PivotArm;
-import org.pvcpirates.frc2018.commands.SpitCube;
 import org.pvcpirates.frc2018.commands.TurnToAngle;
 import org.pvcpirates.frc2018.commands.WristRotate;
-import org.pvcpirates.frc2018.commands.SpitCube.SPEEDS;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.Robot;
 import org.pvcpirates.frc2018.robot.subsystems.Arm;
 import org.pvcpirates.frc2018.state.AutoState;
 import org.pvcpirates.frc2018.state.TeleopState;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import jaci.pathfinder.Waypoint;
+
 
 public class Scheduler extends IterativeRobot {
 

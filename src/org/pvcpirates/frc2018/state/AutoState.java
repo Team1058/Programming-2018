@@ -17,7 +17,6 @@ public class AutoState extends State {
 
 	@Override
 	public void init() {
-		// Zero Sensors
 		Hardware.getInstance().leftDrive1.getSensorCollection().setQuadraturePosition(0, 10);
 		Hardware.getInstance().rightDrive1.getSensorCollection().setQuadraturePosition(0, 10);
 		Hardware.getInstance().rightDrive1.setNeutralMode(NeutralMode.Brake);

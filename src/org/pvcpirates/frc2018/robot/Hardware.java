@@ -27,9 +27,7 @@ import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode.PixelFormat;
 
-
 public class Hardware {
-
     /*
      * Creates and managers hardware settings excluding PID
      * Changes between practice robot and competition robot
@@ -148,17 +146,18 @@ public class Hardware {
         leftCubeGrabMotor.setInverted(true);
     }
 
-    public static Hardware getInstance() {
-        if (ourInstance == null) {
-            ourInstance = new Hardware();
-        }
-        return ourInstance;
-    }
-
     public static void setPIDF(double p, double i, double d, double f, TalonSRX talonSRX) {
         talonSRX.config_kP(0, p, ROBOT_TIMEOUT);
         talonSRX.config_kI(0, i, ROBOT_TIMEOUT);
         talonSRX.config_kD(0, d, ROBOT_TIMEOUT);
         talonSRX.config_kD(0, f, ROBOT_TIMEOUT);
     }
+	
+
+	public static Hardware getInstance() {
+		if (ourInstance == null) {
+			ourInstance = new Hardware();
+		}
+		return ourInstance;
+	}
 }
