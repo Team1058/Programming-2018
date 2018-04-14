@@ -30,7 +30,11 @@ import edu.wpi.cscore.VideoMode.PixelFormat;
 
 public class Hardware {
 
-    //possibly move instance creation to constructor??
+    /*
+     * Creates and managers hardware settings excluding PID
+     * Changes between practice robot and competition robot
+     * 
+     */
 
     private static Hardware ourInstance;
 
@@ -49,7 +53,7 @@ public class Hardware {
 
     public final ADXL345_I2C wristAccel = new ADXL345_I2C(I2C.Port.kOnboard, Range.k4G);
 
-    //public final UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+    public final UsbCamera camera; 
 
     public final DoubleSolenoid cubeGrabberSolenoid = new DoubleSolenoid(RobotMap.PneumaticIds.GRABBER_1,
             RobotMap.PneumaticIds.GRABBER_2);
@@ -64,7 +68,11 @@ public class Hardware {
 
 
     private Hardware() {
-
+    	
+    	camera = CameraServer.getInstance().startAutomaticCapture();
+    	camera.setFPS(20);
+    	camera.setResolution(128, 96);
+    	
         compressor.setClosedLoopControl(true);
         navx.reset();
 

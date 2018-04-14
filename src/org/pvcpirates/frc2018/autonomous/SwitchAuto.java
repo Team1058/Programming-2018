@@ -35,10 +35,10 @@ public class SwitchAuto extends Command {
 		if(location == StartingLocation.CENTER){
 			if(gameData.charAt(0) == 'L'){
 				commands.add(new DriveForGyro(14,Kp,maxSpeed));
-				commands.add(new TurnToAngle(-38,Kg));
+				commands.add(new TurnToAngle(-38));
 				commands.add(new DriveForGyro(77,Kp,maxSpeed));
 				
-				commands.add(new TurnToAngle(0,Kg2));
+				commands.add(new TurnToAngle(0));
 				commands.add(new PivotArm(0,true));
 				commands.add(new WristRotate(0,true));
 				commands.add(new DriveForGyro(22,Kp,maxSpeed));
@@ -46,10 +46,10 @@ public class SwitchAuto extends Command {
 				
 			}else if(gameData.charAt(0) == 'R'){
 				commands.add(new DriveForGyro(14,Kp,maxSpeed));
-				commands.add(new TurnToAngle(50,Kg));
+				commands.add(new TurnToAngle(50));
 				commands.add(new DriveForGyro(70,Kp,maxSpeed));
 				
-				commands.add(new TurnToAngle(0,Kg));
+				commands.add(new TurnToAngle(0));
 				commands.add(new PivotArm(0,true));
 				commands.add(new WristRotate(0,true));
 				commands.add(new DriveForGyro(25,Kp,maxSpeed));

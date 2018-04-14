@@ -17,35 +17,42 @@ public class AutoState extends State {
 
 	@Override
 	public void init() {
-		//Zero Sensors
+		// Zero Sensors
 		Hardware.getInstance().leftDrive1.getSensorCollection().setQuadraturePosition(0, 10);
 		Hardware.getInstance().rightDrive1.getSensorCollection().setQuadraturePosition(0, 10);
 		Hardware.getInstance().rightDrive1.setNeutralMode(NeutralMode.Brake);
 		Hardware.getInstance().rightDrive2.setNeutralMode(NeutralMode.Brake);
 		Hardware.getInstance().leftDrive1.setNeutralMode(NeutralMode.Brake);
 		Hardware.getInstance().leftDrive2.setNeutralMode(NeutralMode.Brake);
-		//Zero Arm
+		// Zero Arm
 		zeroArm = new ZeroArm();
 		zeroArm.init();
+
 		Hardware.getInstance().navx.reset();
+
 		while (zeroArm.getStatus() != Status.STOP || Hardware.getInstance().navx.isCalibrating())
 			zeroArm.exec();
-		//Hold cube during auto
+		// Hold cube during auto
 		Grabber.closeGrabber();
 		Grabber.holdRollers();
-		
+
 		Hardware.getInstance().leftDrive1.configPeakOutputForward(1, 0);
 		Hardware.getInstance().rightDrive1.configPeakOutputForward(1, 0);
-        Hardware.getInstance().leftDrive1.configPeakOutputReverse(-1, 0);
-        Hardware.getInstance().rightDrive1.configPeakOutputReverse(-1, 0);
+		Hardware.getInstance().leftDrive1.configPeakOutputReverse(-1, 0);
+		Hardware.getInstance().rightDrive1.configPeakOutputReverse(-1, 0);
 		Scheduler.autoChooser.getSelected().init();
-		
+		System.out.println("Auto init fam");
+
 	}
 
 	@Override
 	public void exec() {
-		Scheduler.autoChooser.getSelected().exec();
-		//System.out.println("Inches "+((Hardware.getInstance().rightDrive1.getSensorCollection().getQuadraturePosition()/(1024 * 11.25))*(6 * Math.PI)));
+		System.out.println("STATUS"+Scheduler.autoChooser.getSelected().getStatus());
+		if (Scheduler.autoChooser.getSelected().getStatus()!=Status.STOP)
+			Scheduler.autoChooser.getSelected().exec();
+		else 
+			Scheduler.autoChooser.getSelected().finished();
+
 	}
 
 	@Override

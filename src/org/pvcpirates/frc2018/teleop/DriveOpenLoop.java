@@ -23,11 +23,11 @@ public class DriveOpenLoop extends TeleopCommand {
         double lspd = fb - lr;
         double rspd = fb + lr;
         if (gamepad.getButton(GamepadEnum.LEFT_BUMPER))
-        	Drivetrain.setDrive(ControlMode.PercentOutput, lspd*.5, -rspd*.5);
+        	Drivetrain.setDrive(ControlMode.PercentOutput, -lspd*.5, -rspd*.5);
         else if (gamepad.getButton(GamepadEnum.RIGHT_BUMPER))
-        	Drivetrain.setDrive(ControlMode.PercentOutput, lspd, -rspd);
+        	Drivetrain.setDrive(ControlMode.PercentOutput, -lspd, -rspd);
         else
-        	Drivetrain.setDrive(ControlMode.PercentOutput, lspd*.85, -rspd*.85);
+        	Drivetrain.setDrive(ControlMode.PercentOutput, -lspd*.85, -rspd*.85);
     }
 
 }

@@ -9,11 +9,13 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class Grabber extends BaseSubsystem {
-
+	/*
+	 * Subsystem that holds static functions that control the intake
+	 */
     private static Hardware hardware = Hardware.getInstance();
     private static final DoubleSolenoid solenoid = hardware.cubeGrabberSolenoid;
-    private static final TalonSRX rightMotor = hardware.rightCubeGrabMotor;
-    private static final TalonSRX leftMotor = hardware.leftCubeGrabMotor;
+    private static final VictorSPX rightMotor = hardware.rightCubeGrabMotor;
+    private static final VictorSPX leftMotor = hardware.leftCubeGrabMotor;
 
     public static void openGrabber() {
         solenoid.set(DoubleSolenoid.Value.kForward);
@@ -27,6 +29,7 @@ public class Grabber extends BaseSubsystem {
     }
 
     public static void intakeRollers() {
+    	//make one side slower so cube will spin
         rightMotor.set(ControlMode.PercentOutput, 1);
         leftMotor.set(ControlMode.PercentOutput, -.75);
     }

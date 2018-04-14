@@ -5,7 +5,10 @@ import org.pvcpirates.frc2018.gamepads.GamepadEnum;
 import org.pvcpirates.frc2018.robot.subsystems.Grabber;
 
 public class CubeGrabber extends TeleopCommand {
-
+	/*
+	 * Teleop Command that manages intake functions
+	 * 
+	 */
 
     boolean toggle = false;
 
@@ -20,13 +23,17 @@ public class CubeGrabber extends TeleopCommand {
         	Grabber.holdRollers();
         	Grabber.closeGrabber();
         } else if (gamepad.getButton(GamepadEnum.Y_BUTTON)) {
+        	//open intake
             Grabber.openGrabber();
         } else if (gamepad.getButton(GamepadEnum.A_BUTTON)) {
+        	//spit cube
             Grabber.outtakeRollers();
         } else if (gamepad.getButton(GamepadEnum.X_BUTTON)){
+        	//intake cube
         	Grabber.intakeRollers();
         	Grabber.noGrabber();
         }else if (gamepad.getButton(GamepadEnum.B_BUTTON)){
+        	//slow spit
         	Grabber.outtakeRollersHalf();
         }else{
         	//If no input then stop
