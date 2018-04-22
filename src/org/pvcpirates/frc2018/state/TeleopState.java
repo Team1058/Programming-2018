@@ -50,10 +50,6 @@ public class TeleopState extends State {
         driverGamepad.executeCommands();
         operatorGamepad.executeCommands();
         vJoyKeyboard.executeCommands();
-        System.out.println("Angle of arm "+Arm.getPivotAngle());
-        System.out.println("Help: "+hardware.armPivotMotor.getSensorCollection().getAnalogInRaw());
- 
- 
     }
 
     @Override

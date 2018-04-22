@@ -40,13 +40,11 @@ public class AutoState extends State {
 		Hardware.getInstance().leftDrive1.configPeakOutputReverse(-1, 0);
 		Hardware.getInstance().rightDrive1.configPeakOutputReverse(-1, 0);
 		Scheduler.autoChooser.getSelected().init();
-		System.out.println("Auto init fam");
 
 	}
 
 	@Override
 	public void exec() {
-		System.out.println("STATUS"+Scheduler.autoChooser.getSelected().getStatus());
 		if (Scheduler.autoChooser.getSelected().getStatus()!=Status.STOP)
 			Scheduler.autoChooser.getSelected().exec();
 		else 

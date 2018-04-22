@@ -39,8 +39,6 @@ public class TurnToAngle extends Command {
 		this.goal = goal;
 		
 		this.timeOut = timeOut;
-		if (isTimeOut)
-			System.out.println("Who the fuck cares");
 		this.Kg = .093;
 		this.kI = .014;  
 	}
@@ -73,10 +71,6 @@ public class TurnToAngle extends Command {
 			current = Hardware.getInstance().navx.getAngle() + 1;
 
 			double output = 0;
-			System.out.println("Angle: "+Hardware.getInstance().navx.getAngle());
-			System.out.println("Cummulative: "+cummulative);
-			System.out.println("Sign: "+sign);
-			System.out.println("Timer: "+timer.get());
 			
 			if ((Math.abs(goal - current) < 1 && Math.abs(Hardware.getInstance().leftDrive1.getSensorCollection().getQuadratureVelocity()) < 20) || timer.get() > timeOut) {
 				this.setStatus(Status.STOP);

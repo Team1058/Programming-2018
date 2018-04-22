@@ -68,7 +68,6 @@ public class Scheduler extends IterativeRobot {
 		 */
 		robot.setState(new AutoState());
 		robot.state.init();
-		System.out.println("AC:"+autoChooser.getSelected());
 
 	}
 
@@ -90,7 +89,6 @@ public class Scheduler extends IterativeRobot {
 		Hardware.getInstance().armExtendMotor.enableCurrentLimit(false);
 		Hardware.getInstance().armExtendMotorFollower.configPeakCurrentLimit(40000, 10);
 		Hardware.getInstance().armExtendMotorFollower.enableCurrentLimit(false);
-		System.out.println("Curr: "+Hardware.getInstance().armExtendMotor.getOutputCurrent()); 
 		
 	}
 

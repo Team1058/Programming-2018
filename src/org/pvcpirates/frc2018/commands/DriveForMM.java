@@ -80,10 +80,6 @@ public class DriveForMM extends Command {
 	    	double rEnc = h.rightDrive1.getSensorCollection().getQuadraturePosition();
 	    	double lEnc = h.leftDrive1.getSensorCollection().getQuadraturePosition();
 	    	
-	    	System.out.println("L: "+lEnc);
-	    	System.out.println("R: "+rEnc);
-	    	System.out.println("Goal"+encTicksR);
-	    	
 			h.leftDrive1.set(ControlMode.MotionMagic, -encTicksL);
 	    	h.rightDrive1.set(ControlMode.MotionMagic, encTicksR);
 	    	//h.leftDrive1.set(ControlMode.Velocity, direction*300);

@@ -31,7 +31,6 @@ public class MoveArmPolar extends TeleopCommand {
         if ((Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1)) > .1)||(Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1)) > .1)){
         	Arm.moveArmPolar(extend, pivot);
         	Arm.levelWrist();
-        	System.out.println("LEVELLLLLLLLLLLL");
         }
         }
         

@@ -43,7 +43,6 @@ public class SpitCube extends Command {
 
 	@Override
 	public void finished() {
-		System.out.println("Cube");
 
 	}
 }

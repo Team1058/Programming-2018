@@ -85,7 +85,6 @@ public class MoveArmPolarSetpoint extends Command {
     	if (!lastScale){
     		Arm.levelWrist();
 			if (Arm.getPivotAngle() <= angle + 10 && Arm.getPivotAngle() >= angle - 10) {
-				System.out.println("EXTEND AFTER PIVOT");
 				if (Math.abs(Arm.getArmExtension() - ext) < 5) {
 					this.setStatus(Status.STOP);
 					this.finished();
@@ -112,14 +111,12 @@ public class MoveArmPolarSetpoint extends Command {
 						Arm.stopPivot();
 					else
 						Arm.pivotArm(Arm.getPivotAngleClosedLoopTarget());
-					System.out.println("ZERO ARM");
 					Arm.extendArm(0);
 				}
 
 			}
     	}else{
     		
-    		System.out.println("LASSSSSSSSSSSSSST");
     		Arm.pivotArm(90);
     		if (Arm.getPivotAngle() >85 && Arm.getPivotAngle() < 95)
     			lastScale = false;
@@ -129,14 +126,11 @@ public class MoveArmPolarSetpoint extends Command {
 
     @Override
     public void finished() {
-    	System.out.println("EXTENDO");
         
     	Arm.pivotArm(angle);
         if (levelWrist){
         	Arm.levelWrist();
-        	System.out.println("NOOOO");
         }else{
-        	System.out.println("Wrist "+wrist);
         	Arm.wristRotate(wrist);
         }
         levelWrist = true;

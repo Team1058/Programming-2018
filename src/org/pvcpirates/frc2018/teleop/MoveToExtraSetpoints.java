@@ -20,8 +20,6 @@ public class MoveToExtraSetpoints extends TeleopCommand {
 
 	@Override
 	public void exec() {
-
-		System.out.println("LAST SCALE " + lastScale);
 		if (gamepad.getButton(VJoyEnum.SPACE)) {
 			// post scale scoring
 

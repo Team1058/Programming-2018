@@ -33,10 +33,7 @@ public class ScaleAuto extends Command {
 	}
 
 	private void configure() {
-		
-		System.out.println("COOOOOOOOOOOOOOONNNNNNNNNNNNFFFFFFFFFFFf");
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
-		System.out.println("GameData: "+gameData);
 		double Kp = .0000037;
 		double Kg = .125;
 		Command c = new Command();
@@ -90,7 +87,6 @@ public class ScaleAuto extends Command {
 //				commands.add(new DriveForGyro(160));
 			}
 		}
-		System.out.println("Size:"+commands.size());
 		
 	}
 	@Override

@@ -16,9 +16,7 @@ public class Command {
     }
 
     public void init() {
-    	System.out.println("Before get first");
         current = commands.getFirst();
-        System.out.println("After get first");
         setStatus(Status.EXEC);
     }
 

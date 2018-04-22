@@ -22,7 +22,6 @@ public class ZeroWrist extends Command {
     public void exec() {
     	Arm.pivotArm(90);
     	//Drive wrist backwards until limit switch is hit
-    	System.out.println("H*CK: "+(!Hardware.getInstance().wristPivotMotor.getSensorCollection().isRevLimitSwitchClosed()));
         if (!Hardware.getInstance().wristPivotMotor.getSensorCollection().isRevLimitSwitchClosed()) {
             Hardware.getInstance().wristPivotMotor.getSensorCollection().setQuadraturePosition(0,10);
             setStatus(Status.STOP);

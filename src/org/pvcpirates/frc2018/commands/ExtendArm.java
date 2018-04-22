@@ -13,7 +13,6 @@ public class ExtendArm extends Command {
 	public void exec() {
 		// TODO Auto-generated method stub
 		Arm.extendArm(inches);
-		System.out.println("Extend Arm");
 		if (Arm.getArmExtension() > inches-2);
 			this.setStatus(Status.STOP);
 	}

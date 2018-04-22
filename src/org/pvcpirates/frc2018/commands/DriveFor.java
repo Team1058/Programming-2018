@@ -81,12 +81,7 @@ public class DriveFor extends Command {
 	    		rInRange = (rEnc > encTicksR - 1500); 
 		    	lInRange = (lEnc > encTicksL - 1500);
 	    	}
-	    	System.out.println("encTicksR "+encTicksR);
-	    	System.out.println("R"+rEnc);
-	    	System.out.println("L"+(lEnc));
-	    	System.out.println("Goal+"+encTicksR);
 	        if(rInRange||lInRange){
-	        	System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 	        	setStatus(Status.STOP);
 	        	this.finished();
 	        }

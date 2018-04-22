@@ -46,7 +46,6 @@ public class DriveForGyro extends Command {
 	@Override
 	public void init() {
 		timer.start();
-		System.out.println("Init driveforGyro");
 		encTicks = (inches / (6.0 * Math.PI)) * 1024.0 * (11.25);
 		
 		h.leftDrive1.getSensorCollection().setQuadraturePosition(0,ROBOT_TIMEOUT);
@@ -54,7 +53,6 @@ public class DriveForGyro extends Command {
 		while(h.rightDrive1.getSensorCollection().getQuadraturePosition() != 0 || h.leftDrive1.getSensorCollection().getQuadraturePosition() != 0){
 			h.rightDrive1.getSensorCollection().setQuadraturePosition(0,ROBOT_TIMEOUT);
 			h.leftDrive1.getSensorCollection().setQuadraturePosition(0,ROBOT_TIMEOUT);
-			System.out.println("LOOPING ... "+h.leftDrive1.getSensorCollection().getPulseWidthPosition()+" "+h.rightDrive1.getSensorCollection().getPulseWidthPosition());
 			if(timer.get() > 5){
 				break;
 			}
@@ -75,7 +73,6 @@ public class DriveForGyro extends Command {
 
 	@Override
 	public void exec() {
-		System.out.println("DFG exec");
 		if (this.status != Status.STOP) {
 			//get sensor input
 			double rEnc = h.rightDrive1.getSensorCollection().getQuadraturePosition();
@@ -122,11 +119,6 @@ public class DriveForGyro extends Command {
 				//Drive if we are not in range
 				Drivetrain.setDrive(ControlMode.PercentOutput, leftOutput, rightOutput);
 				
-				System.out.println("R Goal: "+rEncTicks);
-				System.out.println("L Goal: "+lEncTicks);
-				System.out.println("R: Pos"+rEnc);
-				System.out.println("L: Pos"+lEnc);
-				
 				//compute range based on direction
 				if (direction == -1) {
 					rInRange = (-rEnc < rEncTicks + 1500);
@@ -153,9 +145,7 @@ public class DriveForGyro extends Command {
 	public void finished() {
 		h.rightDrive1.configOpenloopRamp(0, 10);
 		h.leftDrive1.configOpenloopRamp(0, 10);
-		Drivetrain.stopAll();
-		System.out.println("DFG finished");
-		
+		Drivetrain.stopAll();		
 	}
 
 }
