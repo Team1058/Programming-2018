@@ -2,7 +2,7 @@ package org.pvcpirates.frc2018.autonomous;
 
 import java.util.LinkedList;
 
-import org.pvcpirates.frc2018.Status;
+import org.pvcpirates.frc2018.robot.Status;
 import org.pvcpirates.frc2018.commands.Command;
 import org.pvcpirates.frc2018.commands.Delay;
 import org.pvcpirates.frc2018.commands.DriveFor;

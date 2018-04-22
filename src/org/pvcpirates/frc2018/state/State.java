@@ -1,6 +1,6 @@
 package org.pvcpirates.frc2018.state;
 
-import org.pvcpirates.frc2018.Status;
+import org.pvcpirates.frc2018.robot.Status;
 
 public abstract class State {
     public Status status;

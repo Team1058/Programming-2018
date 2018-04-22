@@ -2,7 +2,7 @@
 package org.pvcpirates.frc2018.commands;
 
 
-import org.pvcpirates.frc2018.Status;
+import org.pvcpirates.frc2018.robot.Status;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.subsystems.Drivetrain;
 

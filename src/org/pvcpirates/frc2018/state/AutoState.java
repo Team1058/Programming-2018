@@ -1,7 +1,7 @@
 package org.pvcpirates.frc2018.state;
 
-import org.pvcpirates.frc2018.Scheduler;
-import org.pvcpirates.frc2018.Status;
+import org.pvcpirates.frc2018.robot.Scheduler;
+import org.pvcpirates.frc2018.robot.Status;
 import org.pvcpirates.frc2018.autonomous.AutoCommandFactory;
 import org.pvcpirates.frc2018.commands.Command;
 import org.pvcpirates.frc2018.commands.ZeroArm;

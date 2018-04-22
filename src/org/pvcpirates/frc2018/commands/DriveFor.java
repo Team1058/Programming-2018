@@ -1,7 +1,7 @@
 package org.pvcpirates.frc2018.commands;
 
-import org.pvcpirates.frc2018.Status;
 import org.pvcpirates.frc2018.util.RobotMap.Constants;
+import org.pvcpirates.frc2018.robot.Status;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.subsystems.Drivetrain;
 
@@ -31,11 +31,8 @@ public class DriveFor extends Command {
     int direction;
     @Override
     public void init() {
-    	while (Hardware.getInstance().leftDrive1.getSensorCollection().getQuadraturePosition()!=0){
-    		Hardware.getInstance().leftDrive1.getSensorCollection().setQuadraturePosition(0, 10);
-    		Hardware.getInstance().rightDrive1.getSensorCollection().setQuadraturePosition(0, 10);
-    	}
-        Drivetrain.setPIDF(.022, 0.0, 0, 0);
+    	Drivetrain.zeroEncoders();
+        Hardware.setPIDF(0.022, 0, 0, 0, h.rightDrive1);
         Hardware.setPIDF(0.027625, 0, 0, 0, h.leftDrive1);
     	//Drivetrain.setPIDF(0, 0.0, 0, 1);
         

@@ -2,7 +2,7 @@ package org.pvcpirates.frc2018.commands;
 
 import static org.pvcpirates.frc2018.util.RobotMap.Constants.ROBOT_TIMEOUT;
 
-import org.pvcpirates.frc2018.Status;
+import org.pvcpirates.frc2018.robot.Status;
 import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.subsystems.Drivetrain;
 
@@ -47,17 +47,18 @@ public class DriveForGyro extends Command {
 	public void init() {
 		timer.start();
 		encTicks = (inches / (6.0 * Math.PI)) * 1024.0 * (11.25);
-		
-		h.leftDrive1.getSensorCollection().setQuadraturePosition(0,ROBOT_TIMEOUT);
-		h.rightDrive1.getSensorCollection().setQuadraturePosition(0,ROBOT_TIMEOUT);
-		while(h.rightDrive1.getSensorCollection().getQuadraturePosition() != 0 || h.leftDrive1.getSensorCollection().getQuadraturePosition() != 0){
-			h.rightDrive1.getSensorCollection().setQuadraturePosition(0,ROBOT_TIMEOUT);
-			h.leftDrive1.getSensorCollection().setQuadraturePosition(0,ROBOT_TIMEOUT);
-			if(timer.get() > 5){
+
+		h.leftDrive1.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);
+		h.rightDrive1.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);
+		while (h.rightDrive1.getSensorCollection().getQuadraturePosition() != 0
+				|| h.leftDrive1.getSensorCollection().getQuadraturePosition() != 0) {
+			h.rightDrive1.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);
+			h.leftDrive1.getSensorCollection().setQuadraturePosition(0, ROBOT_TIMEOUT);
+			if (timer.get() > 5) {
 				break;
 			}
 		}
-		
+
 		// Manually change instead of super.init() b/c there is no command list
 		rEncTicks = encTicks;
 		lEncTicks = encTicks;
@@ -68,13 +69,13 @@ public class DriveForGyro extends Command {
 		direction = (Math.abs(inches) / inches);
 		Hardware.getInstance().leftDrive1.configOpenloopRamp(0, 0);
 		Hardware.getInstance().rightDrive1.configOpenloopRamp(0, 0);
-		
+
 	}
 
 	@Override
 	public void exec() {
 		if (this.status != Status.STOP) {
-			//get sensor input
+			// get sensor input
 			double rEnc = h.rightDrive1.getSensorCollection().getQuadraturePosition();
 			double lEnc = h.leftDrive1.getSensorCollection().getQuadraturePosition();
 			double leftOutput = 0;
@@ -84,22 +85,20 @@ public class DriveForGyro extends Command {
 			double KGp = .04;
 			double current = h.navx.getAngle();
 
-			
 			if (!init) {
-				//make sure the starting angle is initialized
+				// make sure the starting angle is initialized
 				start = h.navx.getAngle();
 				init = true;
 			} else {
-				//compute output without gyro heading
+				// compute output without gyro heading
 				leftOutput = Kp * (encTicks + direction * lEnc);
 				rightOutput = Kp * (encTicks - direction * rEnc);
-				
-				//adjust output to hold a constant heading
+
+				// adjust output to hold a constant heading
 				leftOutput = -(leftOutput + KGp * (start - current));
 				rightOutput = (rightOutput - KGp * (start - current));
 
-				
-				//adjust output to be within than our max and min
+				// adjust output to be within than our max and min
 				if (leftOutput > maxOutput) {
 					leftOutput = maxOutput;
 				}
@@ -115,11 +114,11 @@ public class DriveForGyro extends Command {
 
 					rightOutput = -maxOutput;
 				}
-				
-				//Drive if we are not in range
+
+				// Drive if we are not in range
 				Drivetrain.setDrive(ControlMode.PercentOutput, leftOutput, rightOutput);
-				
-				//compute range based on direction
+
+				// compute range based on direction
 				if (direction == -1) {
 					rInRange = (-rEnc < rEncTicks + 1500);
 					lInRange = (lEnc < lEncTicks + 1500);
@@ -128,15 +127,12 @@ public class DriveForGyro extends Command {
 					lInRange = (lEnc > lEncTicks - 1500);
 				}
 
-				
-				//If Left or right are in range stop
+				// If Left or right are in range stop
 				if (rInRange || lInRange) {
 					setStatus(Status.STOP);
 					this.finished();
 				}
-				
-				
-				
+
 			}
 		}
 	}
@@ -145,7 +141,7 @@ public class DriveForGyro extends Command {
 	public void finished() {
 		h.rightDrive1.configOpenloopRamp(0, 10);
 		h.leftDrive1.configOpenloopRamp(0, 10);
-		Drivetrain.stopAll();		
+		Drivetrain.stopAll();
 	}
 
 }

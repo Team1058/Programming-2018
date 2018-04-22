@@ -1,6 +1,6 @@
 package org.pvcpirates.frc2018.teleop;
 
-import org.pvcpirates.frc2018.Status;
+import org.pvcpirates.frc2018.robot.Status;
 import org.pvcpirates.frc2018.commands.MoveArmPolarSetpoint;
 import org.pvcpirates.frc2018.commands.ZeroArm;
 import org.pvcpirates.frc2018.gamepads.BaseGamepad;

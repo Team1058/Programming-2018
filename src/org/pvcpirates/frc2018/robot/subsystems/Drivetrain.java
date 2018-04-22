@@ -34,6 +34,16 @@ public class Drivetrain extends BaseSubsystem {
         hardware.rightDrive1.config_kD(0, d, RobotMap.Constants.ROBOT_TIMEOUT);
         hardware.rightDrive1.config_kF(0, f, RobotMap.Constants.ROBOT_TIMEOUT);
     }
-
-
+    
+    public static void zeroEncoders() {
+    	//WARNING: WILL BLOCK
+    	while (Hardware.getInstance().leftDrive1.getSensorCollection().getQuadraturePosition()!=0 ||Hardware.getInstance().rightDrive1.getSensorCollection().getQuadraturePosition()!= 0){
+    		Hardware.getInstance().leftDrive1.getSensorCollection().setQuadraturePosition(0, 10);
+    		Hardware.getInstance().rightDrive1.getSensorCollection().setQuadraturePosition(0, 10);
+    	}
+    }
+    
+    public static double getRightInches() {
+    	
+    }
 }
