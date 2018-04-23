@@ -1,5 +1,6 @@
 package org.pvcpirates.frc2018.robot.subsystems;
 
+import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import org.pvcpirates.frc2018.robot.Hardware;
@@ -44,6 +45,48 @@ public class Drivetrain extends BaseSubsystem {
     }
     
     public static double getRightInches() {
+    	return ticksToInches(hardware.rightDrive1.getSensorCollection().getQuadraturePosition());
+    }
+    
+    public static double getRightVelocity() {
+    	//inches per 100ms * 10 = inches per second
+    	return ticksToInches(hardware.rightDrive1.getSensorCollection().getQuadratureVelocity() * 10);
+    }
+    
+    public static double getLeftVelocity() {
+    	//inches per 100ms * 10 = inches per second
+    	return ticksToInches(hardware.leftDrive1.getSensorCollection().getQuadratureVelocity() * 10);
+    }
+    
+    public static double getLeftInches() {
+    	return ticksToInches(hardware.leftDrive1.getSensorCollection().getQuadraturePosition());
+    }
+    
+    public static void setPostion(double leftInches, double rightInches) {
+    	double rightGoal = inchesToTicks(rightInches);
+    	double leftGoal = -inchesToTicks(leftInches);
     	
+    	setDrive(ControlMode.Position,leftGoal,rightGoal);
+    }
+    
+    
+    private static double inchesToTicks(double inches) {
+    	//6pi inches per rotation
+    	//11.25 wheel rotations to encoder rotations
+    	//1024 ticks per rotation
+    	return inches / (6.0 * Math.PI) * 1024.0 * 11.25;
+    }
+    
+    private static double ticksToInches(double ticks) {
+    	//1024 ticks per rotation
+    	//11.25 rotations per wheel rotation
+    	// Circumference of 6pi inches
+    	return ticks / 1024.0 / 11.25 * 6.0 * Math.PI;
+    }
+    
+    public static void configureAllowableError(double inches) {
+    	//sets the allowable error
+    	hardware.leftDrive1.configSetParameter(ParamEnum.eProfileParamSlot_AllowableErr,inchesToTicks(inches), 0, 0, 0);
+    	hardware.rightDrive1.configSetParameter(ParamEnum.eProfileParamSlot_AllowableErr,inchesToTicks(inches), 0, 0, 0);
     }
 }
