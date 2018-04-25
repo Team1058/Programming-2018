@@ -62,9 +62,9 @@ public class Drivetrain extends BaseSubsystem {
     	return ticksToInches(hardware.leftDrive1.getSensorCollection().getQuadraturePosition());
     }
     
-    public static void setPostion(double leftInches, double rightInches) {
-    	double rightGoal = inchesToTicks(rightInches);
-    	double leftGoal = -inchesToTicks(leftInches);
+    public static void setLinearPostion(double inches) {
+    	double rightGoal = inchesToTicks(inches);
+    	double leftGoal = -inchesToTicks(inches);
     	
     	setDrive(ControlMode.Position,leftGoal,rightGoal);
     }

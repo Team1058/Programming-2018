@@ -5,22 +5,11 @@ import org.pvcpirates.frc2018.robot.Hardware;
 import org.pvcpirates.frc2018.robot.subsystems.Drivetrain;
 
 public class DriveFor extends Command {
-	private double rGoal;
-	private double lGoal;
+	private double goal;
 	private Hardware h = Hardware.getInstance();
 
 	public DriveFor(double inches) {
-		this.rGoal = inches;
-		this.lGoal = inches;
-
-	}
-
-	public DriveFor(double rInches, double lInches) {
-		this.rGoal = rInches;
-		this.lGoal = lInches;
-	}
-
-	public DriveFor() {
+		this.goal = inches;
 	}
 
 	@Override
@@ -34,7 +23,7 @@ public class DriveFor extends Command {
 
 	@Override
 	public void exec() {
-		Drivetrain.setPostion(lGoal, rGoal);
+		Drivetrain.setLinearPostion(goal);
 
 		// 1500 ticks ~= 2.5 inches
 		Drivetrain.configureAllowableError(2.5);
