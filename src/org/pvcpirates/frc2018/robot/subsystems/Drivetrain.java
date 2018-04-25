@@ -11,6 +11,10 @@ import org.pvcpirates.frc2018.util.RobotMap;
 public class Drivetrain extends BaseSubsystem {
     //14:50:12 14:50:60
     private static Hardware hardware = Hardware.getInstance();
+    
+    private static double gyroP = .093;
+	private static double gyroI = .014;
+	private static double gyroCummulative = 0;
 
     public static void stopAll() {
         //shut everything off
@@ -69,6 +73,12 @@ public class Drivetrain extends BaseSubsystem {
     	setDrive(ControlMode.Position,leftGoal,rightGoal);
     }
     
+    public static void configureAllowableError(double inches) {
+    	//sets the allowable error
+    	hardware.leftDrive1.configSetParameter(ParamEnum.eProfileParamSlot_AllowableErr,inchesToTicks(inches), 0, 0, 0);
+    	hardware.rightDrive1.configSetParameter(ParamEnum.eProfileParamSlot_AllowableErr,inchesToTicks(inches), 0, 0, 0);
+    }
+    
     
     private static double inchesToTicks(double inches) {
     	//6pi inches per rotation
@@ -82,11 +92,5 @@ public class Drivetrain extends BaseSubsystem {
     	//11.25 rotations per wheel rotation
     	// Circumference of 6pi inches
     	return ticks / 1024.0 / 11.25 * 6.0 * Math.PI;
-    }
-    
-    public static void configureAllowableError(double inches) {
-    	//sets the allowable error
-    	hardware.leftDrive1.configSetParameter(ParamEnum.eProfileParamSlot_AllowableErr,inchesToTicks(inches), 0, 0, 0);
-    	hardware.rightDrive1.configSetParameter(ParamEnum.eProfileParamSlot_AllowableErr,inchesToTicks(inches), 0, 0, 0);
     }
 }
