@@ -44,8 +44,8 @@ public class Grabber extends BaseSubsystem {
         leftMotor.set(ControlMode.PercentOutput, 1);
     }
     public static void outtakeRollersHalf() {
-        rightMotor.set(ControlMode.PercentOutput, -.5);
-        leftMotor.set(ControlMode.PercentOutput, .5);
+        rightMotor.set(ControlMode.PercentOutput, -.7);
+        leftMotor.set(ControlMode.PercentOutput, .7);
     }
     public static void outtakeRollersQuarter() {
         rightMotor.set(ControlMode.PercentOutput, -.25);

@@ -61,7 +61,7 @@ public class ScaleAuto extends Command {
 //				commands.add(new DriveForGyro(190));
 //				commands.add(new TurnToAngle(0));
 //				commands.add(new DriveForGyro(41));
-				commands.add(new DriveForGyro(160));
+				commands.add(new DriveForGyro(182));
 			}
 		}
 
@@ -76,15 +76,15 @@ public class ScaleAuto extends Command {
 			}else if(gameData.charAt(1) == 'R'){
 				
 				commands.add(new DriveForGyro(182,Kp));
-				commands.add(new Delay(500));
-				commands.add(new TurnToAngle(90,2,false));
-//				//FIND MEEEEE
-				commands.add(new DriveForGyro(180,Kp));
-				commands.add(new Delay(500));
-				commands.add(new TurnToAngle(0,2,false));
-				commands.add(c);
-				commands.add(new DriveForGyro(45));
-				commands.add(new SpitCube(SPEEDS.ZERO,true));
+//				commands.add(new Delay(500));
+	//			commands.add(new TurnToAngle(90,2,false));
+////				//FIND MEEEEE
+//				commands.add(new DriveForGyro(180));
+//				commands.add(new Delay(500));
+//				commands.add(new TurnToAngle(0,2,false));
+//				commands.add(c);
+//				commands.add(new DriveForGyro(45));
+//				commands.add(new SpitCube(SPEEDS.ZERO,true));
 //				commands.add(new DriveForGyro(-20));
 //				commands.add(new ZeroArm());
 //				commands.add(new DriveForGyro(160));

@@ -16,7 +16,7 @@ public class TurnToAngle extends Command {
 	double current;
 	boolean init;
 	double Kg = .093;
-	double kI = .014;
+	double kI = .015;
 	double cummulative = 0;
 	int sign = 1;
 	int oldSign = 1;
@@ -40,7 +40,7 @@ public class TurnToAngle extends Command {
 		
 		this.timeOut = timeOut;
 		if (isTimeOut)
-			System.out.println("Who the fuck cares");
+			System.out.println("Time out");
 		this.Kg = .093;
 		this.kI = .014;  
 	}

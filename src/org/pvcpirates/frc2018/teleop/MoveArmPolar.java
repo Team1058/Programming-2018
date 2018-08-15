@@ -20,19 +20,18 @@ public class MoveArmPolar extends TeleopCommand {
 
     @Override
     public void exec() {
-    	extend = Arm.getArmExtension();
-        pivot = Arm.getPivotAngle();
+    	
         if(gamepad.getButton(GamepadEnum.LEFT_BUMPER)){
-        if (Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1)) > .1)
-            extend = Arm.getArmExtensionClosedLoopTarget() + GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1) * EXTEND_INCREMENT;
-        if (Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1)) > .1)
-            pivot = Arm.getPivotAngleClosedLoopTarget() + GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1) * PIVOT_INCREMENT;
-        
-        if ((Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1)) > .1)||(Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1)) > .1)){
+        	extend = Arm.getArmExtensionClosedLoopTarget();
+            pivot = Arm.getPivotAngleClosedLoopTarget();
+	        if (Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1)) > .1)
+	            extend = Arm.getArmExtensionClosedLoopTarget() + GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.LEFT_STICK_Y), .1) * EXTEND_INCREMENT;
+	        if (Math.abs(GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1)) > .1)
+	            pivot = Arm.getPivotAngleClosedLoopTarget() + GamepadHelper.applyDeadBand(gamepad.getAxis(GamepadEnum.RIGHT_STICK_Y), .1) * PIVOT_INCREMENT;
+	        
         	Arm.moveArmPolar(extend, pivot);
         	Arm.levelWrist();
         	System.out.println("LEVELLLLLLLLLLLL");
-        }
         }
         
     }
